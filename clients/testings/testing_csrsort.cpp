@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_CSRSORT_HPP
-#define TESTING_CSRSORT_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -439,5 +435,3 @@ hipsparseStatus_t testing_csrsort(Arguments argus)
 
     return HIPSPARSE_STATUS_SUCCESS;
 }
-
-#endif // TESTING_CSRSORT_HPP

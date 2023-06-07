@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_BSRMM_HPP
-#define TESTING_BSRMM_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -820,4 +816,11 @@ hipsparseStatus_t testing_bsrmm(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_BSRMM_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_bsrmm_bad_arg<TTYPE>(void)   \
+    template void testing_bsrmm<TTYPE>(Arguments argus)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

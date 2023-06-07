@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_GTHRZ_HPP
-#define TESTING_GTHRZ_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -201,4 +197,11 @@ hipsparseStatus_t testing_gthrz(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_GTHRZ_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_gthrz_bad_arg<TTYPE>(void)   \
+    template void testing_gthrz<TTYPE>(Arguments argus)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_CSR2CSR_COMPRESS_HPP
-#define TESTING_CSR2CSR_COMPRESS_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -637,4 +633,11 @@ hipsparseStatus_t testing_csr2csr_compress(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_CSR2CSR_COMPRESS_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_csr2csr_compress_bad_arg<TTYPE>(void)   \
+    template void testing_csr2csr_compress<TTYPE>(Arguments argus)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

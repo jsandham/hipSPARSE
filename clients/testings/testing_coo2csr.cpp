@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_COO2CSR_HPP
-#define TESTING_COO2CSR_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -269,5 +265,3 @@ hipsparseStatus_t testing_coo2csr(Arguments argus)
 
     return HIPSPARSE_STATUS_SUCCESS;
 }
-
-#endif // TESTING_COO2CSR_HPP

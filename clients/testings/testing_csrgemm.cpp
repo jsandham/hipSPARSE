@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_CSRGEMM_HPP
-#define TESTING_CSRGEMM_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -1251,4 +1247,11 @@ hipsparseStatus_t testing_csrgemm(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_CSRGEMM_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_csrgemm_bad_arg<TTYPE>(void)   \
+    template void testing_csrgemm<TTYPE>(Arguments argus)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

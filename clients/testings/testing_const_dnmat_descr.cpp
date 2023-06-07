@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_CONST_DNMAT_DESCR_HPP
-#define TESTING_CONST_DNMAT_DESCR_HPP
-
 #include "hipsparse_test_unique_ptr.hpp"
 #ifdef GOOGLE_TEST
 #include <gtest/gtest.h>
@@ -132,4 +128,3 @@ void testing_const_dnmat_descr_bad_arg(void)
 #endif
 }
 
-#endif // TESTING_CONST_DNMAT_DESCR_HPP

@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_SDDMM_COO_AOS_HPP
-#define TESTING_SDDMM_COO_AOS_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -368,4 +364,14 @@ hipsparseStatus_t testing_sddmm_coo_aos()
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_SDDMM_COO_AOS_HPP
+#define INSTANTIATE(ITYPE, TTYPE)                               \
+    template void testing_sddmm_coo_aos<ITYPE, TTYPE>(Arguments argus)
+
+INSTANTIATE(int32_t, float);
+INSTANTIATE(int32_t, double);
+INSTANTIATE(int32_t, rocsparse_float_complex);
+INSTANTIATE(int32_t, rocsparse_double_complex);
+INSTANTIATE(int64_t, float);
+INSTANTIATE(int64_t, double);
+INSTANTIATE(int64_t, rocsparse_float_complex);
+INSTANTIATE(int64_t, rocsparse_double_complex);

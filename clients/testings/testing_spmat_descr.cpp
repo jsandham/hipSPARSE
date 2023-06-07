@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_SPMAT_DESCR_HPP
-#define TESTING_SPMAT_DESCR_HPP
-
 #include "hipsparse_test_unique_ptr.hpp"
 #ifdef GOOGLE_TEST
 #include <gtest/gtest.h>
@@ -750,4 +746,3 @@ void testing_spmat_descr_bad_arg(void)
 #endif
 }
 
-#endif // TESTING_SPMAT_DESCR_HPP

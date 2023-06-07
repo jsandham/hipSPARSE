@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_GPSV_INTERLEAVED_BATCH_HPP
-#define TESTING_GPSV_INTERLEAVED_BATCH_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -250,4 +246,11 @@ hipsparseStatus_t testing_gpsv_interleaved_batch(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_GPSV_INTERLEAVED_BATCH_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_gpsv_interleaved_batch_bad_arg<TTYPE>(void)   \
+    template void testing_gpsv_interleaved_batch<TTYPE>(Arguments argus)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

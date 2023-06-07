@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_CSRCOLOR_HPP
-#define TESTING_CSRCOLOR_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -311,4 +307,11 @@ hipsparseStatus_t testing_csrcolor()
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_CSRCOLOR_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_csrcolor_bad_arg<TTYPE>(void)   \
+    template void testing_csrcolor<TTYPE>()
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

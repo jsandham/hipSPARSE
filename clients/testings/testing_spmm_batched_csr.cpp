@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_SPMM_BATCHED_CSR_HPP
-#define TESTING_SPMM_BATCHED_CSR_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -411,4 +407,18 @@ hipsparseStatus_t testing_spmm_batched_csr()
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_SPMM_BATCHED_CSR_HPP
+#define INSTANTIATE(ITYPE, JTYPE, TTYPE)                               \
+    template void testing_spmm_batched_csr<ITYPE, JTYPE, TTYPE>()
+
+INSTANTIATE(int32_t, int32_t, float);
+INSTANTIATE(int32_t, int32_t, double);
+INSTANTIATE(int32_t, int32_t, rocsparse_float_complex);
+INSTANTIATE(int32_t, int32_t, rocsparse_double_complex);
+INSTANTIATE(int64_t, int32_t, float);
+INSTANTIATE(int64_t, int32_t, double);
+INSTANTIATE(int64_t, int32_t, rocsparse_float_complex);
+INSTANTIATE(int64_t, int32_t, rocsparse_double_complex);
+INSTANTIATE(int64_t, int64_t, float);
+INSTANTIATE(int64_t, int64_t, double);
+INSTANTIATE(int64_t, int64_t, rocsparse_float_complex);
+INSTANTIATE(int64_t, int64_t, rocsparse_double_complex);

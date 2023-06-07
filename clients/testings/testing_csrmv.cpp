@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_CSRMV_HPP
-#define TESTING_CSRMV_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -479,4 +475,11 @@ hipsparseStatus_t testing_csrmv(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_CSRMV_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_csrmv_bad_arg<TTYPE>(void)   \
+    template void testing_csrmv<TTYPE>(Arguments argus)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_GTHR_HPP
-#define TESTING_GTHR_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -195,4 +191,11 @@ hipsparseStatus_t testing_gthr(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_GTHR_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_gthr_bad_arg<TTYPE>(void)   \
+    template void testing_gthr<TTYPE>(Arguments argus)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

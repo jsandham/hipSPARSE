@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_AXPYI_HPP
-#define TESTING_AXPYI_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -229,4 +225,11 @@ hipsparseStatus_t testing_axpyi(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_AXPYI_HPP
+#define INSTANTIATE(TTYPE)                           \
+    template void testing_axpyi_bad_arg<TTYPE>(void) \
+    template void testing_axpby<TTYPE>(Arguments argus)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

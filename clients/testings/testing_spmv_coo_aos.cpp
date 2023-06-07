@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_SPMV_COO_AOS_HPP
-#define TESTING_SPMV_COO_AOS_HPP
-
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
 #include "utility.hpp"
@@ -309,4 +305,14 @@ hipsparseStatus_t testing_spmv_coo_aos(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_SPMV_COO_AOS_HPP
+#define INSTANTIATE(ITYPE, TTYPE)                               \
+    template void testing_spmv_coo_aos<ITYPE, TTYPE>(void)
+
+INSTANTIATE(int32_t, float);
+INSTANTIATE(int32_t, double);
+INSTANTIATE(int32_t, rocsparse_float_complex);
+INSTANTIATE(int32_t, rocsparse_double_complex);
+INSTANTIATE(int64_t, float);
+INSTANTIATE(int64_t, double);
+INSTANTIATE(int64_t, rocsparse_float_complex);
+INSTANTIATE(int64_t, rocsparse_double_complex);

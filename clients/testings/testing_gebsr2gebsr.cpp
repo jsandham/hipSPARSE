@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_GEBSR2GEBSR_HPP
-#define TESTING_GEBSR2GEBSR_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -1333,4 +1329,11 @@ hipsparseStatus_t testing_gebsr2gebsr(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_GEBSR2GEBSR_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_gebsr2gebsr_bad_arg<TTYPE>(void)   \
+    template void testing_gebsr2gebsr<TTYPE>(Arguments argus)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

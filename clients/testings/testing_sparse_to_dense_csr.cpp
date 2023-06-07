@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_SPARSE_TO_DENSE_CSR_HPP
-#define TESTING_SPARSE_TO_DENSE_CSR_HPP
-
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
 #include "utility.hpp"
@@ -259,4 +255,18 @@ hipsparseStatus_t testing_sparse_to_dense_csr(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_SPARSE_TO_DENSE_CSR_HPP
+#define INSTANTIATE(ITYPE, JTYPE, TTYPE)                               \
+    template void testing_sparse_to_dense_csr<ITYPE, JTYPE, TTYPE>(void)
+
+INSTANTIATE(int32_t, int32_t, float);
+INSTANTIATE(int32_t, int32_t, double);
+INSTANTIATE(int32_t, int32_t, rocsparse_float_complex);
+INSTANTIATE(int32_t, int32_t, rocsparse_double_complex);
+INSTANTIATE(int64_t, int32_t, float);
+INSTANTIATE(int64_t, int32_t, double);
+INSTANTIATE(int64_t, int32_t, rocsparse_float_complex);
+INSTANTIATE(int64_t, int32_t, rocsparse_double_complex);
+INSTANTIATE(int64_t, int64_t, float);
+INSTANTIATE(int64_t, int64_t, double);
+INSTANTIATE(int64_t, int64_t, rocsparse_float_complex);
+INSTANTIATE(int64_t, int64_t, rocsparse_double_complex);

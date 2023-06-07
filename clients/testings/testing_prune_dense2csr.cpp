@@ -21,10 +21,6 @@
 *
 * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_PRUNE_DENSE2CSR_HPP
-#define TESTING_PRUNE_DENSE2CSR_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -491,4 +487,11 @@ hipsparseStatus_t testing_prune_dense2csr(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_PRUNE_DENSE2CSR_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_prune_dense2csr_bad_arg<TTYPE>(void)   \
+    template void testing_prune_dense2csr<TTYPE>(Arguments argus)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

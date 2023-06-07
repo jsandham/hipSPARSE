@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_CONST_SPVEC_DESCR_HPP
-#define TESTING_CONST_SPVEC_DESCR_HPP
-
 #include "hipsparse_test_unique_ptr.hpp"
 #ifdef GOOGLE_TEST
 #include <gtest/gtest.h>
@@ -133,5 +129,3 @@ void testing_const_spvec_descr_bad_arg(void)
     verify_hipsparse_status_success(hipsparseDestroySpVec(x), "Success");
 #endif
 }
-
-#endif // TESTING_CONST_SPVEC_DESCR_HPP

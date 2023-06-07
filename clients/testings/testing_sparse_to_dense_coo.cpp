@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_SPARSE_TO_DENSE_COO_HPP
-#define TESTING_SPARSE_TO_DENSE_COO_HPP
-
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
 #include "utility.hpp"
@@ -263,4 +259,14 @@ hipsparseStatus_t testing_sparse_to_dense_coo(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_SPARSE_TO_DENSE_COO_HPP
+#define INSTANTIATE(ITYPE, TTYPE)                               \
+    template void testing_sparse_to_dense_coo<ITYPE, TTYPE>(void)
+
+INSTANTIATE(int32_t, float);
+INSTANTIATE(int32_t, double);
+INSTANTIATE(int32_t, rocsparse_float_complex);
+INSTANTIATE(int32_t, rocsparse_double_complex);
+INSTANTIATE(int64_t, float);
+INSTANTIATE(int64_t, double);
+INSTANTIATE(int64_t, rocsparse_float_complex);
+INSTANTIATE(int64_t, rocsparse_double_complex);

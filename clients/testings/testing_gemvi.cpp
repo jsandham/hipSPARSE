@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_GEMVI_HPP
-#define TESTING_GEMVI_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -248,4 +244,10 @@ hipsparseStatus_t testing_gemvi(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_GEMVI_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_gemvi<TTYPE>(void)
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);

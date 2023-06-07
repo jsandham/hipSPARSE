@@ -21,10 +21,6 @@
  *
  * ************************************************************************ */
 
-#pragma once
-#ifndef TESTING_CSRU2CSR_HPP
-#define TESTING_CSRU2CSR_HPP
-
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -392,4 +388,10 @@ hipsparseStatus_t testing_csru2csr(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#endif // TESTING_CSRU2CSR_HPP
+#define INSTANTIATE(TTYPE)                               \
+    template void testing_csru2csr<TTYPE>()
+
+INSTANTIATE(float);
+INSTANTIATE(double);
+INSTANTIATE(rocsparse_float_complex);
+INSTANTIATE(rocsparse_double_complex);
