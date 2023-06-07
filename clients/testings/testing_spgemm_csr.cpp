@@ -763,8 +763,7 @@ hipsparseStatus_t testing_spgemm_csr(void)
 #endif
 }
 
-#define INSTANTIATE(ITYPE, JTYPE, TTYPE)                               \
-    template void testing_spgemm_csr<ITYPE, JTYPE, TTYPE>(void)
+#define INSTANTIATE(ITYPE, JTYPE, TTYPE) template void testing_spgemm_csr<ITYPE, JTYPE, TTYPE>(void)
 
 INSTANTIATE(int32_t, int32_t, float);
 INSTANTIATE(int32_t, int32_t, double);

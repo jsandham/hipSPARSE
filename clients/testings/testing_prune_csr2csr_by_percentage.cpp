@@ -982,9 +982,9 @@ hipsparseStatus_t testing_prune_csr2csr_by_percentage(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_prune_csr2csr_by_percentage_bad_arg<TTYPE>(void)   \
-    template void testing_prune_csr2csr_by_percentage<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE)                                                               \
+    template void testing_prune_csr2csr_by_percentage_bad_arg<TTYPE>(void) template void \
+                  testing_prune_csr2csr_by_percentage<TTYPE>(Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

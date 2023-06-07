@@ -1224,9 +1224,9 @@ hipsparseStatus_t testing_csrsm2(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_csrsm2_bad_arg<TTYPE>(void)   \
-    template void testing_csrsm2<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE)                                                                 \
+    template void testing_csrsm2_bad_arg<TTYPE>(void) template void testing_csrsm2<TTYPE>( \
+        Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

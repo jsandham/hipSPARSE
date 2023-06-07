@@ -244,8 +244,7 @@ hipsparseStatus_t testing_gemvi(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_gemvi<TTYPE>(void)
+#define INSTANTIATE(TTYPE) template void testing_gemvi<TTYPE>(void)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

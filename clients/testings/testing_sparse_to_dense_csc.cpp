@@ -295,7 +295,7 @@ hipsparseStatus_t testing_sparse_to_dense_csc(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(ITYPE, JTYPE, TTYPE)                               \
+#define INSTANTIATE(ITYPE, JTYPE, TTYPE) \
     template void testing_sparse_to_dense_csc<ITYPE, JTYPE, TTYPE>(void)
 
 INSTANTIATE(int32_t, int32_t, float);

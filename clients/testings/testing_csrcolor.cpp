@@ -307,9 +307,8 @@ hipsparseStatus_t testing_csrcolor()
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_csrcolor_bad_arg<TTYPE>(void)   \
-    template void testing_csrcolor<TTYPE>()
+#define INSTANTIATE(TTYPE) \
+    template void testing_csrcolor_bad_arg<TTYPE>(void) template void testing_csrcolor<TTYPE>()
 
 INSTANTIATE(float);
 INSTANTIATE(double);

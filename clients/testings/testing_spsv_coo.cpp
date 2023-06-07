@@ -349,8 +349,7 @@ hipsparseStatus_t testing_spsv_coo(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(ITYPE, TTYPE)                               \
-    template void testing_spsv_coo<ITYPE, TTYPE>(void)
+#define INSTANTIATE(ITYPE, TTYPE) template void testing_spsv_coo<ITYPE, TTYPE>(void)
 
 INSTANTIATE(int32_t, float);
 INSTANTIATE(int32_t, double);

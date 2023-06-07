@@ -494,12 +494,10 @@ hipsparseStatus_t testing_bsrxmv()
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_bsrxmv_bad_arg<TTYPE>(void)   \
-    template void testing_bsrxmv<TTYPE>()
+#define INSTANTIATE(TTYPE) \
+    template void testing_bsrxmv_bad_arg<TTYPE>(void) template void testing_bsrxmv<TTYPE>()
 
 INSTANTIATE(float);
 INSTANTIATE(double);
 INSTANTIATE(rocsparse_float_complex);
 INSTANTIATE(rocsparse_double_complex);
-

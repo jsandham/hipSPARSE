@@ -363,9 +363,9 @@ hipsparseStatus_t testing_hyb2csr(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_hyb2csr_bad_arg<TTYPE>(void)   \
-    template void testing_hyb2csr<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE)                                                                   \
+    template void testing_hyb2csr_bad_arg<TTYPE>(void) template void testing_hyb2csr<TTYPE>( \
+        Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

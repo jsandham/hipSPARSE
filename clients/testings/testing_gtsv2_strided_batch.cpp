@@ -218,9 +218,9 @@ hipsparseStatus_t testing_gtsv2_strided_batch(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_gtsv2_strided_batch_batch_bad_arg<TTYPE>(void)   \
-    template void testing_gtsv2_strided_batch<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE)                                                             \
+    template void testing_gtsv2_strided_batch_batch_bad_arg<TTYPE>(void) template void \
+                  testing_gtsv2_strided_batch<TTYPE>(Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

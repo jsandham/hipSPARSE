@@ -359,9 +359,8 @@ hipsparseStatus_t testing_nnz(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_nnz_bad_arg<TTYPE>(void)   \
-    template void testing_nnz<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE) \
+    template void testing_nnz_bad_arg<TTYPE>(void) template void testing_nnz<TTYPE>(Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

@@ -127,4 +127,3 @@ void testing_const_dnmat_descr_bad_arg(void)
     verify_hipsparse_status_success(hipsparseDestroyDnVec(x), "Success");
 #endif
 }
-

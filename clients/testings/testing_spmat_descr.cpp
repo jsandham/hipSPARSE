@@ -745,4 +745,3 @@ void testing_spmat_descr_bad_arg(void)
     verify_hipsparse_status_success(hipsparseDestroySpMat(bell), "Success");
 #endif
 }
-

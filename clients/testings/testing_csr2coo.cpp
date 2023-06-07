@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  *
  * ************************************************************************ */
- 
+
 #include "hipsparse.hpp"
 #include "hipsparse_test_unique_ptr.hpp"
 #include "unit.hpp"
@@ -253,4 +253,3 @@ hipsparseStatus_t testing_csr2coo(Arguments argus)
 
     return HIPSPARSE_STATUS_SUCCESS;
 }
-

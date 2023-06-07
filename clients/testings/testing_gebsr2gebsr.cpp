@@ -1329,9 +1329,9 @@ hipsparseStatus_t testing_gebsr2gebsr(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_gebsr2gebsr_bad_arg<TTYPE>(void)   \
-    template void testing_gebsr2gebsr<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE)                                               \
+    template void testing_gebsr2gebsr_bad_arg<TTYPE>(void) template void \
+                  testing_gebsr2gebsr<TTYPE>(Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

@@ -482,8 +482,7 @@ hipsparseStatus_t testing_csrilusv(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_csrilusv<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE) template void testing_csrilusv<TTYPE>(Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

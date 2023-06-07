@@ -191,9 +191,9 @@ hipsparseStatus_t testing_gthr(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_gthr_bad_arg<TTYPE>(void)   \
-    template void testing_gthr<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE)                                                             \
+    template void testing_gthr_bad_arg<TTYPE>(void) template void testing_gthr<TTYPE>( \
+        Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

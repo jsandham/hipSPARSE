@@ -633,9 +633,9 @@ hipsparseStatus_t testing_csr2csr_compress(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_csr2csr_compress_bad_arg<TTYPE>(void)   \
-    template void testing_csr2csr_compress<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE)                                                    \
+    template void testing_csr2csr_compress_bad_arg<TTYPE>(void) template void \
+                  testing_csr2csr_compress<TTYPE>(Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

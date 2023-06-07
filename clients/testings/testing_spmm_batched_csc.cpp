@@ -406,7 +406,7 @@ hipsparseStatus_t testing_spmm_batched_csc()
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(ITYPE, JTYPE, TTYPE)                               \
+#define INSTANTIATE(ITYPE, JTYPE, TTYPE) \
     template void testing_spmm_batched_csc<ITYPE, JTYPE, TTYPE>()
 
 INSTANTIATE(int32_t, int32_t, float);

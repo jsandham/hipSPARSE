@@ -511,4 +511,3 @@ hipsparseStatus_t testing_coosort(Arguments argus)
 
     return HIPSPARSE_STATUS_SUCCESS;
 }
-

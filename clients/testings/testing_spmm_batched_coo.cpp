@@ -398,8 +398,7 @@ hipsparseStatus_t testing_spmm_batched_coo()
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(ITYPE, TTYPE)                               \
-    template void testing_spmm_batched_coo<ITYPE, TTYPE>()
+#define INSTANTIATE(ITYPE, TTYPE) template void testing_spmm_batched_coo<ITYPE, TTYPE>()
 
 INSTANTIATE(int32_t, float);
 INSTANTIATE(int32_t, double);

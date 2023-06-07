@@ -246,9 +246,9 @@ hipsparseStatus_t testing_gpsv_interleaved_batch(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_gpsv_interleaved_batch_bad_arg<TTYPE>(void)   \
-    template void testing_gpsv_interleaved_batch<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE)                                                          \
+    template void testing_gpsv_interleaved_batch_bad_arg<TTYPE>(void) template void \
+                  testing_gpsv_interleaved_batch<TTYPE>(Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

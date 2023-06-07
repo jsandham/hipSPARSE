@@ -388,8 +388,7 @@ hipsparseStatus_t testing_csru2csr(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_csru2csr<TTYPE>()
+#define INSTANTIATE(TTYPE) template void testing_csru2csr<TTYPE>()
 
 INSTANTIATE(float);
 INSTANTIATE(double);

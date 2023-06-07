@@ -367,8 +367,7 @@ hipsparseStatus_t testing_sddmm_coo()
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(ITYPE, TTYPE)                               \
-    template void testing_sddmm_coo<ITYPE, TTYPE>(Arguments argus)
+#define INSTANTIATE(ITYPE, TTYPE) template void testing_sddmm_coo<ITYPE, TTYPE>(Arguments argus)
 
 INSTANTIATE(int32_t, float);
 INSTANTIATE(int32_t, double);

@@ -387,8 +387,7 @@ hipsparseStatus_t testing_spmm_csr()
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(ITYPE, JTYPE, TTYPE)                               \
-    template void testing_spmm_csr<ITYPE, JTYPE, TTYPE>()
+#define INSTANTIATE(ITYPE, JTYPE, TTYPE) template void testing_spmm_csr<ITYPE, JTYPE, TTYPE>()
 
 INSTANTIATE(int32_t, int32_t, float);
 INSTANTIATE(int32_t, int32_t, double);

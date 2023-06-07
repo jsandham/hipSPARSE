@@ -604,7 +604,7 @@ hipsparseStatus_t testing_spgemmreuse_csr(void)
 #endif
 }
 
-#define INSTANTIATE(ITYPE, JTYPE, TTYPE)                               \
+#define INSTANTIATE(ITYPE, JTYPE, TTYPE) \
     template void testing_spgemmreuse_csr<ITYPE, JTYPE, TTYPE>()
 
 INSTANTIATE(int32_t, int32_t, float);

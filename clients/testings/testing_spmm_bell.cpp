@@ -406,8 +406,7 @@ hipsparseStatus_t testing_spmm_bell()
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(ITYPE, TTYPE)                               \
-    template void testing_spmm_bell<ITYPE, TTYPE>()
+#define INSTANTIATE(ITYPE, TTYPE) template void testing_spmm_bell<ITYPE, TTYPE>()
 
 INSTANTIATE(int32_t, float);
 INSTANTIATE(int32_t, double);

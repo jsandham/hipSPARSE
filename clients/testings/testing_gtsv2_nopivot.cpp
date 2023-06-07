@@ -191,9 +191,9 @@ hipsparseStatus_t testing_gtsv2_nopivot(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_gtsv2_batch_bad_arg<TTYPE>(void)   \
-    template void testing_gtsv2<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE)                                                                     \
+    template void testing_gtsv2_batch_bad_arg<TTYPE>(void) template void testing_gtsv2<TTYPE>( \
+        Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);

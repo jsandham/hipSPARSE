@@ -754,12 +754,11 @@ hipsparseStatus_t testing_bsric02(Arguments argus)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(TTYPE)                               \
-    template void testing_bsric02_bad_arg<TTYPE>(void)   \
-    template void testing_bsric02<TTYPE>(Arguments argus)
+#define INSTANTIATE(TTYPE)                                                                   \
+    template void testing_bsric02_bad_arg<TTYPE>(void) template void testing_bsric02<TTYPE>( \
+        Arguments argus)
 
 INSTANTIATE(float);
 INSTANTIATE(double);
 INSTANTIATE(rocsparse_float_complex);
 INSTANTIATE(rocsparse_double_complex);
-

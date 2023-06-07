@@ -165,8 +165,7 @@ hipsparseStatus_t testing_scatter(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(ITYPE, TTYPE)                               \
-    template void testing_scatter<ITYPE, TTYPE>(Arguments argus)
+#define INSTANTIATE(ITYPE, TTYPE) template void testing_scatter<ITYPE, TTYPE>(Arguments argus)
 
 INSTANTIATE(int32_t, float);
 INSTANTIATE(int32_t, double);

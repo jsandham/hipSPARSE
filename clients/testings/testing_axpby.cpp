@@ -182,8 +182,7 @@ hipsparseStatus_t testing_axpby(void)
     return HIPSPARSE_STATUS_SUCCESS;
 }
 
-#define INSTANTIATE(ITYPE, TTYPE)                   \
-    template void testing_axpby<ITYPE, TTYPE>(void)
+#define INSTANTIATE(ITYPE, TTYPE) template void testing_axpby<ITYPE, TTYPE>(void)
 
 INSTANTIATE(int32_t, float);
 INSTANTIATE(int32_t, double);
