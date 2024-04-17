@@ -25,34 +25,48 @@
 #include <hipsparse.h>
 
 // Only run tests for CUDA 11.1 or greater
-#if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
-TEST(axpby_bad_arg, axpby_float)
-{
-    testing_axpby_bad_arg();
-}
+// #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
+// TEST(axpby_bad_arg, axpby_float)
+// {
+//     testing_axpby_bad_arg();
+// }
 
-TEST(axpby, axpby_i32_float)
-{
-    hipsparseStatus_t status = testing_axpby<int32_t, float>();
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
+// TEST(axpby, axpby_i32_float)
+// {
+//     hipsparseStatus_t status = testing_axpby<int32_t, float>();
+//     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
+// }
 
-TEST(axpby, axpby_i64_double)
-{
-    hipsparseStatus_t status = testing_axpby<int64_t, double>();
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
+// TEST(axpby, axpby_i64_double)
+// {
+//     hipsparseStatus_t status = testing_axpby<int64_t, double>();
+//     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
+// }
 
-TEST(axpby, axpby_i32_hipFloatComplex)
-{
-    hipsparseStatus_t status = testing_axpby<int32_t, hipComplex>();
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
+// TEST(axpby, axpby_i32_hipFloatComplex)
+// {
+//     hipsparseStatus_t status = testing_axpby<int32_t, hipComplex>();
+//     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
+// }
 
-TEST(axpby, axpby_i64_hipDoubleComplex)
-{
-    hipsparseStatus_t status = testing_axpby<int64_t, hipDoubleComplex>();
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
+// TEST(axpby, axpby_i64_hipDoubleComplex)
+// {
+//     hipsparseStatus_t status = testing_axpby<int64_t, hipDoubleComplex>();
+//     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
+// }
 
-#endif
+// #endif
+
+
+
+TEST_ROUTINE_WITH_CONFIG(axpby,
+                         level1,
+                         hipsparse_test_config_it,
+                         arg.M,
+                         arg.nnz,
+                         arg.alpha,
+                         arg.alphai,
+                         arg.beta,
+                         arg.betai,
+                         arg.baseA,
+                         arg.graph_test);
