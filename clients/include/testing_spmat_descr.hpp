@@ -912,12 +912,12 @@ void testing_spmat_descr_bad_arg(void)
 #endif
 }
 
-hipsparseStatus_t testing_spmat_descr(void)
+hipsparseStatus_t testing_spmat_descr(Arguments argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11000)
-    int m    = 2;
-    int n    = 2;
-    int nnzC = 4;
+    int m    = argus.M;
+    int n    = argus.N;
+    int nnzC = argus.nnz;
 
     // C
     std::vector<int>   hcsr_row_ptrC = {0, 2, 4};

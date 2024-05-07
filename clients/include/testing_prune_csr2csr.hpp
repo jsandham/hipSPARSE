@@ -528,8 +528,8 @@ hipsparseStatus_t testing_prune_csr2csr(Arguments argus)
     int                  M              = argus.M;
     int                  N              = argus.N;
     T                    threshold      = static_cast<T>(argus.threshold);
-    hipsparseIndexBase_t csr_idx_base_A = argus.idx_base;
-    hipsparseIndexBase_t csr_idx_base_C = argus.idx_base2;
+    hipsparseIndexBase_t csr_idx_base_A = argus.idx_baseA;
+    hipsparseIndexBase_t csr_idx_base_C = argus.idx_baseC;
     std::string          binfile        = "";
     std::string          filename       = "";
     hipsparseStatus_t    status;

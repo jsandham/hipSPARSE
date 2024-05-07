@@ -436,7 +436,7 @@ hipsparseStatus_t testing_csrsv2(Arguments argus)
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 12000)
     int                    safe_size = 100;
     int                    m         = argus.M;
-    hipsparseIndexBase_t   idx_base  = argus.idx_base;
+    hipsparseIndexBase_t   idx_base  = argus.idx_baseA;
     hipsparseOperation_t   trans     = argus.transA;
     hipsparseDiagType_t    diag_type = argus.diag_type;
     hipsparseFillMode_t    fill_mode = argus.fill_mode;

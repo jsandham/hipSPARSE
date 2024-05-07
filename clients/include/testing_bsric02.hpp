@@ -288,7 +288,7 @@ hipsparseStatus_t testing_bsric02(Arguments argus)
     int                    m         = argus.M;
     int                    block_dim = argus.block_dim;
     hipsparseDirection_t   dir       = argus.dirA;
-    hipsparseIndexBase_t   idx_base  = argus.idx_base;
+    hipsparseIndexBase_t   idx_base  = argus.idx_baseA;
     hipsparseSolvePolicy_t policy    = HIPSPARSE_SOLVE_POLICY_USE_LEVEL;
     std::string            binfile   = "";
     std::string            filename  = "";

@@ -25,6 +25,24 @@
 
 #include <hipsparse.h>
 
+template <typename T>
+Arguments setup_gemvi_arguments()
+{
+    Arguments arg;
+    arg.M        = 1291;
+    arg.N        = 724;
+    arg.nnz      = 237;
+    arg.lda      = 1291;
+    arg.alpha    = make_DataType<T>(0.6);
+    arg.alphai   = make_DataType<T>(0.0);
+    arg.beta     = make_DataType<T>(3.2);
+    arg.betai    = make_DataType<T>(0.0);
+    arg.transA   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing   = 0;
+    return arg;
+}
+
 TEST(gemvi_bad_arg, gemvi_float)
 {
     testing_gemvi_bad_arg();
@@ -32,24 +50,24 @@ TEST(gemvi_bad_arg, gemvi_float)
 
 TEST(gemvi, gemvi_float)
 {
-    hipsparseStatus_t status = testing_gemvi<float>();
+    hipsparseStatus_t status = testing_gemvi<float>(setup_gemvi_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gemvi, gemvi_double)
 {
-    hipsparseStatus_t status = testing_gemvi<double>();
+    hipsparseStatus_t status = testing_gemvi<double>(setup_gemvi_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gemvi, gemvi_hipFloatComplex)
 {
-    hipsparseStatus_t status = testing_gemvi<hipComplex>();
+    hipsparseStatus_t status = testing_gemvi<hipComplex>(setup_gemvi_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gemvi, gemvi_hipDoubleComplex)
 {
-    hipsparseStatus_t status = testing_gemvi<hipDoubleComplex>();
+    hipsparseStatus_t status = testing_gemvi<hipDoubleComplex>(setup_gemvi_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }

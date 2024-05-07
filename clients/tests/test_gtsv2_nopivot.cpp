@@ -25,6 +25,16 @@
 
 #include <hipsparse.h>
 
+Arguments setup_gtsv2_nopivot_arguments()
+{
+    Arguments arg;
+    arg.M        = 512;
+    arg.N        = 512;
+    arg.ldb      = 1024;
+    arg.timing   = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(gtsv2_nopivot_bad_arg, gtsv2_nopivot_float)
@@ -34,19 +44,19 @@ TEST(gtsv2_nopivot_bad_arg, gtsv2_nopivot_float)
 
 TEST(gtsv2_nopivot, gtsv2_nopivot_float)
 {
-    hipsparseStatus_t status = testing_gtsv2_nopivot<float>();
+    hipsparseStatus_t status = testing_gtsv2_nopivot<float>(setup_gtsv2_nopivot_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gtsv2_nopivot, gtsv2_nopivot_double)
 {
-    hipsparseStatus_t status = testing_gtsv2_nopivot<double>();
+    hipsparseStatus_t status = testing_gtsv2_nopivot<double>(setup_gtsv2_nopivot_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gtsv2_nopivot, gtsv2_nopivot_hipComplex)
 {
-    hipsparseStatus_t status = testing_gtsv2_nopivot<hipComplex>();
+    hipsparseStatus_t status = testing_gtsv2_nopivot<hipComplex>(setup_gtsv2_nopivot_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

@@ -25,6 +25,16 @@
 
 #include <hipsparse.h>
 
+Arguments setup_sparse_to_dense_csr_arguments()
+{
+    Arguments arg;
+    arg.orderA   = HIPSPARSE_ORDER_COL;
+    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
+    arg.filename = "nos3.bin";
+    arg.timing   = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(sparse_to_dense_csr_bad_arg, sparse_to_dense_csr_float)
@@ -34,27 +44,27 @@ TEST(sparse_to_dense_csr_bad_arg, sparse_to_dense_csr_float)
 
 TEST(sparse_to_dense_csr, sparse_to_dense_csr_i32_i32_float)
 {
-    hipsparseStatus_t status = testing_sparse_to_dense_csr<int32_t, int32_t, float>();
+    hipsparseStatus_t status = testing_sparse_to_dense_csr<int32_t, int32_t, float>(setup_sparse_to_dense_csr_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 #if(!defined(CUDART_VERSION))
 TEST(sparse_to_dense_csr, sparse_to_dense_csr_i64_i32_double)
 {
-    hipsparseStatus_t status = testing_sparse_to_dense_csr<int64_t, int32_t, double>();
+    hipsparseStatus_t status = testing_sparse_to_dense_csr<int64_t, int32_t, double>(setup_sparse_to_dense_csr_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #else
 TEST(sparse_to_dense_csr, sparse_to_dense_csr_i64_i64_double)
 {
-    hipsparseStatus_t status = testing_sparse_to_dense_csr<int64_t, int64_t, double>();
+    hipsparseStatus_t status = testing_sparse_to_dense_csr<int64_t, int64_t, double>(setup_sparse_to_dense_csr_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif
 
 TEST(sparse_to_dense_csr, sparse_to_dense_csr_i64_i64_hipComplex)
 {
-    hipsparseStatus_t status = testing_sparse_to_dense_csr<int64_t, int64_t, hipComplex>();
+    hipsparseStatus_t status = testing_sparse_to_dense_csr<int64_t, int64_t, hipComplex>(setup_sparse_to_dense_csr_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

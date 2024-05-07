@@ -283,7 +283,7 @@ hipsparseStatus_t testing_csric02(Arguments argus)
 {
     int                    safe_size = 100;
     int                    m         = argus.M;
-    hipsparseIndexBase_t   idx_base  = argus.idx_base;
+    hipsparseIndexBase_t   idx_base  = argus.idx_baseA;
     hipsparseSolvePolicy_t policy    = HIPSPARSE_SOLVE_POLICY_USE_LEVEL;
     std::string            binfile   = "";
     std::string            filename  = "";

@@ -440,7 +440,7 @@ hipsparseStatus_t testing_bsrsv2(Arguments argus)
     int                    safe_size = 100;
     int                    m         = argus.M;
     int                    block_dim = argus.block_dim;
-    hipsparseIndexBase_t   idx_base  = argus.idx_base;
+    hipsparseIndexBase_t   idx_base  = argus.idx_baseA;
     hipsparseDirection_t   dir       = argus.dirA;
     hipsparseOperation_t   trans     = argus.transA;
     hipsparseDiagType_t    diag_type = argus.diag_type;

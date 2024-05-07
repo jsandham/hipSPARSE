@@ -167,7 +167,7 @@ hipsparseStatus_t testing_cscsort(Arguments argus)
     int                  n         = argus.N;
     int                  safe_size = 100;
     int                  permute   = argus.temp;
-    hipsparseIndexBase_t idx_base  = argus.idx_base;
+    hipsparseIndexBase_t idx_base  = argus.idx_baseA;
     std::string          binfile   = "";
     std::string          filename  = "";
     hipsparseStatus_t    status;

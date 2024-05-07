@@ -196,18 +196,16 @@ void testing_spmm_csr_bad_arg(void)
 }
 
 template <typename I, typename J, typename T>
-hipsparseStatus_t testing_spmm_csr()
+hipsparseStatus_t testing_spmm_csr(Arguments argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11000)
-    T                    h_alpha  = make_DataType<T>(2.0);
-    T                    h_beta   = make_DataType<T>(1.0);
-    hipsparseOperation_t transA   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseOperation_t transB   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseOrder_t     order    = HIPSPARSE_ORDER_COL;
-    hipsparseIndexBase_t idx_base = HIPSPARSE_INDEX_BASE_ZERO;
-    //
-    // !
-    //
+    T                    h_alpha  = make_DataType<T>(argus.alpha, argus.alphai);
+    T                    h_beta   = make_DataType<T>(argus.beta, argus.betai);
+    hipsparseOperation_t transA   = argus.transA;
+    hipsparseOperation_t transB   = argus.transB;
+    hipsparseOrder_t     order    = argus.orderA;
+    hipsparseIndexBase_t idx_base = argus.idx_baseA;
+    
 #if(CUDART_VERSION >= 11003)
     hipsparseSpMMAlg_t alg = HIPSPARSE_SPMM_CSR_ALG1;
 #else
@@ -215,7 +213,7 @@ hipsparseStatus_t testing_spmm_csr()
 #endif
 
     // Matrices are stored at the same path in matrices directory
-    std::string filename = get_filename("nos3.bin");
+    std::string filename = get_filename(argus.filename);
 
     // Index and data type
     hipsparseIndexType_t typeI

@@ -516,17 +516,17 @@ void testing_bsrsm2_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_bsrsm2(void)
+hipsparseStatus_t testing_bsrsm2(Arguments argus)
 {
-    T   h_alpha = make_DataType<T>(2.0);
-    int nrhs    = 15;
+    T   h_alpha = make_DataType<T>(argus.alpha, argus.alphai);
+    int nrhs    = argus.N;
 
     // Determine absolute path of test matrix
 
     // Get current executables absolute path
 
     // Matrices are stored at the same path in matrices directory
-    std::string filename = get_filename("nos3.bin");
+    std::string filename = get_filename(argus.filename);
 
     // hipSPARSE handle and opaque structs
     std::unique_ptr<handle_struct> test_handle(new handle_struct);

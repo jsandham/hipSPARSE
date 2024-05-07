@@ -25,6 +25,21 @@
 
 #include <hipsparse.h>
 
+template<typename T>
+Arguments setup_spsv_csr_arguments()
+{
+    Arguments arg;
+    arg.alpha        = make_DataType<T>(2.3);
+    arg.alphai       = make_DataType<T>(0.0);
+    arg.transA       = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.idx_baseA    = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.diag_type    = HIPSPARSE_DIAG_TYPE_NON_UNIT;
+    arg.fill_mode    = HIPSPARSE_FILL_MODE_LOWER;
+    arg.filename     = "nos3.bin";
+    arg.timing  = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(spsv_csr_bad_arg, spsv_csr_float)
@@ -34,21 +49,21 @@ TEST(spsv_csr_bad_arg, spsv_csr_float)
 
 TEST(spsv_csr, spsv_csr_i32_i32_float)
 {
-    hipsparseStatus_t status = testing_spsv_csr<int32_t, int32_t, float>();
+    hipsparseStatus_t status = testing_spsv_csr<int32_t, int32_t, float>(setup_spsv_csr_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 #if(!defined(CUDART_VERSION))
 TEST(spsv_csr, spsv_csr_i64_i32_double)
 {
-    hipsparseStatus_t status = testing_spsv_csr<int64_t, int32_t, double>();
+    hipsparseStatus_t status = testing_spsv_csr<int64_t, int32_t, double>(setup_spsv_csr_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif
 
 TEST(spsv_csr, spsv_csr_i64_i64_hipComplex)
 {
-    hipsparseStatus_t status = testing_spsv_csr<int64_t, int64_t, hipComplex>();
+    hipsparseStatus_t status = testing_spsv_csr<int64_t, int64_t, hipComplex>(setup_spsv_csr_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

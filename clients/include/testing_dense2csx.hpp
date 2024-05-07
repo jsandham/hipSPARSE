@@ -213,7 +213,7 @@ hipsparseStatus_t testing_dense2csx(const Arguments& argus, FUNC& dense2csx)
     int                  M        = argus.M;
     int                  N        = argus.N;
     int                  LD       = argus.lda;
-    hipsparseIndexBase_t idx_base = argus.idx_base;
+    hipsparseIndexBase_t idx_base = argus.idx_baseA;
 
     hipsparseStatus_t status;
 

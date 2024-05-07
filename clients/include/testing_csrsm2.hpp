@@ -746,7 +746,7 @@ hipsparseStatus_t testing_csrsm2(Arguments argus)
     int                    safe_size = 100;
     int                    m         = argus.M;
     int                    nrhs      = argus.N;
-    hipsparseIndexBase_t   idx_base  = argus.idx_base;
+    hipsparseIndexBase_t   idx_base  = argus.idx_baseA;
     hipsparseOperation_t   transA    = argus.transA;
     hipsparseOperation_t   transB    = argus.transB;
     hipsparseDiagType_t    diag      = argus.diag_type;

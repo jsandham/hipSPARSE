@@ -25,6 +25,18 @@
 
 #include <hipsparse.h>
 
+Arguments setup_dense_to_sparse_coo_arguments()
+{
+    Arguments arg;
+    arg.M        = 100;
+    arg.N        = 100;
+    arg.lda      = 100;
+    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
+
+    arg.timing   = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(dense_to_sparse_coo_bad_arg, dense_to_sparse_coo_float)
@@ -34,19 +46,19 @@ TEST(dense_to_sparse_coo_bad_arg, dense_to_sparse_coo_float)
 
 TEST(dense_to_sparse_coo, dense_to_sparse_coo_i32_i32_float)
 {
-    hipsparseStatus_t status = testing_dense_to_sparse_coo<int32_t, float>();
+    hipsparseStatus_t status = testing_dense_to_sparse_coo<int32_t, float>(setup_dense_to_sparse_coo_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(dense_to_sparse_coo, dense_to_sparse_coo_i64_i32_double)
 {
-    hipsparseStatus_t status = testing_dense_to_sparse_coo<int64_t, double>();
+    hipsparseStatus_t status = testing_dense_to_sparse_coo<int64_t, double>(setup_dense_to_sparse_coo_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(dense_to_sparse_coo, dense_to_sparse_coo_i64_i64_hipComplex)
 {
-    hipsparseStatus_t status = testing_dense_to_sparse_coo<int64_t, hipComplex>();
+    hipsparseStatus_t status = testing_dense_to_sparse_coo<int64_t, hipComplex>(setup_dense_to_sparse_coo_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

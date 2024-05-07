@@ -5948,6 +5948,11 @@ public:
     int row_block_dimB = 1;
     int col_block_dimA = 1;
     int col_block_dimB = 1;
+    int batch_count    = 1;
+    int batch_countA   = 1;
+    int batch_countB   = 1;
+    int batch_countC   = 1;
+    int batch_stride   = 1;
 
     int lda{};
     int ldb{};
@@ -5962,15 +5967,16 @@ public:
 
     hipsparseOperation_t    transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
     hipsparseOperation_t    transB    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseIndexBase_t    idx_base  = HIPSPARSE_INDEX_BASE_ZERO;
-    hipsparseIndexBase_t    idx_base2 = HIPSPARSE_INDEX_BASE_ZERO;
-    hipsparseIndexBase_t    idx_base3 = HIPSPARSE_INDEX_BASE_ZERO;
-    hipsparseIndexBase_t    idx_base4 = HIPSPARSE_INDEX_BASE_ZERO;
+    hipsparseIndexBase_t    idx_baseA  = HIPSPARSE_INDEX_BASE_ZERO;
+    hipsparseIndexBase_t    idx_baseB = HIPSPARSE_INDEX_BASE_ZERO;
+    hipsparseIndexBase_t    idx_baseC = HIPSPARSE_INDEX_BASE_ZERO;
+    hipsparseIndexBase_t    idx_baseD = HIPSPARSE_INDEX_BASE_ZERO;
     hipsparseAction_t       action    = HIPSPARSE_ACTION_NUMERIC;
     hipsparseHybPartition_t part      = HIPSPARSE_HYB_PARTITION_AUTO;
     hipsparseDiagType_t     diag_type = HIPSPARSE_DIAG_TYPE_NON_UNIT;
     hipsparseFillMode_t     fill_mode = HIPSPARSE_FILL_MODE_LOWER;
     hipsparseDirection_t    dirA      = HIPSPARSE_DIRECTION_ROW;
+    hipsparseOrder_t        orderA    = HIPSPARSE_ORDER_COL;
 
     int norm_check = 0;
     int unit_check = 1;
@@ -5980,6 +5986,7 @@ public:
     int laplacian = 0;
     int ell_width = 0;
     int temp      = 0;
+    int algo      = 0;
 
     int    numericboost{};
     double boosttol{};
@@ -6000,6 +6007,12 @@ public:
         this->col_block_dimA = rhs.col_block_dimA;
         this->col_block_dimB = rhs.col_block_dimB;
 
+        this->batch_count = rhs.batch_count;
+        this->batch_countA = rhs.batch_countA;
+        this->batch_countB = rhs.batch_countB;
+        this->batch_countC = rhs.batch_countC;
+        this->batch_stride = rhs.batch_stride;
+
         this->lda = rhs.lda;
         this->ldb = rhs.ldb;
         this->ldc = rhs.ldc;
@@ -6013,15 +6026,16 @@ public:
 
         this->transA    = rhs.transA;
         this->transB    = rhs.transB;
-        this->idx_base  = rhs.idx_base;
-        this->idx_base2 = rhs.idx_base2;
-        this->idx_base3 = rhs.idx_base3;
-        this->idx_base4 = rhs.idx_base4;
+        this->idx_baseA = rhs.idx_baseA;
+        this->idx_baseB = rhs.idx_baseB;
+        this->idx_baseC = rhs.idx_baseC;
+        this->idx_baseD = rhs.idx_baseD;
         this->action    = rhs.action;
         this->part      = rhs.part;
         this->diag_type = rhs.diag_type;
         this->fill_mode = rhs.fill_mode;
         this->dirA      = rhs.dirA;
+        this->orderA      = rhs.orderA;
 
         this->norm_check = rhs.norm_check;
         this->unit_check = rhs.unit_check;
@@ -6031,6 +6045,7 @@ public:
         this->laplacian = rhs.laplacian;
         this->ell_width = rhs.ell_width;
         this->temp      = rhs.temp;
+        this->algo      = rhs.algo;
 
         this->numericboost = rhs.numericboost;
         this->boosttol     = rhs.boosttol;

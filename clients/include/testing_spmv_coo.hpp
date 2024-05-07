@@ -150,14 +150,14 @@ void testing_spmv_coo_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_spmv_coo(void)
+hipsparseStatus_t testing_spmv_coo(Arguments argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION > 10010 \
     || (CUDART_VERSION == 10010 && CUDART_10_1_UPDATE_VERSION == 1))
-    T                    h_alpha  = make_DataType<T>(2.0);
-    T                    h_beta   = make_DataType<T>(1.0);
-    hipsparseOperation_t transA   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseIndexBase_t idx_base = HIPSPARSE_INDEX_BASE_ZERO;
+    T                    h_alpha  = make_DataType<T>(argus.alpha, argus.alphai);
+    T                    h_beta   = make_DataType<T>(argus.beta, argus.betai);
+    hipsparseOperation_t transA   = argus.transA;
+    hipsparseIndexBase_t idx_base = argus.idx_baseA;
 
 #if(!defined(CUDART_VERSION))
     hipsparseSpMVAlg_t alg = HIPSPARSE_COOMV_ALG;
@@ -170,7 +170,7 @@ hipsparseStatus_t testing_spmv_coo(void)
 #endif
 
     // Matrices are stored at the same path in matrices directory
-    std::string filename = get_filename("nos3.bin");
+    std::string filename = get_filename(argus.filename);
 
     // Index and data type
     hipsparseIndexType_t typeI

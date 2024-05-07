@@ -444,7 +444,7 @@ hipsparseStatus_t testing_bsrmm(Arguments argus)
     hipsparseDirection_t dirA      = argus.dirA;
     hipsparseOperation_t transA    = argus.transA;
     hipsparseOperation_t transB    = argus.transB;
-    hipsparseIndexBase_t idx_base  = argus.idx_base;
+    hipsparseIndexBase_t idx_base  = argus.idx_baseA;
     std::string          binfile   = "";
     std::string          filename  = "";
 

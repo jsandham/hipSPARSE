@@ -122,17 +122,16 @@ void testing_gtsv2_strided_batch_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_gtsv2_strided_batch(void)
+hipsparseStatus_t testing_gtsv2_strided_batch(Arguments argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 10010)
+    int m            = argus.M;
+    int batch_count  = argus.batch_count;
+    int batch_stride = argus.batch_stride;
 
     // hipSPARSE handle
     std::unique_ptr<handle_struct> test_handle(new handle_struct);
     hipsparseHandle_t              handle = test_handle->handle;
-
-    int m            = 512;
-    int batch_count  = 512;
-    int batch_stride = 2 * m;
 
     // Host structures
     std::vector<T> hdl(batch_stride * batch_count, make_DataType<T>(1));

@@ -186,21 +186,21 @@ void testing_sddmm_coo_aos_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_sddmm_coo_aos()
+hipsparseStatus_t testing_sddmm_coo_aos(Arguments argus)
 {
 // only csr format supported when using cusparse backend
 #if(!defined(CUDART_VERSION) || (CUDART_VERSION >= 11022 && CUDART_VERSION < 12000))
 
-    T                    h_alpha  = make_DataType<T>(2.0);
-    T                    h_beta   = make_DataType<T>(1.0);
-    hipsparseOperation_t transA   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseOperation_t transB   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseOrder_t     order    = HIPSPARSE_ORDER_COL;
-    hipsparseIndexBase_t idx_base = HIPSPARSE_INDEX_BASE_ZERO;
+    T                    h_alpha  = make_DataType<T>(argus.alpha, argus.alphai);
+    T                    h_beta   = make_DataType<T>(argus.beta, argus.betai);
+    hipsparseOperation_t transA   = argus.transA;
+    hipsparseOperation_t transB   = argus.transB;
+    hipsparseOrder_t     order    = argus.orderA;
+    hipsparseIndexBase_t idx_base = argus.idx_baseA;
     hipsparseSDDMMAlg_t  alg      = HIPSPARSE_SDDMM_ALG_DEFAULT;
 
     // Matrices are stored at the same path in matrices directory
-    std::string filename = get_filename("nos3.bin");
+    std::string filename = get_filename(argus.filename);
 
     // Index and data type
     hipsparseIndexType_t typeI

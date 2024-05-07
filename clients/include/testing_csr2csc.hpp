@@ -217,7 +217,7 @@ hipsparseStatus_t testing_csr2csc(Arguments argus)
     int                  m         = argus.M;
     int                  n         = argus.N;
     int                  safe_size = 100;
-    hipsparseIndexBase_t idx_base  = argus.idx_base;
+    hipsparseIndexBase_t idx_base  = argus.idx_baseA;
     hipsparseAction_t    action    = argus.action;
     std::string          binfile   = "";
     std::string          filename  = "";

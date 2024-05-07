@@ -25,6 +25,21 @@
 
 #include <hipsparse.h>
 
+template <typename T>
+Arguments setup_rot_arguments()
+{
+    Arguments arg;
+    arg.N        = 15332;
+    arg.nnz      = 500;
+    arg.alpha    = make_DataType<T>(1.5);
+    arg.alphai   = make_DataType<T>(0.0);
+    arg.beta     = make_DataType<T>(2.0);
+    arg.betai    = make_DataType<T>(0.0);
+    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing   = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(rot_bad_arg, rot_float)
@@ -34,25 +49,25 @@ TEST(rot_bad_arg, rot_float)
 
 TEST(rot, rot_i32_float)
 {
-    hipsparseStatus_t status = testing_rot<int32_t, float>();
+    hipsparseStatus_t status = testing_rot<int32_t, float>(setup_rot_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(rot, rot_i64_double)
 {
-    hipsparseStatus_t status = testing_rot<int64_t, double>();
+    hipsparseStatus_t status = testing_rot<int64_t, double>(setup_rot_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(rot, rot_i32_hipFloatComplex)
 {
-    hipsparseStatus_t status = testing_rot<int32_t, hipComplex>();
+    hipsparseStatus_t status = testing_rot<int32_t, hipComplex>(setup_rot_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(rot, rot_i64_hipDoubleComplex)
 {
-    hipsparseStatus_t status = testing_rot<int64_t, hipDoubleComplex>();
+    hipsparseStatus_t status = testing_rot<int64_t, hipDoubleComplex>(setup_rot_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

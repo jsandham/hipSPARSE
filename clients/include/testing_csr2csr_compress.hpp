@@ -350,7 +350,7 @@ hipsparseStatus_t testing_csr2csr_compress(Arguments argus)
     T   tol = make_DataType<T>(argus.alpha);
 
     int                  safe_size = 100;
-    hipsparseIndexBase_t idx_base  = argus.idx_base;
+    hipsparseIndexBase_t idx_base  = argus.idx_baseA;
     std::string          binfile   = "";
     std::string          filename  = "";
     hipsparseStatus_t    status;

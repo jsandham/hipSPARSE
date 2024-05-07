@@ -25,6 +25,16 @@
 
 #include <hipsparse.h>
 
+Arguments setup_gtsv2_arguments()
+{
+    Arguments arg;
+    arg.M        = 512;
+    arg.N        = 512;
+    arg.ldb      = 1024;
+    arg.timing   = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(gtsv2_bad_arg, gtsv2_float)
@@ -34,19 +44,19 @@ TEST(gtsv2_bad_arg, gtsv2_float)
 
 TEST(gtsv2, gtsv2_float)
 {
-    hipsparseStatus_t status = testing_gtsv2<float>();
+    hipsparseStatus_t status = testing_gtsv2<float>(setup_gtsv2_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gtsv2, gtsv2_double)
 {
-    hipsparseStatus_t status = testing_gtsv2<double>();
+    hipsparseStatus_t status = testing_gtsv2<double>(setup_gtsv2_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gtsv2, gtsv2_hipComplex)
 {
-    hipsparseStatus_t status = testing_gtsv2<hipComplex>();
+    hipsparseStatus_t status = testing_gtsv2<hipComplex>(setup_gtsv2_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

@@ -25,6 +25,14 @@
 
 #include <hipsparse.h>
 
+Arguments setup_csrcolor_arguments()
+{
+    Arguments arg;
+    arg.filename = "nos3.bin";
+    arg.timing   = 0;
+    return arg;
+}
+
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 
 TEST(csrcolor_bad_arg, csrcolor_bad_arg_float)
@@ -34,25 +42,25 @@ TEST(csrcolor_bad_arg, csrcolor_bad_arg_float)
 
 TEST(csrcolor, csrcolor_float)
 {
-    hipsparseStatus_t status = testing_csrcolor<float>();
+    hipsparseStatus_t status = testing_csrcolor<float>(setup_csrcolor_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(csrcolor, csrcolor_double)
 {
-    hipsparseStatus_t status = testing_csrcolor<double>();
+    hipsparseStatus_t status = testing_csrcolor<double>(setup_csrcolor_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(csrcolor, csrcolor_hipComplex)
 {
-    hipsparseStatus_t status = testing_csrcolor<hipComplex>();
+    hipsparseStatus_t status = testing_csrcolor<hipComplex>(setup_csrcolor_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(csrcolor, csrcolor_hipDoubleComplex)
 {
-    hipsparseStatus_t status = testing_csrcolor<hipDoubleComplex>();
+    hipsparseStatus_t status = testing_csrcolor<hipDoubleComplex>(setup_csrcolor_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 

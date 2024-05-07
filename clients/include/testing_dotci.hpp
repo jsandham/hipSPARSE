@@ -112,7 +112,7 @@ hipsparseStatus_t testing_dotci(Arguments argus)
     int                  N         = argus.N;
     int                  nnz       = argus.nnz;
     int                  safe_size = 100;
-    hipsparseIndexBase_t idx_base  = argus.idx_base;
+    hipsparseIndexBase_t idx_base  = argus.idx_baseA;
     hipsparseStatus_t    status;
 
     std::unique_ptr<handle_struct> test_handle(new handle_struct);

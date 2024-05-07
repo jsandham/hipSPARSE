@@ -25,6 +25,26 @@
 
 #include <hipsparse.h>
 
+template<typename T>
+Arguments setup_spmm_batched_coo_arguments()
+{
+    Arguments arg;
+    arg.batch_countA = 1;
+    arg.batch_countB = 10;
+    arg.batch_countC = 10;
+    arg.alpha        = make_DataType<T>(2.0);
+    arg.alphai       = make_DataType<T>(0.0);
+    arg.beta         = make_DataType<T>(1.0);
+    arg.betai        = make_DataType<T>(0.0);
+    arg.transA       = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.transB       = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.orderA       = HIPSPARSE_ORDER_COL;
+    arg.idx_baseA    = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.filename     = "nos3.bin";
+    arg.timing  = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(spmm_batched_coo_bad_arg, spmm_batched_coo_float)
@@ -34,19 +54,19 @@ TEST(spmm_batched_coo_bad_arg, spmm_batched_coo_float)
 
 TEST(spmm_batched_coo, spmm_batched_coo_i32_float)
 {
-    hipsparseStatus_t status = testing_spmm_batched_coo<int32_t, float>();
+    hipsparseStatus_t status = testing_spmm_batched_coo<int32_t, float>(setup_spmm_batched_coo_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spmm_batched_coo, spmm_batched_coo_i32_double)
 {
-    hipsparseStatus_t status = testing_spmm_batched_coo<int32_t, double>();
+    hipsparseStatus_t status = testing_spmm_batched_coo<int32_t, double>(setup_spmm_batched_coo_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spmm_batched_coo, spmm_batched_coo_i32_hipComplex)
 {
-    hipsparseStatus_t status = testing_spmm_batched_coo<int32_t, hipComplex>();
+    hipsparseStatus_t status = testing_spmm_batched_coo<int32_t, hipComplex>(setup_spmm_batched_coo_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

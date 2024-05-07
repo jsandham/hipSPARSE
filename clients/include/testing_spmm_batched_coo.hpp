@@ -172,7 +172,7 @@ void testing_spmm_batched_coo_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_spmm_batched_coo()
+hipsparseStatus_t testing_spmm_batched_coo(Arguments argus)
 {
 #ifdef __HIP_PLATFORM_NVIDIA__
     // do not test for bad args
@@ -180,16 +180,16 @@ hipsparseStatus_t testing_spmm_batched_coo()
 #endif
 
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11000)
-    T                    h_alpha  = make_DataType<T>(2.0);
-    T                    h_beta   = make_DataType<T>(1.0);
-    hipsparseOperation_t transA   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseOperation_t transB   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseOrder_t     order    = HIPSPARSE_ORDER_COL;
-    hipsparseIndexBase_t idx_base = HIPSPARSE_INDEX_BASE_ZERO;
+    T                    h_alpha  = make_DataType<T>(argus.alpha, argus.alphai);
+    T                    h_beta   = make_DataType<T>(argus.beta, argus.betai);
+    hipsparseOperation_t transA   = argus.transA;
+    hipsparseOperation_t transB   = argus.transB;
+    hipsparseOrder_t     order    = argus.orderA;
+    hipsparseIndexBase_t idx_base = argus.idx_baseA;
 
-    I batch_count_A = 1;
-    I batch_count_B = 10;
-    I batch_count_C = 10;
+    I batch_count_A = argus.batch_countA;
+    I batch_count_B = argus.batch_countB;
+    I batch_count_C = argus.batch_countC;
 
 #if(CUDART_VERSION >= 11003)
     hipsparseSpMMAlg_t alg = HIPSPARSE_SPMM_COO_ALG1;
@@ -198,7 +198,7 @@ hipsparseStatus_t testing_spmm_batched_coo()
 #endif
 
     // Matrices are stored at the same path in matrices directory
-    std::string filename = get_filename("nos3.bin");
+    std::string filename = get_filename(argus.filename);
 
     // Index and data type
     hipsparseIndexType_t typeI

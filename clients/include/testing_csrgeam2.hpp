@@ -741,9 +741,9 @@ hipsparseStatus_t testing_csrgeam2(Arguments argus)
     int                  safe_size  = 100;
     int                  M          = argus.M;
     int                  N          = argus.N;
-    hipsparseIndexBase_t idx_base_A = argus.idx_base;
-    hipsparseIndexBase_t idx_base_B = argus.idx_base2;
-    hipsparseIndexBase_t idx_base_C = argus.idx_base3;
+    hipsparseIndexBase_t idx_base_A = argus.idx_baseA;
+    hipsparseIndexBase_t idx_base_B = argus.idx_baseB;
+    hipsparseIndexBase_t idx_base_C = argus.idx_baseC;
     std::string          binfile    = "";
     std::string          filename   = "";
     T                    h_alpha    = make_DataType<T>(argus.alpha);

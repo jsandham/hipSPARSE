@@ -43,7 +43,7 @@ template <typename T>
 hipsparseStatus_t testing_csrilusv(Arguments argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 12000)
-    hipsparseIndexBase_t idx_base = argus.idx_base;
+    hipsparseIndexBase_t idx_base = argus.idx_baseA;
 
     std::unique_ptr<handle_struct> test_handle(new handle_struct);
     hipsparseHandle_t              handle = test_handle->handle;

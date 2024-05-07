@@ -25,6 +25,16 @@
 
 #include <hipsparse.h>
 
+Arguments setup_scatter_arguments()
+{
+    Arguments arg;
+    arg.N        = 15332;
+    arg.nnz      = 500;
+    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing   = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(scatter_bad_arg, scatter_float)
@@ -34,13 +44,13 @@ TEST(scatter_bad_arg, scatter_float)
 
 TEST(scatter, scatter_i32_float)
 {
-    hipsparseStatus_t status = testing_scatter<int32_t, float>();
+    hipsparseStatus_t status = testing_scatter<int32_t, float>(setup_scatter_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(scatter, scatter_i64_double)
 {
-    hipsparseStatus_t status = testing_scatter<int64_t, double>();
+    hipsparseStatus_t status = testing_scatter<int64_t, double>(setup_scatter_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

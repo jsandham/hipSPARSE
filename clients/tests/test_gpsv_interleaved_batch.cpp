@@ -25,6 +25,16 @@
 
 #include <hipsparse.h>
 
+Arguments setup_gpsv_interleaved_batch_arguments()
+{
+    Arguments arg;
+    arg.M           = 512;
+    arg.batch_count = 512;
+    arg.algo        = 0;
+    arg.timing      = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(gpsv_interleaved_batch_bad_arg, gpsv_interleaved_batch_float)
@@ -34,19 +44,19 @@ TEST(gpsv_interleaved_batch_bad_arg, gpsv_interleaved_batch_float)
 
 TEST(gpsv_interleaved_batch, gpsv_interleaved_batch_float)
 {
-    hipsparseStatus_t status = testing_gpsv_interleaved_batch<float>();
+    hipsparseStatus_t status = testing_gpsv_interleaved_batch<float>(setup_gpsv_interleaved_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gpsv_interleaved_batch, gpsv_interleaved_batch_double)
 {
-    hipsparseStatus_t status = testing_gpsv_interleaved_batch<double>();
+    hipsparseStatus_t status = testing_gpsv_interleaved_batch<double>(setup_gpsv_interleaved_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gpsv_interleaved_batch, gpsv_interleaved_batch_hipComplex)
 {
-    hipsparseStatus_t status = testing_gpsv_interleaved_batch<hipComplex>();
+    hipsparseStatus_t status = testing_gpsv_interleaved_batch<hipComplex>(setup_gpsv_interleaved_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

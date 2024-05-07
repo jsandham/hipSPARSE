@@ -328,7 +328,7 @@ hipsparseStatus_t testing_bsrilu02(Arguments argus)
     double                 boost_tol = argus.boosttol;
     T                      boost_val = make_DataType<T>(argus.boostval, argus.boostvali);
     hipsparseDirection_t   dir       = argus.dirA;
-    hipsparseIndexBase_t   idx_base  = argus.idx_base;
+    hipsparseIndexBase_t   idx_base  = argus.idx_baseA;
     hipsparseSolvePolicy_t policy    = HIPSPARSE_SOLVE_POLICY_USE_LEVEL;
     std::string            binfile   = "";
     std::string            filename  = "";

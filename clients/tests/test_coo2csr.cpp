@@ -80,7 +80,7 @@ Arguments setup_coo2csr_arguments(coo2csr_tuple tup)
     Arguments arg;
     arg.M        = std::get<0>(tup);
     arg.N        = std::get<1>(tup);
-    arg.idx_base = std::get<2>(tup);
+    arg.idx_baseA= std::get<2>(tup);
     arg.timing   = 0;
     return arg;
 }
@@ -90,7 +90,7 @@ Arguments setup_coo2csr_arguments(coo2csr_bin_tuple tup)
     Arguments arg;
     arg.M                = -99;
     arg.N                = -99;
-    arg.idx_base         = std::get<0>(tup);
+    arg.idx_baseA        = std::get<0>(tup);
     arg.timing           = 0;
     std::string bin_file = std::get<1>(tup);
 

@@ -52,7 +52,7 @@ Arguments setup_prune_dense2csr_arguments(prune_dense2csr_tuple tup)
     arg.N         = std::get<1>(tup);
     arg.lda       = std::get<2>(tup);
     arg.threshold = std::get<3>(tup);
-    arg.idx_base  = std::get<4>(tup);
+    arg.idx_baseA = std::get<4>(tup);
     return arg;
 }
 

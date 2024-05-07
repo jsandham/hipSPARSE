@@ -25,6 +25,18 @@
 
 #include <hipsparse.h>
 
+template <typename T>
+Arguments setup_bsrsm2_arguments()
+{
+    Arguments arg;
+    arg.N        = 15;
+    arg.filename = "nos3.bin";
+    arg.alpha    = make_DataType<T>(2.0);
+    arg.alphai   = make_DataType<T>(0.0);
+    arg.timing   = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(bsrsm2_bad_arg, bsrsm2_float)
@@ -34,25 +46,25 @@ TEST(bsrsm2_bad_arg, bsrsm2_float)
 
 TEST(bsrsm2, bsrsm2_float)
 {
-    hipsparseStatus_t status = testing_bsrsm2<float>();
+    hipsparseStatus_t status = testing_bsrsm2<float>(setup_bsrsm2_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(bsrsm2, bsrsm2_double)
 {
-    hipsparseStatus_t status = testing_bsrsm2<double>();
+    hipsparseStatus_t status = testing_bsrsm2<double>(setup_bsrsm2_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(bsrsm2, bsrsm2_hipComplex)
 {
-    hipsparseStatus_t status = testing_bsrsm2<hipComplex>();
+    hipsparseStatus_t status = testing_bsrsm2<hipComplex>(setup_bsrsm2_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(bsrsm2, bsrsm2_hipDoubleComplex)
 {
-    hipsparseStatus_t status = testing_bsrsm2<hipDoubleComplex>();
+    hipsparseStatus_t status = testing_bsrsm2<hipDoubleComplex>(setup_bsrsm2_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

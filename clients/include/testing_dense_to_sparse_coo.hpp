@@ -135,10 +135,14 @@ void testing_dense_to_sparse_coo_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_dense_to_sparse_coo(void)
+hipsparseStatus_t testing_dense_to_sparse_coo(Arguments argus)
 {
 #if(!defined(CUDART_VERSION))
-    hipsparseIndexBase_t        idx_base = HIPSPARSE_INDEX_BASE_ZERO;
+    I m  = argus.M;
+    I n  = argus.N;
+    I ld = argus.lda;
+
+    hipsparseIndexBase_t        idx_base = argus.idx_baseA;
     hipsparseDenseToSparseAlg_t alg      = HIPSPARSE_DENSETOSPARSE_ALG_DEFAULT;
     hipsparseOrder_t            order    = HIPSPARSE_ORDER_COL;
 
@@ -154,10 +158,6 @@ hipsparseStatus_t testing_dense_to_sparse_coo(void)
     // hipSPARSE handle
     std::unique_ptr<handle_struct> test_handle(new handle_struct);
     hipsparseHandle_t              handle = test_handle->handle;
-
-    I m  = 100;
-    I n  = 100;
-    I ld = m;
 
     // Host structures
     std::vector<T> hdense_val(ld * n);

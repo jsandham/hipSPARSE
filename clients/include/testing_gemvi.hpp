@@ -143,18 +143,17 @@ void testing_gemvi_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_gemvi(void)
+hipsparseStatus_t testing_gemvi(Arguments argus)
 {
-    int m   = 1291;
-    int n   = 724;
-    int nnz = 237;
+    int m   = argus.M;
+    int n   = argus.N;
+    int nnz = argus.nnz;
+    int lda = argus.lda;
+    hipsparseOperation_t opType  = argus.transA;
+    hipsparseIndexBase_t idxBase = argus.idx_baseA;
 
-    static constexpr hipsparseOperation_t opType  = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    int                                   lda     = m;
-    hipsparseIndexBase_t                  idxBase = HIPSPARSE_INDEX_BASE_ZERO;
-
-    T alpha = make_DataType<T>(0.6);
-    T beta  = make_DataType<T>(3.2);
+    T alpha = make_DataType<T>(argus.alpha, argus.alphai);
+    T beta  = make_DataType<T>(argus.beta, argus.betai);
 
     // hipSPARSE handle
     std::unique_ptr<handle_struct> test_handle(new handle_struct);

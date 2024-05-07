@@ -194,7 +194,7 @@ hipsparseStatus_t testing_coosort(Arguments argus)
     int                  safe_size = 100;
     int                  by_row    = argus.transA == HIPSPARSE_OPERATION_NON_TRANSPOSE;
     int                  permute   = argus.temp;
-    hipsparseIndexBase_t idx_base  = argus.idx_base;
+    hipsparseIndexBase_t idx_base  = argus.idx_baseA;
     std::string          binfile   = "";
     std::string          filename  = "";
     hipsparseStatus_t    status;

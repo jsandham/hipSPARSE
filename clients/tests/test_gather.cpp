@@ -25,6 +25,16 @@
 
 #include <hipsparse.h>
 
+Arguments setup_gather_arguments()
+{
+    Arguments arg;
+    arg.N        = 15332;
+    arg.nnz      = 500;
+    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing   = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(gather_bad_arg, gather_float)
@@ -34,13 +44,13 @@ TEST(gather_bad_arg, gather_float)
 
 TEST(gather, gather_i32_float)
 {
-    hipsparseStatus_t status = testing_gather<int32_t, float>();
+    hipsparseStatus_t status = testing_gather<int32_t, float>(setup_gather_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gather, gather_i64_double)
 {
-    hipsparseStatus_t status = testing_gather<int64_t, double>();
+    hipsparseStatus_t status = testing_gather<int64_t, double>(setup_gather_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

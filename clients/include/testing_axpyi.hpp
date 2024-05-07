@@ -109,7 +109,7 @@ hipsparseStatus_t testing_axpyi(Arguments argus)
     int                  nnz       = argus.nnz;
     int                  safe_size = 100;
     T                    h_alpha   = make_DataType<T>(argus.alpha);
-    hipsparseIndexBase_t idx_base  = argus.idx_base;
+    hipsparseIndexBase_t idx_base  = argus.idx_baseA;
     hipsparseStatus_t    status;
 
     std::unique_ptr<handle_struct> test_handle(new handle_struct);

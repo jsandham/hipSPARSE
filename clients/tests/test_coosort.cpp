@@ -81,7 +81,7 @@ Arguments setup_coosort_arguments(coosort_tuple tup)
     arg.N        = std::get<1>(tup);
     arg.transA   = std::get<2>(tup);
     arg.temp     = std::get<3>(tup);
-    arg.idx_base = std::get<4>(tup);
+    arg.idx_baseA= std::get<4>(tup);
     arg.timing   = 0;
     return arg;
 }
@@ -93,7 +93,7 @@ Arguments setup_coosort_arguments(coosort_bin_tuple tup)
     arg.N        = -99;
     arg.transA   = std::get<0>(tup);
     arg.temp     = std::get<1>(tup);
-    arg.idx_base = std::get<2>(tup);
+    arg.idx_baseA= std::get<2>(tup);
     arg.timing   = 0;
 
     // Determine absolute path of test matrix

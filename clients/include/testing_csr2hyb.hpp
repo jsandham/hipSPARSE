@@ -161,7 +161,7 @@ hipsparseStatus_t testing_csr2hyb(Arguments argus)
     int                     m              = argus.M;
     int                     n              = argus.N;
     int                     safe_size      = 100;
-    hipsparseIndexBase_t    idx_base       = argus.idx_base;
+    hipsparseIndexBase_t    idx_base       = argus.idx_baseA;
     hipsparseHybPartition_t part           = argus.part;
     int                     user_ell_width = argus.ell_width;
     std::string             binfile        = "";

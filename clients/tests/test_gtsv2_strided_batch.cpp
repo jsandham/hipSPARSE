@@ -25,6 +25,16 @@
 
 #include <hipsparse.h>
 
+Arguments setup_gtsv2_strided_batch_arguments()
+{
+    Arguments arg;
+    arg.M            = 512;
+    arg.batch_count  = 512;
+    arg.batch_stride = 1024;
+    arg.timing       = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(gtsv2_strided_batch_bad_arg, gtsv2_strided_batch_float)
@@ -34,19 +44,19 @@ TEST(gtsv2_strided_batch_bad_arg, gtsv2_strided_batch_float)
 
 TEST(gtsv2_strided_batch, gtsv2_strided_batch_float)
 {
-    hipsparseStatus_t status = testing_gtsv2_strided_batch<float>();
+    hipsparseStatus_t status = testing_gtsv2_strided_batch<float>(setup_gtsv2_strided_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gtsv2_strided_batch, gtsv2_strided_batch_double)
 {
-    hipsparseStatus_t status = testing_gtsv2_strided_batch<double>();
+    hipsparseStatus_t status = testing_gtsv2_strided_batch<double>(setup_gtsv2_strided_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gtsv2_strided_batch, gtsv2_strided_batch_hipComplex)
 {
-    hipsparseStatus_t status = testing_gtsv2_strided_batch<hipComplex>();
+    hipsparseStatus_t status = testing_gtsv2_strided_batch<hipComplex>(setup_gtsv2_strided_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

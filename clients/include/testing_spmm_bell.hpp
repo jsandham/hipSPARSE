@@ -185,8 +185,25 @@ void testing_spmm_bell_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_spmm_bell()
+hipsparseStatus_t testing_spmm_bell(Arguments argus)
 {
+    I m = argus.M;
+    I k = argus.K;
+    I n = argus.N;
+    I nnz = argus.nnz;
+
+    T                    h_alpha  = make_DataType<T>(argus.alpha, argus.alphai);
+    T                    h_beta   = make_DataType<T>(argus.beta, argus.betai);
+    hipsparseOperation_t transA   = argus.transA;
+    hipsparseOperation_t transB   = argus.transB;
+    hipsparseOrder_t     order    = argus.orderA;
+    hipsparseIndexBase_t idx_base = argus.idx_baseA;
+    hipsparseSpMMAlg_t   alg      = HIPSPARSE_SPMM_BLOCKED_ELL_ALG1;
+
+    I ell_cols      = 4;
+    I ell_blocksize = 2;
+    I ldb           = k;
+    I ldc           = m;
 
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11021)
 
@@ -222,23 +239,6 @@ hipsparseStatus_t testing_spmm_bell()
            make_DataType<T>(-7.0), make_DataType<T>(-7.0), make_DataType<T>(-7.0)};
 
     std::vector<I> hbell_ind = {1, 0, 1, 2, 3, 0};
-
-    I ell_cols      = 4;
-    I ell_blocksize = 2;
-    I m             = 6;
-    I k             = 6;
-    I nnz           = 16;
-    I n             = 2;
-    I ldb           = k;
-    I ldc           = m;
-
-    T                    h_alpha  = make_DataType<T>(2.0);
-    T                    h_beta   = make_DataType<T>(1.0);
-    hipsparseOperation_t transA   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseOperation_t transB   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseOrder_t     order    = HIPSPARSE_ORDER_COL;
-    hipsparseIndexBase_t idx_base = HIPSPARSE_INDEX_BASE_ONE;
-    hipsparseSpMMAlg_t   alg      = HIPSPARSE_SPMM_BLOCKED_ELL_ALG1;
 
     // Index and data type
     hipsparseIndexType_t typeI

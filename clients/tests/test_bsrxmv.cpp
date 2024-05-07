@@ -25,6 +25,24 @@
 
 #include <hipsparse.h>
 
+template <typename T>
+Arguments setup_bsrxmv_arguments()
+{
+    Arguments arg;
+    arg.dirA      = HIPSPARSE_DIRECTION_COLUMN;
+    arg.transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.M         = 4;
+    arg.N         = 6;
+    arg.nnz       = 20;
+    arg.block_dim = 2;
+    arg.alpha     = make_DataType<T>(2.0);
+    arg.alphai    = make_DataType<T>(0.0);
+    arg.beta      = make_DataType<T>(1.0);
+    arg.betai     = make_DataType<T>(0.0);
+    arg.timing    = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(bsrxmv_bad_arg, bsrxmv_bad_arg_float)
@@ -49,19 +67,19 @@ TEST(bsrxmv_bad_arg, bsrxmv_bad_arg_double_complex)
 
 TEST(bsrxmv, bsrxmv_float)
 {
-    hipsparseStatus_t status = testing_bsrxmv<float>();
+    hipsparseStatus_t status = testing_bsrxmv<float>(setup_bsrxmv_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(bsrxmv, bsrxmv_double)
 {
-    hipsparseStatus_t status = testing_bsrxmv<double>();
+    hipsparseStatus_t status = testing_bsrxmv<double>(setup_bsrxmv_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(bsrxmv, bsrxmv_hipComplex)
 {
-    hipsparseStatus_t status = testing_bsrxmv<hipComplex>();
+    hipsparseStatus_t status = testing_bsrxmv<hipComplex>(setup_bsrxmv_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

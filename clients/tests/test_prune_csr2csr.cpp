@@ -70,8 +70,8 @@ Arguments setup_prune_csr2csr_arguments(prune_csr2csr_tuple tup)
     arg.M         = std::get<0>(tup);
     arg.N         = std::get<1>(tup);
     arg.threshold = std::get<2>(tup);
-    arg.idx_base  = std::get<3>(tup);
-    arg.idx_base2 = std::get<4>(tup);
+    arg.idx_baseA  = std::get<3>(tup);
+    arg.idx_baseC = std::get<4>(tup);
     arg.timing    = 0;
     return arg;
 }
@@ -82,8 +82,8 @@ Arguments setup_prune_csr2csr_arguments(prune_csr2csr_bin_tuple tup)
     arg.M         = -99;
     arg.N         = -99;
     arg.threshold = std::get<0>(tup);
-    arg.idx_base  = std::get<1>(tup);
-    arg.idx_base2 = std::get<2>(tup);
+    arg.idx_baseA  = std::get<1>(tup);
+    arg.idx_baseC = std::get<2>(tup);
     arg.timing    = 0;
 
     // Determine absolute path of test matrix

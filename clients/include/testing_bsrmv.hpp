@@ -294,7 +294,7 @@ hipsparseStatus_t testing_bsrmv(Arguments argus)
     T                    h_alpha   = make_DataType<T>(argus.alpha);
     T                    h_beta    = make_DataType<T>(argus.beta);
     hipsparseOperation_t transA    = argus.transA;
-    hipsparseIndexBase_t idx_base  = argus.idx_base;
+    hipsparseIndexBase_t idx_base  = argus.idx_baseA;
     hipsparseDirection_t dir       = argus.dirA;
     std::string          binfile   = "";
     std::string          filename  = "";

@@ -185,19 +185,19 @@ void testing_spsm_coo_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_spsm_coo(void)
+hipsparseStatus_t testing_spsm_coo(Arguments argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11031)
-    T                    h_alpha  = make_DataType<T>(2.3);
-    hipsparseOperation_t transA   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseOperation_t transB   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseIndexBase_t idx_base = HIPSPARSE_INDEX_BASE_ZERO;
-    hipsparseDiagType_t  diag     = HIPSPARSE_DIAG_TYPE_NON_UNIT;
-    hipsparseFillMode_t  uplo     = HIPSPARSE_FILL_MODE_LOWER;
-    hipsparseOrder_t     order    = HIPSPARSE_ORDER_COL;
+    T                    h_alpha  = make_DataType<T>(argus.alpha, argus.alphai);
+    hipsparseOperation_t transA   = argus.transA;
+    hipsparseOperation_t transB   = argus.transB;
+    hipsparseIndexBase_t idx_base = argus.idx_baseA;
+    hipsparseDiagType_t  diag     = argus.diag_type;
+    hipsparseFillMode_t  uplo     = argus.fill_mode;
+    hipsparseOrder_t     order    = argus.orderA;
     hipsparseSpSMAlg_t   alg      = HIPSPARSE_SPSM_ALG_DEFAULT;
 
-    std::string filename = get_filename("nos3.bin");
+    std::string filename = get_filename(argus.filename);
 
     // Index and data type
     hipsparseIndexType_t typeI

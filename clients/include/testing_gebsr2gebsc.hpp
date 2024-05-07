@@ -442,7 +442,7 @@ hipsparseStatus_t testing_gebsr2gebsc(Arguments argus)
     hipsparseHandle_t              handle = unique_ptr_handle->handle;
 
     hipsparseAction_t    action = argus.action;
-    hipsparseIndexBase_t base   = argus.idx_base;
+    hipsparseIndexBase_t base   = argus.idx_baseA;
 
     // Argument sanity check before allocating invalid memory
     if((argus.M <= 0 && argus.M != -99) || (argus.N <= 0 && argus.M != -99)

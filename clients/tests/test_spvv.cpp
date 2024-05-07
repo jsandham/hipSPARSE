@@ -25,6 +25,16 @@
 
 #include <hipsparse.h>
 
+Arguments setup_spvv_arguments()
+{
+    Arguments arg;
+    arg.N = 15332;
+    arg.nnz = 500;
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing  = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(spvv_bad_arg, spvv_float)
@@ -34,25 +44,25 @@ TEST(spvv_bad_arg, spvv_float)
 
 TEST(spvv, spvv_i32_float)
 {
-    hipsparseStatus_t status = testing_spvv<int32_t, float>();
+    hipsparseStatus_t status = testing_spvv<int32_t, float>(setup_spvv_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spvv, spvv_i64_double)
 {
-    hipsparseStatus_t status = testing_spvv<int64_t, double>();
+    hipsparseStatus_t status = testing_spvv<int64_t, double>(setup_spvv_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spvv, spvv_i32_hipFloatComplex)
 {
-    hipsparseStatus_t status = testing_spvv<int32_t, hipComplex>();
+    hipsparseStatus_t status = testing_spvv<int32_t, hipComplex>(setup_spvv_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spvv, spvv_i64_hipDoubleComplex)
 {
-    hipsparseStatus_t status = testing_spvv<int64_t, hipDoubleComplex>();
+    hipsparseStatus_t status = testing_spvv<int64_t, hipDoubleComplex>(setup_spvv_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

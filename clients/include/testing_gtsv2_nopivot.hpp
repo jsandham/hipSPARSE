@@ -112,17 +112,16 @@ void testing_gtsv2_nopivot_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_gtsv2_nopivot(void)
+hipsparseStatus_t testing_gtsv2_nopivot(Arguments argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 10010)
+    int m   = argus.M;
+    int n   = argus.N;
+    int ldb = argus.ldb;
 
     // hipSPARSE handle
     std::unique_ptr<handle_struct> test_handle(new handle_struct);
     hipsparseHandle_t              handle = test_handle->handle;
-
-    int m   = 512;
-    int n   = 512;
-    int ldb = 2 * m;
 
     // Host structures
     std::vector<T> hdl(m, make_DataType<T>(1));

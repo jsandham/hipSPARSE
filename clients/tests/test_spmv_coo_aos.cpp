@@ -25,6 +25,21 @@
 
 #include <hipsparse.h>
 
+template<typename T>
+Arguments setup_spmv_coo_aos_arguments()
+{
+    Arguments arg;
+    arg.alpha        = make_DataType<T>(2.0);
+    arg.alphai       = make_DataType<T>(0.0);
+    arg.beta         = make_DataType<T>(1.0);
+    arg.betai        = make_DataType<T>(0.0);
+    arg.transA       = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.idx_baseA    = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.filename     = "nos3.bin";
+    arg.timing  = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(spmv_coo_aos_bad_arg, spmv_coo_aos_float)
@@ -34,13 +49,13 @@ TEST(spmv_coo_aos_bad_arg, spmv_coo_aos_float)
 
 TEST(spmv_coo_aos, spmv_coo_aos_i32_float)
 {
-    hipsparseStatus_t status = testing_spmv_coo_aos<int32_t, float>();
+    hipsparseStatus_t status = testing_spmv_coo_aos<int32_t, float>(setup_spmv_coo_aos_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spmv_coo_aos, spmv_coo_aos_i64_double)
 {
-    hipsparseStatus_t status = testing_spmv_coo_aos<int64_t, double>();
+    hipsparseStatus_t status = testing_spmv_coo_aos<int64_t, double>(setup_spmv_coo_aos_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

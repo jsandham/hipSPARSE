@@ -22,7 +22,24 @@
  * ************************************************************************ */
 
 #include "testing_axpby.hpp"
+#include "utility.hpp"
+
 #include <hipsparse.h>
+
+template <typename T>
+Arguments setup_axpby_arguments()
+{
+    Arguments arg;
+    arg.N        = 15332;
+    arg.nnz      = 500;
+    arg.alpha    = make_DataType<T>(1.5);
+    arg.alphai   = make_DataType<T>(0.0);
+    arg.beta     = make_DataType<T>(0.5);
+    arg.betai    = make_DataType<T>(0.0);
+    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing   = 0;
+    return arg;
+}
 
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
@@ -33,25 +50,25 @@ TEST(axpby_bad_arg, axpby_float)
 
 TEST(axpby, axpby_i32_float)
 {
-    hipsparseStatus_t status = testing_axpby<int32_t, float>();
+    hipsparseStatus_t status = testing_axpby<int32_t, float>(setup_axpby_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(axpby, axpby_i64_double)
 {
-    hipsparseStatus_t status = testing_axpby<int64_t, double>();
+    hipsparseStatus_t status = testing_axpby<int64_t, double>(setup_axpby_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(axpby, axpby_i32_hipFloatComplex)
 {
-    hipsparseStatus_t status = testing_axpby<int32_t, hipComplex>();
+    hipsparseStatus_t status = testing_axpby<int32_t, hipComplex>(setup_axpby_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(axpby, axpby_i64_hipDoubleComplex)
 {
-    hipsparseStatus_t status = testing_axpby<int64_t, hipDoubleComplex>();
+    hipsparseStatus_t status = testing_axpby<int64_t, hipDoubleComplex>(setup_axpby_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 

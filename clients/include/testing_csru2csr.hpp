@@ -246,8 +246,12 @@ void testing_csru2csr_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csru2csr(void)
+hipsparseStatus_t testing_csru2csr(Arguments argus)
 {
+    int m   = argus.M;
+    int n   = argus.N;
+    int nnz = argus.nnz;
+
     // hipSPARSE handle
     std::unique_ptr<handle_struct> test_handle(new handle_struct);
     hipsparseHandle_t              handle = test_handle->handle;
@@ -260,10 +264,6 @@ hipsparseStatus_t testing_csru2csr(void)
 
     // Sample test matrix
     srand(12345ULL);
-
-    int m   = 51314;
-    int n   = 12963;
-    int nnz = 309274;
 
     // Sample random COO matrix
     std::vector<int> hcoo_row_ind;

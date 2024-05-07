@@ -23,6 +23,16 @@
 
 #include "testing_spmat_descr.hpp"
 
+Arguments setup_spmat_descr_arguments()
+{
+    Arguments arg;
+    arg.M       = 2;
+    arg.N       = 2;
+    arg.nnz     = 4;
+    arg.timing  = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(spmat_descr_bad_arg, spmat_descr_float)
@@ -32,7 +42,7 @@ TEST(spmat_descr_bad_arg, spmat_descr_float)
 
 TEST(spmat_descr, spmat_descr)
 {
-    hipsparseStatus_t status = testing_spmat_descr();
+    hipsparseStatus_t status = testing_spmat_descr(setup_spmat_descr_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

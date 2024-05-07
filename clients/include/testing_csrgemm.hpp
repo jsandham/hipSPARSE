@@ -828,9 +828,9 @@ hipsparseStatus_t testing_csrgemm(Arguments argus)
     int                  K          = argus.K;
     hipsparseOperation_t trans_A    = argus.transA;
     hipsparseOperation_t trans_B    = argus.transB;
-    hipsparseIndexBase_t idx_base_A = argus.idx_base;
-    hipsparseIndexBase_t idx_base_B = argus.idx_base2;
-    hipsparseIndexBase_t idx_base_C = argus.idx_base3;
+    hipsparseIndexBase_t idx_base_A = argus.idx_baseA;
+    hipsparseIndexBase_t idx_base_B = argus.idx_baseB;
+    hipsparseIndexBase_t idx_base_C = argus.idx_baseC;
     std::string          binfile    = "";
     std::string          filename   = "";
     hipsparseStatus_t    status;

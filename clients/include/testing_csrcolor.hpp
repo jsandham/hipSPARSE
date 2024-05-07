@@ -229,11 +229,11 @@ void testing_csrcolor_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csrcolor()
+hipsparseStatus_t testing_csrcolor(Arguments argus)
 {
     // Determine absolute path of test matrix
     // Matrices are stored at the same path in matrices directory
-    std::string filename = get_filename("nos3.bin");
+    std::string filename = get_filename(argus.filename);
 
     // hipSPARSE handle
     std::unique_ptr<handle_struct> test_handle(new handle_struct);

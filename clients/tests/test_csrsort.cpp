@@ -87,7 +87,7 @@ Arguments setup_csrsort_arguments(csrsort_tuple tup)
     arg.M        = std::get<0>(tup);
     arg.N        = std::get<1>(tup);
     arg.temp     = std::get<2>(tup);
-    arg.idx_base = std::get<3>(tup);
+    arg.idx_baseA= std::get<3>(tup);
     arg.timing   = 0;
     return arg;
 }
@@ -98,7 +98,7 @@ Arguments setup_csrsort_arguments(csrsort_bin_tuple tup)
     arg.M        = -99;
     arg.N        = -99;
     arg.temp     = std::get<0>(tup);
-    arg.idx_base = std::get<1>(tup);
+    arg.idx_baseA= std::get<1>(tup);
     arg.timing   = 0;
 
     // Determine absolute path of test matrix

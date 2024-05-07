@@ -25,6 +25,16 @@
 
 #include <hipsparse.h>
 
+Arguments setup_csru2csr_arguments()
+{
+    Arguments arg;
+    arg.M        = 51314;
+    arg.N        = 12963;
+    arg.nnz      = 309274;
+    arg.timing   = 0;
+    return arg;
+}
+
 // Only run tests for CUDA 11.1 or greater
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11010)
 TEST(csru2csr_bad_arg, csru2csr_float)
@@ -34,25 +44,25 @@ TEST(csru2csr_bad_arg, csru2csr_float)
 
 TEST(csru2csr, csru2csr_float)
 {
-    hipsparseStatus_t status = testing_csru2csr<float>();
+    hipsparseStatus_t status = testing_csru2csr<float>(setup_csru2csr_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(csru2csr, csru2csr_double)
 {
-    hipsparseStatus_t status = testing_csru2csr<double>();
+    hipsparseStatus_t status = testing_csru2csr<double>(setup_csru2csr_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(csru2csr, csru2csr_hipComplex)
 {
-    hipsparseStatus_t status = testing_csru2csr<hipComplex>();
+    hipsparseStatus_t status = testing_csru2csr<hipComplex>(setup_csru2csr_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(csru2csr, csru2csr_hipDoubleComplex)
 {
-    hipsparseStatus_t status = testing_csru2csr<hipDoubleComplex>();
+    hipsparseStatus_t status = testing_csru2csr<hipDoubleComplex>(setup_csru2csr_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif
