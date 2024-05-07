@@ -205,7 +205,7 @@ hipsparseStatus_t testing_spmm_csr(Arguments argus)
     hipsparseOperation_t transB   = argus.transB;
     hipsparseOrder_t     order    = argus.orderA;
     hipsparseIndexBase_t idx_base = argus.idx_baseA;
-    
+
 #if(CUDART_VERSION >= 11003)
     hipsparseSpMMAlg_t alg = HIPSPARSE_SPMM_CSR_ALG1;
 #else

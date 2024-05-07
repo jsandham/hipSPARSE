@@ -28,12 +28,12 @@
 Arguments setup_dense_to_sparse_csc_arguments()
 {
     Arguments arg;
-    arg.M        = 100;
-    arg.N        = 100;
-    arg.lda      = 100;
-    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
+    arg.M         = 100;
+    arg.N         = 100;
+    arg.lda       = 100;
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
 
-    arg.timing   = 0;
+    arg.timing = 0;
     return arg;
 }
 
@@ -46,19 +46,22 @@ TEST(dense_to_sparse_csc_bad_arg, dense_to_sparse_csc_float)
 
 TEST(dense_to_sparse_csc, dense_to_sparse_csc_i32_i32_float)
 {
-    hipsparseStatus_t status = testing_dense_to_sparse_csc<int32_t, int32_t, float>(setup_dense_to_sparse_csc_arguments());
+    hipsparseStatus_t status = testing_dense_to_sparse_csc<int32_t, int32_t, float>(
+        setup_dense_to_sparse_csc_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(dense_to_sparse_csc, dense_to_sparse_csc_i64_i32_double)
 {
-    hipsparseStatus_t status = testing_dense_to_sparse_csc<int64_t, int32_t, double>(setup_dense_to_sparse_csc_arguments());
+    hipsparseStatus_t status = testing_dense_to_sparse_csc<int64_t, int32_t, double>(
+        setup_dense_to_sparse_csc_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(dense_to_sparse_csc, dense_to_sparse_csc_i64_i64_hipComplex)
 {
-    hipsparseStatus_t status = testing_dense_to_sparse_csc<int64_t, int64_t, hipComplex>(setup_dense_to_sparse_csc_arguments());
+    hipsparseStatus_t status = testing_dense_to_sparse_csc<int64_t, int64_t, hipComplex>(
+        setup_dense_to_sparse_csc_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

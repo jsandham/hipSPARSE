@@ -30,14 +30,14 @@ template <typename T>
 Arguments setup_axpby_arguments()
 {
     Arguments arg;
-    arg.N        = 15332;
-    arg.nnz      = 500;
-    arg.alpha    = make_DataType<T>(1.5);
-    arg.alphai   = make_DataType<T>(0.0);
-    arg.beta     = make_DataType<T>(0.5);
-    arg.betai    = make_DataType<T>(0.0);
-    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
-    arg.timing   = 0;
+    arg.N         = 15332;
+    arg.nnz       = 500;
+    arg.alpha     = make_DataType<T>(1.5);
+    arg.alphai    = make_DataType<T>(0.0);
+    arg.beta      = make_DataType<T>(0.5);
+    arg.betai     = make_DataType<T>(0.0);
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing    = 0;
     return arg;
 }
 
@@ -68,7 +68,8 @@ TEST(axpby, axpby_i32_hipFloatComplex)
 
 TEST(axpby, axpby_i64_hipDoubleComplex)
 {
-    hipsparseStatus_t status = testing_axpby<int64_t, hipDoubleComplex>(setup_axpby_arguments<double>());
+    hipsparseStatus_t status
+        = testing_axpby<int64_t, hipDoubleComplex>(setup_axpby_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 

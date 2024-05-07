@@ -25,18 +25,18 @@
 
 #include <hipsparse.h>
 
-template<typename T>
+template <typename T>
 Arguments setup_spmv_coo_arguments()
 {
     Arguments arg;
-    arg.alpha        = make_DataType<T>(2.0);
-    arg.alphai       = make_DataType<T>(0.0);
-    arg.beta         = make_DataType<T>(1.0);
-    arg.betai        = make_DataType<T>(0.0);
-    arg.transA       = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    arg.idx_baseA    = HIPSPARSE_INDEX_BASE_ZERO;
-    arg.filename     = "nos3.bin";
-    arg.timing  = 0;
+    arg.alpha     = make_DataType<T>(2.0);
+    arg.alphai    = make_DataType<T>(0.0);
+    arg.beta      = make_DataType<T>(1.0);
+    arg.betai     = make_DataType<T>(0.0);
+    arg.transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.filename  = "nos3.bin";
+    arg.timing    = 0;
     return arg;
 }
 
@@ -55,7 +55,8 @@ TEST(spmv_coo, spmv_coo_i32_float)
 
 TEST(spmv_coo, spmv_coo_i64_double)
 {
-    hipsparseStatus_t status = testing_spmv_coo<int64_t, double>(setup_spmv_coo_arguments<double>());
+    hipsparseStatus_t status
+        = testing_spmv_coo<int64_t, double>(setup_spmv_coo_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

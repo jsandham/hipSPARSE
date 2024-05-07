@@ -25,24 +25,24 @@
 
 #include <hipsparse.h>
 
-template<typename T>
+template <typename T>
 Arguments setup_spmm_bell_arguments()
 {
     Arguments arg;
 
-    arg.M            = 6;
-    arg.N            = 2;
-    arg.K            = 6;
-    arg.nnz          = 16;
-    arg.alpha        = make_DataType<T>(2.0);
-    arg.alphai       = make_DataType<T>(0.0);
-    arg.beta         = make_DataType<T>(1.0);
-    arg.betai        = make_DataType<T>(0.0);
-    arg.transA       = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    arg.transB       = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    arg.orderA       = HIPSPARSE_ORDER_COL;
-    arg.idx_baseA    = HIPSPARSE_INDEX_BASE_ZERO;
-    arg.timing  = 0;
+    arg.M         = 6;
+    arg.N         = 2;
+    arg.K         = 6;
+    arg.nnz       = 16;
+    arg.alpha     = make_DataType<T>(2.0);
+    arg.alphai    = make_DataType<T>(0.0);
+    arg.beta      = make_DataType<T>(1.0);
+    arg.betai     = make_DataType<T>(0.0);
+    arg.transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.transB    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.orderA    = HIPSPARSE_ORDER_COL;
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing    = 0;
     return arg;
 }
 
@@ -54,19 +54,22 @@ TEST(spmm_bell_bad_arg, spmm_bell_float)
 
 TEST(spmm_bell, spmm_bell_i32_float)
 {
-    hipsparseStatus_t status = testing_spmm_bell<int32_t, float>(setup_spmm_bell_arguments<float>());
+    hipsparseStatus_t status
+        = testing_spmm_bell<int32_t, float>(setup_spmm_bell_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spmm_bell, spmm_bell_i64_double)
 {
-    hipsparseStatus_t status = testing_spmm_bell<int32_t, double>(setup_spmm_bell_arguments<double>());
+    hipsparseStatus_t status
+        = testing_spmm_bell<int32_t, double>(setup_spmm_bell_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spmm_bell, spmm_bell_i64_hipComplex)
 {
-    hipsparseStatus_t status = testing_spmm_bell<int32_t, hipComplex>(setup_spmm_bell_arguments<float>());
+    hipsparseStatus_t status
+        = testing_spmm_bell<int32_t, hipComplex>(setup_spmm_bell_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

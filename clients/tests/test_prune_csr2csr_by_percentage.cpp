@@ -82,7 +82,7 @@ Arguments setup_prune_csr2csr_by_percentage_arguments(prune_csr2csr_by_percentag
     arg.M          = std::get<0>(tup);
     arg.N          = std::get<1>(tup);
     arg.percentage = std::get<2>(tup);
-    arg.idx_baseA   = std::get<3>(tup);
+    arg.idx_baseA  = std::get<3>(tup);
     arg.idx_baseC  = std::get<4>(tup);
     arg.timing     = 0;
     return arg;
@@ -94,7 +94,7 @@ Arguments setup_prune_csr2csr_by_percentage_arguments(prune_csr2csr_by_percentag
     arg.M          = -99;
     arg.N          = -99;
     arg.percentage = std::get<0>(tup);
-    arg.idx_baseA   = std::get<1>(tup);
+    arg.idx_baseA  = std::get<1>(tup);
     arg.idx_baseC  = std::get<2>(tup);
     arg.timing     = 0;
 

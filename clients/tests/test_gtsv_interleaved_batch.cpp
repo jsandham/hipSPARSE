@@ -44,19 +44,22 @@ TEST(gtsv_interleaved_batch_bad_arg, gtsv_interleaved_batch_float)
 
 TEST(gtsv_interleaved_batch, gtsv_interleaved_batch_float)
 {
-    hipsparseStatus_t status = testing_gtsv_interleaved_batch<float>(setup_gtsv_interleaved_batch_arguments());
+    hipsparseStatus_t status
+        = testing_gtsv_interleaved_batch<float>(setup_gtsv_interleaved_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gtsv_interleaved_batch, gtsv_interleaved_batch_double)
 {
-    hipsparseStatus_t status = testing_gtsv_interleaved_batch<double>(setup_gtsv_interleaved_batch_arguments());
+    hipsparseStatus_t status
+        = testing_gtsv_interleaved_batch<double>(setup_gtsv_interleaved_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gtsv_interleaved_batch, gtsv_interleaved_batch_hipComplex)
 {
-    hipsparseStatus_t status = testing_gtsv_interleaved_batch<hipComplex>(setup_gtsv_interleaved_batch_arguments());
+    hipsparseStatus_t status
+        = testing_gtsv_interleaved_batch<hipComplex>(setup_gtsv_interleaved_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

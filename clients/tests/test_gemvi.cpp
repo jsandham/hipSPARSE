@@ -29,17 +29,17 @@ template <typename T>
 Arguments setup_gemvi_arguments()
 {
     Arguments arg;
-    arg.M        = 1291;
-    arg.N        = 724;
-    arg.nnz      = 237;
-    arg.lda      = 1291;
-    arg.alpha    = make_DataType<T>(0.6);
-    arg.alphai   = make_DataType<T>(0.0);
-    arg.beta     = make_DataType<T>(3.2);
-    arg.betai    = make_DataType<T>(0.0);
-    arg.transA   = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
-    arg.timing   = 0;
+    arg.M         = 1291;
+    arg.N         = 724;
+    arg.nnz       = 237;
+    arg.lda       = 1291;
+    arg.alpha     = make_DataType<T>(0.6);
+    arg.alphai    = make_DataType<T>(0.0);
+    arg.beta      = make_DataType<T>(3.2);
+    arg.betai     = make_DataType<T>(0.0);
+    arg.transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing    = 0;
     return arg;
 }
 

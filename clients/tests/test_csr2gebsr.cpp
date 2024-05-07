@@ -95,7 +95,7 @@ Arguments setup_csr2gebsr_arguments(csr2gebsr_tuple tup)
     arg.N              = std::get<1>(tup);
     arg.row_block_dimA = std::get<2>(tup);
     arg.col_block_dimA = std::get<3>(tup);
-    arg.idx_baseA       = std::get<4>(tup);
+    arg.idx_baseA      = std::get<4>(tup);
     arg.idx_baseB      = std::get<5>(tup);
     arg.dirA           = std::get<6>(tup);
     arg.timing         = 0;
@@ -109,7 +109,7 @@ Arguments setup_csr2gebsr_arguments(csr2gebsr_bin_tuple tup)
     arg.N              = -99;
     arg.row_block_dimA = std::get<0>(tup);
     arg.col_block_dimA = std::get<1>(tup);
-    arg.idx_baseA       = std::get<2>(tup);
+    arg.idx_baseA      = std::get<2>(tup);
     arg.idx_baseB      = std::get<3>(tup);
     arg.dirA           = std::get<4>(tup);
     arg.timing         = 0;

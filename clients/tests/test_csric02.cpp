@@ -59,18 +59,18 @@ protected:
 Arguments setup_csric02_arguments(csric02_tuple tup)
 {
     Arguments arg;
-    arg.M        = std::get<0>(tup);
-    arg.idx_baseA= std::get<1>(tup);
-    arg.timing   = 0;
+    arg.M         = std::get<0>(tup);
+    arg.idx_baseA = std::get<1>(tup);
+    arg.timing    = 0;
     return arg;
 }
 
 Arguments setup_csric02_arguments(csric02_bin_tuple tup)
 {
     Arguments arg;
-    arg.M        = -99;
-    arg.idx_baseA= std::get<0>(tup);
-    arg.timing   = 0;
+    arg.M         = -99;
+    arg.idx_baseA = std::get<0>(tup);
+    arg.timing    = 0;
 
     // Determine absolute path of test matrix
     std::string bin_file = std::get<1>(tup);

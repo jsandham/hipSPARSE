@@ -5967,7 +5967,7 @@ public:
 
     hipsparseOperation_t    transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
     hipsparseOperation_t    transB    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    hipsparseIndexBase_t    idx_baseA  = HIPSPARSE_INDEX_BASE_ZERO;
+    hipsparseIndexBase_t    idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
     hipsparseIndexBase_t    idx_baseB = HIPSPARSE_INDEX_BASE_ZERO;
     hipsparseIndexBase_t    idx_baseC = HIPSPARSE_INDEX_BASE_ZERO;
     hipsparseIndexBase_t    idx_baseD = HIPSPARSE_INDEX_BASE_ZERO;
@@ -6007,7 +6007,7 @@ public:
         this->col_block_dimA = rhs.col_block_dimA;
         this->col_block_dimB = rhs.col_block_dimB;
 
-        this->batch_count = rhs.batch_count;
+        this->batch_count  = rhs.batch_count;
         this->batch_countA = rhs.batch_countA;
         this->batch_countB = rhs.batch_countB;
         this->batch_countC = rhs.batch_countC;
@@ -6035,7 +6035,7 @@ public:
         this->diag_type = rhs.diag_type;
         this->fill_mode = rhs.fill_mode;
         this->dirA      = rhs.dirA;
-        this->orderA      = rhs.orderA;
+        this->orderA    = rhs.orderA;
 
         this->norm_check = rhs.norm_check;
         this->unit_check = rhs.unit_check;

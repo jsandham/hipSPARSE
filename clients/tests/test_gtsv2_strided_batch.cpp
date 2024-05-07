@@ -44,19 +44,22 @@ TEST(gtsv2_strided_batch_bad_arg, gtsv2_strided_batch_float)
 
 TEST(gtsv2_strided_batch, gtsv2_strided_batch_float)
 {
-    hipsparseStatus_t status = testing_gtsv2_strided_batch<float>(setup_gtsv2_strided_batch_arguments());
+    hipsparseStatus_t status
+        = testing_gtsv2_strided_batch<float>(setup_gtsv2_strided_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gtsv2_strided_batch, gtsv2_strided_batch_double)
 {
-    hipsparseStatus_t status = testing_gtsv2_strided_batch<double>(setup_gtsv2_strided_batch_arguments());
+    hipsparseStatus_t status
+        = testing_gtsv2_strided_batch<double>(setup_gtsv2_strided_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(gtsv2_strided_batch, gtsv2_strided_batch_hipComplex)
 {
-    hipsparseStatus_t status = testing_gtsv2_strided_batch<hipComplex>(setup_gtsv2_strided_batch_arguments());
+    hipsparseStatus_t status
+        = testing_gtsv2_strided_batch<hipComplex>(setup_gtsv2_strided_batch_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

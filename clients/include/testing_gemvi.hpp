@@ -145,10 +145,10 @@ void testing_gemvi_bad_arg(void)
 template <typename T>
 hipsparseStatus_t testing_gemvi(Arguments argus)
 {
-    int m   = argus.M;
-    int n   = argus.N;
-    int nnz = argus.nnz;
-    int lda = argus.lda;
+    int                  m       = argus.M;
+    int                  n       = argus.N;
+    int                  nnz     = argus.nnz;
+    int                  lda     = argus.lda;
     hipsparseOperation_t opType  = argus.transA;
     hipsparseIndexBase_t idxBase = argus.idx_baseA;
 

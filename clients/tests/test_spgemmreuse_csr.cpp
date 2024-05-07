@@ -51,13 +51,15 @@ TEST(spgemmreuse_csr_bad_arg, spgemmreuse_csr_float)
 
 TEST(spgemmreuse_csr, spgemmreuse_csr_i32_i32_float)
 {
-    hipsparseStatus_t status = testing_spgemmreuse_csr<int32_t, int32_t, float>(setup_spgemmreuse_csr_arguments<float>());
+    hipsparseStatus_t status = testing_spgemmreuse_csr<int32_t, int32_t, float>(
+        setup_spgemmreuse_csr_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spgemmreuse_csr, spgemmreuse_csr_i32_i32_double)
 {
-    hipsparseStatus_t status = testing_spgemmreuse_csr<int32_t, int32_t, double>(setup_spgemmreuse_csr_arguments<double>());
+    hipsparseStatus_t status = testing_spgemmreuse_csr<int32_t, int32_t, double>(
+        setup_spgemmreuse_csr_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
@@ -65,19 +67,22 @@ TEST(spgemmreuse_csr, spgemmreuse_csr_i32_i32_double)
 #if(!defined(CUDART_VERSION))
 TEST(spgemmreuse_csr, spgemmreuse_csr_i64_i32_double)
 {
-    hipsparseStatus_t status = testing_spgemmreuse_csr<int64_t, int32_t, double>(setup_spgemmreuse_csr_arguments<double>());
+    hipsparseStatus_t status = testing_spgemmreuse_csr<int64_t, int32_t, double>(
+        setup_spgemmreuse_csr_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spgemmreuse_csr, spgemmreuse_csr_i64_i64_hipComplex)
 {
-    hipsparseStatus_t status = testing_spgemmreuse_csr<int64_t, int64_t, hipComplex>(setup_spgemmreuse_csr_arguments<float>());
+    hipsparseStatus_t status = testing_spgemmreuse_csr<int64_t, int64_t, hipComplex>(
+        setup_spgemmreuse_csr_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spgemmreuse_csr, spgemmreuse_csr_i64_i64_hipDoubleComplex)
 {
-    hipsparseStatus_t status = testing_spgemmreuse_csr<int64_t, int64_t, hipDoubleComplex>(setup_spgemmreuse_csr_arguments<double>());
+    hipsparseStatus_t status = testing_spgemmreuse_csr<int64_t, int64_t, hipDoubleComplex>(
+        setup_spgemmreuse_csr_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

@@ -25,7 +25,7 @@
 
 #include <hipsparse.h>
 
-template<typename T>
+template <typename T>
 Arguments setup_spmm_batched_csc_arguments()
 {
     Arguments arg;
@@ -41,7 +41,7 @@ Arguments setup_spmm_batched_csc_arguments()
     arg.orderA       = HIPSPARSE_ORDER_COL;
     arg.idx_baseA    = HIPSPARSE_INDEX_BASE_ZERO;
     arg.filename     = "nos3.bin";
-    arg.timing  = 0;
+    arg.timing       = 0;
     return arg;
 }
 
@@ -54,13 +54,15 @@ TEST(spmm_batched_csc_bad_arg, spmm_batched_csc_float)
 
 TEST(spmm_batched_csc, spmm_batched_csc_i32_i32_float)
 {
-    hipsparseStatus_t status = testing_spmm_batched_csc<int32_t, int32_t, float>(setup_spmm_batched_csc_arguments<float>());
+    hipsparseStatus_t status = testing_spmm_batched_csc<int32_t, int32_t, float>(
+        setup_spmm_batched_csc_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spmm_batched_csc, spmm_batched_csc_i32_i32_double)
 {
-    hipsparseStatus_t status = testing_spmm_batched_csc<int32_t, int32_t, double>(setup_spmm_batched_csc_arguments<double>());
+    hipsparseStatus_t status = testing_spmm_batched_csc<int32_t, int32_t, double>(
+        setup_spmm_batched_csc_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 

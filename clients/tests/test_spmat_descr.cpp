@@ -26,10 +26,10 @@
 Arguments setup_spmat_descr_arguments()
 {
     Arguments arg;
-    arg.M       = 2;
-    arg.N       = 2;
-    arg.nnz     = 4;
-    arg.timing  = 0;
+    arg.M      = 2;
+    arg.N      = 2;
+    arg.nnz    = 4;
+    arg.timing = 0;
     return arg;
 }
 

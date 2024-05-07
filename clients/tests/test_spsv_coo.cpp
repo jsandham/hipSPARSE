@@ -25,18 +25,18 @@
 
 #include <hipsparse.h>
 
-template<typename T>
+template <typename T>
 Arguments setup_spsv_coo_arguments()
 {
     Arguments arg;
-    arg.alpha        = make_DataType<T>(2.3);
-    arg.alphai       = make_DataType<T>(0.0);
-    arg.transA       = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    arg.idx_baseA    = HIPSPARSE_INDEX_BASE_ZERO;
-    arg.diag_type    = HIPSPARSE_DIAG_TYPE_NON_UNIT;
-    arg.fill_mode    = HIPSPARSE_FILL_MODE_LOWER;
-    arg.filename     = "nos3.bin";
-    arg.timing  = 0;
+    arg.alpha     = make_DataType<T>(2.3);
+    arg.alphai    = make_DataType<T>(0.0);
+    arg.transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.diag_type = HIPSPARSE_DIAG_TYPE_NON_UNIT;
+    arg.fill_mode = HIPSPARSE_FILL_MODE_LOWER;
+    arg.filename  = "nos3.bin";
+    arg.timing    = 0;
     return arg;
 }
 
@@ -56,14 +56,16 @@ TEST(spsv_coo, spsv_coo_i32_i32_float)
 #if(!defined(CUDART_VERSION))
 TEST(spsv_coo, spsv_coo_i64_i32_double)
 {
-    hipsparseStatus_t status = testing_spsv_coo<int64_t, double>(setup_spsv_coo_arguments<double>());
+    hipsparseStatus_t status
+        = testing_spsv_coo<int64_t, double>(setup_spsv_coo_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif
 
 TEST(spsv_coo, spsv_coo_i64_i64_hipComplex)
 {
-    hipsparseStatus_t status = testing_spsv_coo<int64_t, hipComplex>(setup_spsv_coo_arguments<float>());
+    hipsparseStatus_t status
+        = testing_spsv_coo<int64_t, hipComplex>(setup_spsv_coo_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

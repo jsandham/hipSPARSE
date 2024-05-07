@@ -28,10 +28,10 @@
 Arguments setup_sparse_to_dense_coo_arguments()
 {
     Arguments arg;
-    arg.orderA   = HIPSPARSE_ORDER_COL;
-    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
-    arg.filename = "nos3.bin";
-    arg.timing   = 0;
+    arg.orderA    = HIPSPARSE_ORDER_COL;
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.filename  = "nos3.bin";
+    arg.timing    = 0;
     return arg;
 }
 
@@ -44,13 +44,15 @@ TEST(sparse_to_dense_coo_bad_arg, sparse_to_dense_coo_float)
 
 TEST(sparse_to_dense_coo, sparse_to_dense_coo_i32_i32_float)
 {
-    hipsparseStatus_t status = testing_sparse_to_dense_coo<int32_t, float>(setup_sparse_to_dense_coo_arguments());
+    hipsparseStatus_t status
+        = testing_sparse_to_dense_coo<int32_t, float>(setup_sparse_to_dense_coo_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(sparse_to_dense_coo, sparse_to_dense_coo_i64_i64_hipComplex)
 {
-    hipsparseStatus_t status = testing_sparse_to_dense_coo<int64_t, hipComplex>(setup_sparse_to_dense_coo_arguments());
+    hipsparseStatus_t status
+        = testing_sparse_to_dense_coo<int64_t, hipComplex>(setup_sparse_to_dense_coo_arguments());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

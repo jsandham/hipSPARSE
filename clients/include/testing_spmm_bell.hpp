@@ -187,9 +187,9 @@ void testing_spmm_bell_bad_arg(void)
 template <typename I, typename T>
 hipsparseStatus_t testing_spmm_bell(Arguments argus)
 {
-    I m = argus.M;
-    I k = argus.K;
-    I n = argus.N;
+    I m   = argus.M;
+    I k   = argus.K;
+    I n   = argus.N;
     I nnz = argus.nnz;
 
     T                    h_alpha  = make_DataType<T>(argus.alpha, argus.alphai);

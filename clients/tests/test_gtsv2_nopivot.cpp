@@ -28,10 +28,10 @@
 Arguments setup_gtsv2_nopivot_arguments()
 {
     Arguments arg;
-    arg.M        = 512;
-    arg.N        = 512;
-    arg.ldb      = 1024;
-    arg.timing   = 0;
+    arg.M      = 512;
+    arg.N      = 512;
+    arg.ldb    = 1024;
+    arg.timing = 0;
     return arg;
 }
 

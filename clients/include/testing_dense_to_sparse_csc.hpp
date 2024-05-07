@@ -147,9 +147,9 @@ template <typename I, typename J, typename T>
 hipsparseStatus_t testing_dense_to_sparse_csc(Arguments argus)
 {
 #if(!defined(CUDART_VERSION))
-    J m  = argus.M;
-    J n  = argus.N;
-    I ld = argus.lda;
+    J                           m        = argus.M;
+    J                           n        = argus.N;
+    I                           ld       = argus.lda;
     hipsparseIndexBase_t        idx_base = argus.idx_baseA;
     hipsparseDenseToSparseAlg_t alg      = HIPSPARSE_DENSETOSPARSE_ALG_DEFAULT;
     hipsparseOrder_t            order    = HIPSPARSE_ORDER_COL;

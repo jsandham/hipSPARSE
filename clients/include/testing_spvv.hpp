@@ -121,8 +121,8 @@ hipsparseStatus_t testing_spvv(Arguments argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION > 10010 \
     || (CUDART_VERSION == 10010 && CUDART_10_1_UPDATE_VERSION == 1))
-    int64_t size = argus.N;
-    int64_t nnz  = argus.nnz;
+    int64_t              size    = argus.N;
+    int64_t              nnz     = argus.nnz;
     hipsparseIndexBase_t idxBase = argus.idx_baseA;
 
     // Index and data type

@@ -28,10 +28,10 @@
 Arguments setup_scatter_arguments()
 {
     Arguments arg;
-    arg.N        = 15332;
-    arg.nnz      = 500;
-    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
-    arg.timing   = 0;
+    arg.N         = 15332;
+    arg.nnz       = 500;
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing    = 0;
     return arg;
 }
 

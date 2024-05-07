@@ -70,7 +70,7 @@ Arguments setup_csrgemm2_a_arguments(csrgemm2_a_tuple tup)
     arg.N         = std::get<1>(tup);
     arg.K         = std::get<2>(tup);
     arg.alpha     = std::get<3>(tup);
-    arg.idx_baseA  = std::get<4>(tup);
+    arg.idx_baseA = std::get<4>(tup);
     arg.idx_baseB = std::get<5>(tup);
     arg.idx_baseC = std::get<6>(tup);
     arg.timing    = 0;
@@ -84,7 +84,7 @@ Arguments setup_csrgemm2_a_arguments(csrgemm2_a_bin_tuple tup)
     arg.N         = -99;
     arg.K         = -99;
     arg.alpha     = std::get<0>(tup);
-    arg.idx_baseA  = std::get<1>(tup);
+    arg.idx_baseA = std::get<1>(tup);
     arg.idx_baseB = std::get<2>(tup);
     arg.idx_baseC = std::get<3>(tup);
     arg.timing    = 0;

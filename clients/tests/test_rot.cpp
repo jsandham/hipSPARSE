@@ -29,14 +29,14 @@ template <typename T>
 Arguments setup_rot_arguments()
 {
     Arguments arg;
-    arg.N        = 15332;
-    arg.nnz      = 500;
-    arg.alpha    = make_DataType<T>(1.5);
-    arg.alphai   = make_DataType<T>(0.0);
-    arg.beta     = make_DataType<T>(2.0);
-    arg.betai    = make_DataType<T>(0.0);
-    arg.idx_baseA= HIPSPARSE_INDEX_BASE_ZERO;
-    arg.timing   = 0;
+    arg.N         = 15332;
+    arg.nnz       = 500;
+    arg.alpha     = make_DataType<T>(1.5);
+    arg.alphai    = make_DataType<T>(0.0);
+    arg.beta      = make_DataType<T>(2.0);
+    arg.betai     = make_DataType<T>(0.0);
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.timing    = 0;
     return arg;
 }
 
@@ -67,7 +67,8 @@ TEST(rot, rot_i32_hipFloatComplex)
 
 TEST(rot, rot_i64_hipDoubleComplex)
 {
-    hipsparseStatus_t status = testing_rot<int64_t, hipDoubleComplex>(setup_rot_arguments<double>());
+    hipsparseStatus_t status
+        = testing_rot<int64_t, hipDoubleComplex>(setup_rot_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif

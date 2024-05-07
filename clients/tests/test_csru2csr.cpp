@@ -28,10 +28,10 @@
 Arguments setup_csru2csr_arguments()
 {
     Arguments arg;
-    arg.M        = 51314;
-    arg.N        = 12963;
-    arg.nnz      = 309274;
-    arg.timing   = 0;
+    arg.M      = 51314;
+    arg.N      = 12963;
+    arg.nnz    = 309274;
+    arg.timing = 0;
     return arg;
 }
 

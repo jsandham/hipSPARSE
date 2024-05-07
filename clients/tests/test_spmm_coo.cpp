@@ -25,20 +25,20 @@
 
 #include <hipsparse.h>
 
-template<typename T>
+template <typename T>
 Arguments setup_spmm_coo_arguments()
 {
     Arguments arg;
-    arg.alpha        = make_DataType<T>(2.0);
-    arg.alphai       = make_DataType<T>(0.0);
-    arg.beta         = make_DataType<T>(1.0);
-    arg.betai        = make_DataType<T>(0.0);
-    arg.transA       = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    arg.transB       = HIPSPARSE_OPERATION_NON_TRANSPOSE;
-    arg.orderA       = HIPSPARSE_ORDER_COL;
-    arg.idx_baseA    = HIPSPARSE_INDEX_BASE_ZERO;
-    arg.filename     = "nos3.bin";
-    arg.timing  = 0;
+    arg.alpha     = make_DataType<T>(2.0);
+    arg.alphai    = make_DataType<T>(0.0);
+    arg.beta      = make_DataType<T>(1.0);
+    arg.betai     = make_DataType<T>(0.0);
+    arg.transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.transB    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
+    arg.orderA    = HIPSPARSE_ORDER_COL;
+    arg.idx_baseA = HIPSPARSE_INDEX_BASE_ZERO;
+    arg.filename  = "nos3.bin";
+    arg.timing    = 0;
     return arg;
 }
 
@@ -57,13 +57,15 @@ TEST(spmm_coo, spmm_coo_i32_float)
 
 TEST(spmm_coo, spmm_coo_i64_double)
 {
-    hipsparseStatus_t status = testing_spmm_coo<int32_t, double>(setup_spmm_coo_arguments<double>());
+    hipsparseStatus_t status
+        = testing_spmm_coo<int32_t, double>(setup_spmm_coo_arguments<double>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 
 TEST(spmm_coo, spmm_coo_i64_hipComplex)
 {
-    hipsparseStatus_t status = testing_spmm_coo<int32_t, hipComplex>(setup_spmm_coo_arguments<float>());
+    hipsparseStatus_t status
+        = testing_spmm_coo<int32_t, hipComplex>(setup_spmm_coo_arguments<float>());
     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
 }
 #endif
