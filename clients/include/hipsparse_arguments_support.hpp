@@ -269,7 +269,8 @@ struct routine_support
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 11000)
         return true;
 #else
-        return false;s
+        return false;
+        s
 #endif
     }
     // Extra
