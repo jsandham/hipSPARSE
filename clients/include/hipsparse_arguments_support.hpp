@@ -63,6 +63,29 @@ static void print_cuda_11_2_0_to_12_5_1_support_string()
     std::cout << table << std::endl;
 }
 
+static void print_cuda_11_0_1_to_12_5_1_support_string()
+{
+    std::cout << "Warning: You are using CUDA version: " << TOSTRING(CUDART_VERSION)
+              << " but this routine is not supported. See CUDA support table for this"
+              << " routine below: " << std::endl;
+    std::string table = "                      CUDA Version                    \n"
+                        "|10.1.0|10.2.0|11.0.1|11.0.2|...|12.4.1|12.5.0|12.5.1|\n"
+                        "              |<--------------supported------------->|  ";
+    std::cout << table << std::endl;
+}
+
+static void print_cuda_10_1_0_to_12_5_1_support_string()
+{
+    std::cout << "Warning: You are using CUDA version: " << TOSTRING(CUDART_VERSION)
+              << " but this routine is not supported. See CUDA support table for this"
+              << " routine below: " << std::endl;
+
+    std::string table = "                  CUDA Version               \n"
+                        "|10.0|10.1|10.2|....|12.4.1|12.5.0|12.5.1|...\n"
+                        "     |-----------supported-------------->|     ";
+    std::cout << table << std::endl;
+}
+
 static void print_cuda_10_0_0_to_12_5_1_support_string()
 {
     std::cout << "Warning: You are using CUDA version: " << TOSTRING(CUDART_VERSION)
@@ -162,18 +185,13 @@ struct routine_support
     }
 
     // Level2
+    static bool is_bsrmv_supported()
+    {
+        return true;
+    }
     static bool is_bsrsv2_supported()
     {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 13000)
-        return true;
-#else
-        return false;
-#endif
-    }
-    static bool is_coomv_supported()
-    {
-#if(!defined(CUDART_VERSION) || CUDART_VERSION > 10010 \
-    || (CUDART_VERSION == 10010 && CUDART_10_1_UPDATE_VERSION == 1))
         return true;
 #else
         return false;
@@ -188,7 +206,7 @@ struct routine_support
         return false;
 #endif
     }
-    static bool is_csrsv_supported()
+    static bool is_csrsv2_supported()
     {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11030)
         return true;
@@ -230,22 +248,6 @@ struct routine_support
         return false;
 #endif
     }
-    static bool is_coomm_supported()
-    {
-#if(!defined(CUDART_VERSION) || CUDART_VERSION >= 10010)
-        return true;
-#else
-        return false;
-#endif
-    }
-    static bool is_cscmm_supported()
-    {
-#if(!defined(CUDART_VERSION) || CUDART_VERSION >= 10010)
-        return true;
-#else
-        return false;
-#endif
-    }
     static bool is_csrmm_supported()
     {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 10010)
@@ -254,15 +256,7 @@ struct routine_support
         return false;
 #endif
     }
-    static bool is_coosm_supported()
-    {
-#if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11031)
-        return true;
-#else
-        return false;
-#endif
-    }
-    static bool is_csrsm_supported()
+    static bool is_csrsm2_supported()
     {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11031)
         return true;
@@ -275,7 +269,7 @@ struct routine_support
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 11000)
         return true;
 #else
-        return false;
+        return false;s
 #endif
     }
     // Extra
@@ -286,6 +280,10 @@ struct routine_support
 #else
         return false;
 #endif
+    }
+    static bool is_csrgeam2_supported()
+    {
+        return true;
     }
     static bool is_csrgemm_supported()
     {
@@ -393,19 +391,11 @@ struct routine_support
     {
         return true;
     }
-    static bool is_coo2dense_supported()
-    {
-        return true;
-    }
     static bool is_dense2csr_supported()
     {
         return true;
     }
     static bool is_dense2csc_supported()
-    {
-        return true;
-    }
-    static bool is_dense2coo_supported()
     {
         return true;
     }
@@ -418,6 +408,55 @@ struct routine_support
         return true;
     }
     static bool is_gebsr2gebsr_supported()
+    {
+        return true;
+    }
+    // Generic
+    static bool is_axpby_supported()
+    {
+        return true;
+    }
+    static bool is_gather_supported()
+    {
+        return true;
+    }
+    static bool is_scatter_supported()
+    {
+        return true;
+    }
+    static bool is_rot_supported()
+    {
+        return true;
+    }
+    static bool is_spvv_supported()
+    {
+        return true;
+    }
+    static bool is_spmv_supported()
+    {
+        return true;
+    }
+    static bool is_spsv_supported()
+    {
+        return true;
+    }
+    static bool is_spmm_supported()
+    {
+        return true;
+    }
+    static bool is_spsm_supported()
+    {
+        return true;
+    }
+    static bool is_spgemm_supported()
+    {
+        return true;
+    }
+    static bool is_spgemmreuse_supported()
+    {
+        return true;
+    }
+    static bool is_sddmm_supported()
     {
         return true;
     }
@@ -466,13 +505,13 @@ struct routine_support
 #endif
     }
     // Level 2
-    static void print_bsrsv2_support_warning()
+    static void print_bsrmv_support_warning()
     {
 #if(defined(CUDART_VERSION))
         print_cuda_10_0_0_to_12_5_1_support_string();
 #endif
     }
-    static void print_coomv_support_warning()
+    static void print_bsrsv2_support_warning()
     {
 #if(defined(CUDART_VERSION))
         print_cuda_10_0_0_to_12_5_1_support_string();
@@ -484,7 +523,7 @@ struct routine_support
         print_cuda_10_0_0_to_12_5_1_support_string();
 #endif
     }
-    static void print_csrsv_support_warning()
+    static void print_csrsv2_support_warning()
     {
 #if(defined(CUDART_VERSION))
         print_cuda_10_0_0_to_11_8_0_support_string();
@@ -515,31 +554,13 @@ struct routine_support
         print_cuda_10_0_0_to_12_5_1_support_string();
 #endif
     }
-    static void print_coomm_support_warning()
-    {
-#if(defined(CUDART_VERSION))
-        print_cuda_10_0_0_to_12_5_1_support_string();
-#endif
-    }
-    static void print_cscmm_support_warning()
-    {
-#if(defined(CUDART_VERSION))
-        print_cuda_10_0_0_to_12_5_1_support_string();
-#endif
-    }
     static void print_csrmm_support_warning()
     {
 #if(defined(CUDART_VERSION))
         print_cuda_10_0_0_to_12_5_1_support_string();
 #endif
     }
-    static void print_coosm_support_warning()
-    {
-#if(defined(CUDART_VERSION))
-        print_cuda_11_3_1_to_12_5_1_support_string();
-#endif
-    }
-    static void print_csrsm_support_warning()
+    static void print_csrsm2_support_warning()
     {
 #if(defined(CUDART_VERSION))
         print_cuda_11_3_1_to_12_5_1_support_string();
@@ -553,6 +574,12 @@ struct routine_support
     }
     // Extra
     static void print_csrgeam_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_10_0_0_to_10_2_0_support_string();
+#endif
+    }
+    static void print_csrgeam2_support_warning()
     {
 #if(defined(CUDART_VERSION))
         print_cuda_10_0_0_to_10_2_0_support_string();
@@ -686,12 +713,6 @@ struct routine_support
         print_cuda_11_2_0_to_12_5_1_support_string();
 #endif
     }
-    static void print_coo2dense_support_warning()
-    {
-#if(defined(CUDART_VERSION))
-        print_cuda_11_2_0_to_12_5_1_support_string();
-#endif
-    }
     static void print_dense2csr_support_warning()
     {
 #if(defined(CUDART_VERSION))
@@ -699,12 +720,6 @@ struct routine_support
 #endif
     }
     static void print_dense2csc_support_warning()
-    {
-#if(defined(CUDART_VERSION))
-        print_cuda_11_2_0_to_12_5_1_support_string();
-#endif
-    }
-    static void print_dense2coo_support_warning()
     {
 #if(defined(CUDART_VERSION))
         print_cuda_11_2_0_to_12_5_1_support_string();
@@ -726,6 +741,78 @@ struct routine_support
     {
 #if(defined(CUDART_VERSION))
         print_cuda_10_0_0_to_12_5_1_support_string();
+#endif
+    }
+    static void print_axpby_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_11_0_1_to_12_5_1_support_string();
+#endif
+    }
+    static void print_gather_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_11_0_1_to_12_5_1_support_string();
+#endif
+    }
+    static void print_scatter_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_11_0_1_to_12_5_1_support_string();
+#endif
+    }
+    static void print_rot_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_11_0_1_to_12_5_1_support_string();
+#endif
+    }
+    static void print_spvv_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_10_1_0_to_12_5_1_support_string();
+#endif
+    }
+    static void print_spmv_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_10_1_0_to_12_5_1_support_string();
+#endif
+    }
+    static void print_spsv_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_11_3_1_to_12_5_1_support_string();
+#endif
+    }
+    static void print_spmm_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_10_1_0_to_12_5_1_support_string();
+#endif
+    }
+    static void print_spsm_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_10_1_0_to_12_5_1_support_string();
+#endif
+    }
+    static void print_spgemm_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_10_1_0_to_12_5_1_support_string();
+#endif
+    }
+    static void print_spgemmreuse_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_10_1_0_to_12_5_1_support_string();
+#endif
+    }
+    static void print_sddmm_support_warning()
+    {
+#if(defined(CUDART_VERSION))
+        print_cuda_10_1_0_to_12_5_1_support_string();
 #endif
     }
 };

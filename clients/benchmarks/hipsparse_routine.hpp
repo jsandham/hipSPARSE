@@ -33,21 +33,19 @@ HIPSPARSE_DO_ROUTINE(gthr)          \
 HIPSPARSE_DO_ROUTINE(gthrz)         \
 HIPSPARSE_DO_ROUTINE(roti)          \
 HIPSPARSE_DO_ROUTINE(sctr)          \
-HIPSPARSE_DO_ROUTINE(bsrsv2)        \
-HIPSPARSE_DO_ROUTINE(coomv)         \
-HIPSPARSE_DO_ROUTINE(csrmv)         \
-HIPSPARSE_DO_ROUTINE(csrsv)         \
-HIPSPARSE_DO_ROUTINE(gemvi)         \
-HIPSPARSE_DO_ROUTINE(hybmv)         \
+HIPSPARSE_DO_ROUTINE(bsrmv)          \
+HIPSPARSE_DO_ROUTINE(bsrsv2)          \
+HIPSPARSE_DO_ROUTINE(csrmv)          \
+HIPSPARSE_DO_ROUTINE(csrsv2)          \
+HIPSPARSE_DO_ROUTINE(gemvi)          \
+HIPSPARSE_DO_ROUTINE(hybmv)          \
 HIPSPARSE_DO_ROUTINE(bsrmm)         \
 HIPSPARSE_DO_ROUTINE(bsrsm2)        \
-HIPSPARSE_DO_ROUTINE(coomm)         \
-HIPSPARSE_DO_ROUTINE(cscmm)         \
 HIPSPARSE_DO_ROUTINE(csrmm)         \
-HIPSPARSE_DO_ROUTINE(coosm)         \
-HIPSPARSE_DO_ROUTINE(csrsm)         \
+HIPSPARSE_DO_ROUTINE(csrsm2)         \
 HIPSPARSE_DO_ROUTINE(gemmi)         \
 HIPSPARSE_DO_ROUTINE(csrgeam)       \
+HIPSPARSE_DO_ROUTINE(csrgeam2)       \
 HIPSPARSE_DO_ROUTINE(csrgemm)       \
 HIPSPARSE_DO_ROUTINE(bsric02)       \
 HIPSPARSE_DO_ROUTINE(bsrilu02)      \
@@ -69,13 +67,30 @@ HIPSPARSE_DO_ROUTINE(coo2csr) \
 HIPSPARSE_DO_ROUTINE(hyb2csr) \
 HIPSPARSE_DO_ROUTINE(csr2dense) \
 HIPSPARSE_DO_ROUTINE(csc2dense) \
-HIPSPARSE_DO_ROUTINE(coo2dense) \
 HIPSPARSE_DO_ROUTINE(dense2csr) \
 HIPSPARSE_DO_ROUTINE(dense2csc) \
-HIPSPARSE_DO_ROUTINE(dense2coo) \
 HIPSPARSE_DO_ROUTINE(gebsr2csr) \
 HIPSPARSE_DO_ROUTINE(gebsr2gebsc) \
-HIPSPARSE_DO_ROUTINE(gebsr2gebsr)
+HIPSPARSE_DO_ROUTINE(gebsr2gebsr) \
+HIPSPARSE_DO_ROUTINE(axpby) \
+HIPSPARSE_DO_ROUTINE(gather) \
+HIPSPARSE_DO_ROUTINE(scatter) \
+HIPSPARSE_DO_ROUTINE(rot) \
+HIPSPARSE_DO_ROUTINE(spvv) \
+HIPSPARSE_DO_ROUTINE(spmv_coo) \
+HIPSPARSE_DO_ROUTINE(spmv_coo_aos) \
+HIPSPARSE_DO_ROUTINE(spmv_csr) \
+HIPSPARSE_DO_ROUTINE(spsv_csr) \
+HIPSPARSE_DO_ROUTINE(spmm_coo) \
+HIPSPARSE_DO_ROUTINE(spmm_csr) \
+HIPSPARSE_DO_ROUTINE(spmm_csc) \
+HIPSPARSE_DO_ROUTINE(spsm_coo) \
+HIPSPARSE_DO_ROUTINE(spsm_csr) \
+HIPSPARSE_DO_ROUTINE(spgemm_csr) \
+HIPSPARSE_DO_ROUTINE(spgemmreuse_csr) \
+HIPSPARSE_DO_ROUTINE(sddmm_coo) \
+HIPSPARSE_DO_ROUTINE(sddmm_csr) \
+HIPSPARSE_DO_ROUTINE(sddmm_csc)
 // clang-format on
 
 template <std::size_t N, typename T>

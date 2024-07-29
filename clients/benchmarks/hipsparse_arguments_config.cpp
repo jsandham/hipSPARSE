@@ -226,12 +226,14 @@ void hipsparse_arguments_config::set_description(options_description& desc)
      value<std::string>(&this->function_name)->default_value("axpyi"),
      "SPARSE function to test. Options:\n"
      "  Level1: axpyi, doti, dotci, gthr, gthrz, roti, sctr\n"
-     "  Level2: bsrsv2, coomv, csrmv, csrsv, gemvi, hybmv\n"
-     "  Level3: bsrmm, bsrsm2, coomm, cscmm, csrmm, coosm, csrsm, gemmi\n"
-     "  Extra: csrgeam, csrgemm\n"
+     "  Level2: bsrmv, bsrsv2, csrmv, csrsv2, gemvi, hybmv\n"
+     "  Level3: bsrmm, bsrsm2, csrmm, csrsm2, gemmi\n"
+     "  Extra: csrgeam, csrgeam2, csrgemm\n"
      "  Preconditioner: bsric02, bsrilu02, csric02, csrilu02, gtsv2, gtsv2_nopivot, gtsv2_strided_batch, gtsv_interleaved_batch, gpsv_interleaved_batch\n"
-     "  Conversion: bsr2csr, csr2coo, csr2csc, csr2hyb, csr2bsr, csr2gebsr, csr2csr_compress, coo2csr, hyb2csr, csr2dense, csc2dense, coo2dense\n"
-     "              dense2csr, dense2csc, dense2coo, gebsr2csr, gebsr2gebsc, gebsr2gebsr\n")
+     "  Conversion: bsr2csr, csr2coo, csr2csc, csr2hyb, csr2bsr, csr2gebsr, csr2csr_compress, coo2csr, hyb2csr, csr2dense, csc2dense\n"
+     "              dense2csr, dense2csc, gebsr2csr, gebsr2gebsc, gebsr2gebsr\n"
+     "  Generic: axpby, gather, scatter, rot, spvv, spmv_coo, spmv_coo_aos, spmv_csr, spsv_csr, spmm_coo, spmm_csr, spmm_csc, spsm_coo, spsm_csr \n"
+     "           spgemm_csr, spgemmreuse_csr, sddmm_coo, sddmm_csr, sddmm_csc\n")
 
     ("verify,v",
      value<int>(&this->unit_check)->default_value(0),

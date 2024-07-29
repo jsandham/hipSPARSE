@@ -183,6 +183,7 @@ constexpr const char* hipsparse_routine::to_string() const
 // Level2
 #include "testing_bsrmv.hpp"
 #include "testing_bsrsv2.hpp"
+#include "testing_csrmv.hpp"
 #include "testing_csrsv2.hpp"
 #include "testing_gemvi.hpp"
 #include "testing_hybmv.hpp"
@@ -190,10 +191,13 @@ constexpr const char* hipsparse_routine::to_string() const
 // Level3
 #include "testing_bsrmm.hpp"
 #include "testing_bsrsm2.hpp"
+#include "testing_csrmm.hpp"
+#include "testing_csrsm2.hpp"
 #include "testing_gemmi.hpp"
 
 // Extra
 #include "testing_csrgeam.hpp"
+#include "testing_csrgeam2.hpp"
 #include "testing_csrgemm.hpp"
 
 // Precond
@@ -209,33 +213,50 @@ constexpr const char* hipsparse_routine::to_string() const
 
 // Conversion
 #include "testing_bsr2csr.hpp"
-#include "testing_coo2csr.hpp"
-#include "testing_csr2bsr.hpp"
 #include "testing_csr2coo.hpp"
 #include "testing_csr2csc.hpp"
-#include "testing_csr2csr_compress.hpp"
-#include "testing_csr2gebsr.hpp"
 #include "testing_csr2hyb.hpp"
+#include "testing_csr2bsr.hpp"
+#include "testing_csr2gebsr.hpp"
+#include "testing_csr2csr_compress.hpp"
+#include "testing_coo2csr.hpp"
+#include "testing_hyb2csr.hpp"
+#include "testing_csr2dense.hpp"
+#include "testing_csc2dense.hpp"
+#include "testing_dense2csr.hpp"
+#include "testing_dense2csc.hpp"
 #include "testing_gebsr2csr.hpp"
 #include "testing_gebsr2gebsc.hpp"
 #include "testing_gebsr2gebsr.hpp"
-#include "testing_hyb2csr.hpp"
 
 // Generic
+#include "testing_axpby.hpp"
+#include "testing_gather.hpp"
+#include "testing_scatter.hpp"
+#include "testing_rot.hpp"
+#include "testing_spvv.hpp"
+#include "testing_spmv_coo.hpp"
+#include "testing_spmv_coo_aos.hpp"
+#include "testing_spmv_csr.hpp"
+#include "testing_spsv_csr.hpp"
+#include "testing_spmm_coo.hpp"
+#include "testing_spmm_csr.hpp"
+#include "testing_spmm_csc.hpp"
+#include "testing_spsm_coo.hpp"
+#include "testing_spsm_csr.hpp"
+#include "testing_spgemm_csr.hpp"
+#include "testing_spgemmreuse_csr.hpp"
+#include "testing_sddmm_coo.hpp"
+#include "testing_sddmm_csr.hpp"
+#include "testing_sddmm_csc.hpp"
+
 #include "testing_dense_to_sparse_coo.hpp"
 #include "testing_dense_to_sparse_csc.hpp"
 #include "testing_dense_to_sparse_csr.hpp"
 #include "testing_sparse_to_dense_coo.hpp"
 #include "testing_sparse_to_dense_csc.hpp"
 #include "testing_sparse_to_dense_csr.hpp"
-#include "testing_spmm_coo.hpp"
-#include "testing_spmm_csc.hpp"
-#include "testing_spmm_csr.hpp"
-#include "testing_spmv_coo.hpp"
-#include "testing_spmv_csr.hpp"
-#include "testing_spsm_coo.hpp"
-#include "testing_spsm_csr.hpp"
-#include "testing_spsv_csr.hpp"
+
 
 bool hipsparse_routine::is_routine_supported(hipsparse_routine::value_type FNAME)
 {
@@ -257,14 +278,14 @@ bool hipsparse_routine::is_routine_supported(hipsparse_routine::value_type FNAME
     case sctr:
         return routine_support::is_sctr_supported();
     // Level 2
+    case bsrmv:
+        return routine_support::is_bsrmv_supported();
     case bsrsv2:
         return routine_support::is_bsrsv2_supported();
-    case coomv:
-        return routine_support::is_coomv_supported();
     case csrmv:
         return routine_support::is_csrmv_supported();
-    case csrsv:
-        return routine_support::is_csrsv_supported();
+    case csrsv2:
+        return routine_support::is_csrsv2_supported();
     case gemvi:
         return routine_support::is_gemvi_supported();
     case hybmv:
@@ -274,21 +295,17 @@ bool hipsparse_routine::is_routine_supported(hipsparse_routine::value_type FNAME
         return routine_support::is_bsrmm_supported();
     case bsrsm2:
         return routine_support::is_bsrsm2_supported();
-    case coomm:
-        return routine_support::is_coomm_supported();
-    case cscmm:
-        return routine_support::is_cscmm_supported();
     case csrmm:
         return routine_support::is_csrmm_supported();
-    case coosm:
-        return routine_support::is_coosm_supported();
-    case csrsm:
-        return routine_support::is_csrsm_supported();
+    case csrsm2:
+        return routine_support::is_csrsm2_supported();
     case gemmi:
         return routine_support::is_gemmi_supported();
     // Extra
     case csrgeam:
         return routine_support::is_csrgeam_supported();
+    case csrgeam2:
+        return routine_support::is_csrgeam2_supported();
     case csrgemm:
         return routine_support::is_csrgemm_supported();
     // Precond
@@ -333,20 +350,48 @@ bool hipsparse_routine::is_routine_supported(hipsparse_routine::value_type FNAME
         return routine_support::is_csr2dense_supported();
     case csc2dense:
         return routine_support::is_csc2dense_supported();
-    case coo2dense:
-        return routine_support::is_coo2dense_supported();
     case dense2csr:
         return routine_support::is_dense2csr_supported();
     case dense2csc:
         return routine_support::is_dense2csc_supported();
-    case dense2coo:
-        return routine_support::is_dense2coo_supported();
     case gebsr2csr:
         return routine_support::is_gebsr2csr_supported();
     case gebsr2gebsc:
         return routine_support::is_gebsr2gebsc_supported();
     case gebsr2gebsr:
         return routine_support::is_gebsr2gebsr_supported();
+    // Generic
+    case axpby:
+        return routine_support::is_axpby_supported();
+    case gather:
+        return routine_support::is_gather_supported();
+    case scatter:
+        return routine_support::is_scatter_supported();
+    case rot:
+        return routine_support::is_rot_supported();
+    case spvv:
+        return routine_support::is_spvv_supported();
+    case spmv_coo:
+    case spmv_coo_aos:
+    case spmv_csr:
+        return routine_support::is_spmv_supported();
+    case spsv_csr:
+        return routine_support::is_spsv_supported();
+    case spmm_coo:
+    case spmm_csr:
+    case spmm_csc:
+        return routine_support::is_spmm_supported();
+    case spsm_coo:
+    case spsm_csr:
+        return routine_support::is_spsm_supported();
+    case spgemm_csr:
+        return routine_support::is_spgemm_supported();
+    case spgemmreuse_csr:
+        return routine_support::is_spgemmreuse_supported();
+    case sddmm_coo:
+    case sddmm_csr:
+    case sddmm_csc:
+        return routine_support::is_sddmm_supported();
     }
 
     return false;
@@ -379,17 +424,17 @@ void hipsparse_routine::print_routine_support_info(hipsparse_routine::value_type
         routine_support::print_sctr_support_warning();
         break;
     // Level 2
+    case bsrmv:
+        routine_support::print_bsrmv_support_warning();
+        break;
     case bsrsv2:
         routine_support::print_bsrsv2_support_warning();
-        break;
-    case coomv:
-        routine_support::print_coomv_support_warning();
         break;
     case csrmv:
         routine_support::print_csrmv_support_warning();
         break;
-    case csrsv:
-        routine_support::print_csrsv_support_warning();
+    case csrsv2:
+        routine_support::print_csrsv2_support_warning();
         break;
     case gemvi:
         routine_support::print_gemvi_support_warning();
@@ -404,20 +449,11 @@ void hipsparse_routine::print_routine_support_info(hipsparse_routine::value_type
     case bsrsm2:
         routine_support::print_bsrsm2_support_warning();
         break;
-    case coomm:
-        routine_support::print_coomm_support_warning();
-        break;
-    case cscmm:
-        routine_support::print_cscmm_support_warning();
-        break;
     case csrmm:
         routine_support::print_csrmm_support_warning();
         break;
-    case coosm:
-        routine_support::print_coosm_support_warning();
-        break;
-    case csrsm:
-        routine_support::print_csrsm_support_warning();
+    case csrsm2:
+        routine_support::print_csrsm2_support_warning();
         break;
     case gemmi:
         routine_support::print_gemmi_support_warning();
@@ -425,6 +461,9 @@ void hipsparse_routine::print_routine_support_info(hipsparse_routine::value_type
     // Extra
     case csrgeam:
         routine_support::print_csrgeam_support_warning();
+        break;
+    case csrgeam2:
+        routine_support::print_csrgeam2_support_warning();
         break;
     case csrgemm:
         routine_support::print_csrgemm_support_warning();
@@ -491,17 +530,11 @@ void hipsparse_routine::print_routine_support_info(hipsparse_routine::value_type
     case csc2dense:
         routine_support::print_csc2dense_support_warning();
         break;
-    case coo2dense:
-        routine_support::print_coo2dense_support_warning();
-        break;
     case dense2csr:
         routine_support::print_dense2csr_support_warning();
         break;
     case dense2csc:
         routine_support::print_dense2csc_support_warning();
-        break;
-    case dense2coo:
-        routine_support::print_dense2coo_support_warning();
         break;
     case gebsr2csr:
         routine_support::print_gebsr2csr_support_warning();
@@ -511,6 +544,50 @@ void hipsparse_routine::print_routine_support_info(hipsparse_routine::value_type
         break;
     case gebsr2gebsr:
         routine_support::print_gebsr2gebsr_support_warning();
+        break;
+    // Generic
+    case axpby:
+        routine_support::print_axpby_support_warning();
+        break;
+    case gather:
+        routine_support::print_gather_support_warning();
+        break;
+    case scatter:
+        routine_support::print_scatter_support_warning();
+        break;
+    case rot:
+        routine_support::print_rot_support_warning();
+        break;
+    case spvv:
+        routine_support::print_spvv_support_warning();
+        break;
+    case spmv_coo:
+    case spmv_coo_aos:
+    case spmv_csr:
+        routine_support::print_spmv_support_warning();
+        break;
+    case spsv_csr:
+        routine_support::print_spsv_support_warning();
+        break;
+    case spmm_coo:
+    case spmm_csr:
+    case spmm_csc:
+        routine_support::print_spmm_support_warning();
+        break;
+    case spsm_coo:
+    case spsm_csr:
+        routine_support::print_spsm_support_warning();
+        break;
+    case spgemm_csr:
+        routine_support::print_spgemm_support_warning();
+        break;
+    case spgemmreuse_csr:
+        routine_support::print_spgemmreuse_support_warning();
+        break;
+    case sddmm_coo:
+    case sddmm_csr:
+    case sddmm_csc:
+        routine_support::print_sddmm_support_warning();
         break;
     }
 }
@@ -650,25 +727,23 @@ hipsparseStatus_t hipsparse_routine::dispatch_call(const Arguments& arg)
         DEFINE_CASE_T(sctr);
 
         // Level2
+        DEFINE_CASE_T(bsrmv);
         DEFINE_CASE_T(bsrsv2);
-        DEFINE_CASE_IT_X(coomv, testing_spmv_coo);
-        DEFINE_CASE_IJT_X(csrmv, testing_spmv_csr);
-        DEFINE_CASE_IJT_X(csrsv, testing_spsv_csr);
+        DEFINE_CASE_T(csrmv);
+        DEFINE_CASE_T(csrsv2);
         DEFINE_CASE_T(gemvi);
         DEFINE_CASE_T(hybmv);
 
         // Level3
         DEFINE_CASE_T(bsrmm);
         DEFINE_CASE_T(bsrsm2);
-        DEFINE_CASE_IT_X(coomm, testing_spmm_coo);
-        DEFINE_CASE_IJT_X(cscmm, testing_spmm_csc);
-        DEFINE_CASE_IJT_X(csrmm, testing_spmm_csr);
-        DEFINE_CASE_IT_X(coosm, testing_spsm_coo);
-        DEFINE_CASE_IJT_X(csrsm, testing_spsm_csr);
+        DEFINE_CASE_T(csrmm);
+        DEFINE_CASE_T(csrsm2);
         DEFINE_CASE_T(gemmi);
 
         // Extra
         DEFINE_CASE_T(csrgeam);
+        DEFINE_CASE_T(csrgeam2);
         DEFINE_CASE_T(csrgemm);
 
         // Precond
@@ -692,15 +767,34 @@ hipsparseStatus_t hipsparse_routine::dispatch_call(const Arguments& arg)
         DEFINE_CASE_T(csr2csr_compress);
         DEFINE_CASE_T(coo2csr);
         DEFINE_CASE_T(hyb2csr);
-        DEFINE_CASE_IJT_X(csr2dense, testing_sparse_to_dense_csr);
-        DEFINE_CASE_IJT_X(csc2dense, testing_sparse_to_dense_csc);
-        DEFINE_CASE_IT_X(coo2dense, testing_sparse_to_dense_coo);
-        DEFINE_CASE_IJT_X(dense2csr, testing_dense_to_sparse_csr);
-        DEFINE_CASE_IJT_X(dense2csc, testing_dense_to_sparse_csc);
-        DEFINE_CASE_IT_X(dense2coo, testing_dense_to_sparse_coo);
+        DEFINE_CASE_T(csr2dense);
+        DEFINE_CASE_T(csc2dense);
+        DEFINE_CASE_T(dense2csr);
+        DEFINE_CASE_T(dense2csc);
         DEFINE_CASE_T(gebsr2csr);
         DEFINE_CASE_T(gebsr2gebsc);
         DEFINE_CASE_T(gebsr2gebsr);
+
+        // Generic
+        DEFINE_CASE_IT_X(axpby, testing_axpby);
+        DEFINE_CASE_IT_X(gather, testing_gather);
+        DEFINE_CASE_IT_X(scatter, testing_scatter);
+        DEFINE_CASE_IT_X(rot, testing_rot);
+        DEFINE_CASE_IT_X(spvv, testing_spvv);
+        DEFINE_CASE_IT_X(spmv_coo, testing_spmv_coo);
+        DEFINE_CASE_IT_X(spmv_coo_aos, testing_spmv_coo_aos);
+        DEFINE_CASE_IJT_X(spmv_csr, testing_spmv_csr);
+        DEFINE_CASE_IJT_X(spsv_csr, testing_spsv_csr);
+        DEFINE_CASE_IT_X(spmm_coo, testing_spmm_coo);
+        DEFINE_CASE_IJT_X(spmm_csr, testing_spmm_csr);
+        DEFINE_CASE_IJT_X(spmm_csc, testing_spmm_csc);
+        DEFINE_CASE_IT_X(spsm_coo, testing_spsm_coo);
+        DEFINE_CASE_IJT_X(spsm_csr, testing_spsm_csr);
+        DEFINE_CASE_IJT_X(spgemm_csr, testing_spgemm_csr);
+        DEFINE_CASE_IJT_X(spgemmreuse_csr, testing_spgemmreuse_csr);
+        DEFINE_CASE_IT_X(sddmm_coo, testing_sddmm_coo);
+        DEFINE_CASE_IJT_X(sddmm_csr, testing_sddmm_csr);
+        DEFINE_CASE_IJT_X(sddmm_csc, testing_sddmm_csc);
     }
 
 #undef DEFINE_CASE_T_X
