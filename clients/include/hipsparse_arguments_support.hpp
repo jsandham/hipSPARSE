@@ -270,7 +270,6 @@ struct routine_support
         return true;
 #else
         return false;
-        s
 #endif
     }
     // Extra
