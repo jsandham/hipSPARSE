@@ -69,10 +69,10 @@ hipsparseStatus_t testing_csrilusv(Arguments argus)
     int nnz;
 
     if(read_bin_matrix(
-           argus.filename.c_str(), m, n, nnz, hcsr_row_ptr, hcsr_col_ind, hcsr_val, idx_base)
+           argus.filename, m, n, nnz, hcsr_row_ptr, hcsr_col_ind, hcsr_val, idx_base)
        != 0)
     {
-        fprintf(stderr, "Cannot open [read] %s\n", argus.filename.c_str());
+        fprintf(stderr, "Cannot open [read] %s\n", argus.filename);
         return HIPSPARSE_STATUS_INTERNAL_ERROR;
     }
 
@@ -326,7 +326,7 @@ hipsparseStatus_t testing_csrilusv(Arguments argus)
 
     // Host csrsv
     hipDeviceProp_t prop;
-    hipGetDeviceProperties(&prop, 0);
+    CHECK_HIP_ERROR(hipGetDeviceProperties(&prop, 0));
 
     position_gold = csr_lsolve(HIPSPARSE_OPERATION_NON_TRANSPOSE,
                                m,

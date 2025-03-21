@@ -21,6 +21,8 @@
  *
  * ************************************************************************ */
 
+#include "hipsparse_parse_data.hpp"
+#include "hipsparse_test_cleanup.hpp"
 #include "utility.hpp"
 #ifdef GOOGLE_TEST
 #include <gtest/gtest.h>
@@ -233,8 +235,23 @@ int main(int argc, char** argv)
 
     printf("hipSPARSE version: %s\n", version);
 
+
+
+
+
+    std::string datapath = hipsparse_datapath();
+
+    // Print test data path being used
+    std::cout << "hipSPARSE data path: " << datapath << std::endl;
+
+    // Set data file path
+    hipsparse_parse_data(argc, argv, datapath + "hipsparse_test.data");
+
     // Initialize google test
-    InitGoogleTest(&argc, argv);
+    testing::InitGoogleTest(&argc, argv);
+
+    // Free up all temporary data generated during test creation
+    test_cleanup::cleanup();
 
     // Remove the default listener
     auto& listeners       = UnitTest::GetInstance()->listeners();

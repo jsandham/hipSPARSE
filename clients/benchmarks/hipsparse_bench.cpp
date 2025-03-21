@@ -71,7 +71,7 @@ hipsparse_bench::hipsparse_bench(int& argc, char**& argv)
     : desc("hipsparse client command line options")
 {
     this->parse(argc, argv, this->config);
-    routine(this->config.function_name.c_str());
+    routine(this->config.function_name);
 
     // Device query
     int devs;
@@ -93,7 +93,7 @@ hipsparse_bench::hipsparse_bench(int& argc, char**& argv)
 hipsparse_bench& hipsparse_bench::operator()(int& argc, char**& argv)
 {
     this->parse(argc, argv, this->config);
-    routine(this->config.function_name.c_str());
+    routine(this->config.function_name);
     return *this;
 }
 

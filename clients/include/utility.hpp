@@ -47,6 +47,7 @@
 #include <omp.h>
 #endif
 std::string hipsparse_exepath();
+std::string hipsparse_datapath();
 /*!\file
  * \brief provide data initialization and timing utilities.
  */
@@ -2625,8 +2626,8 @@ inline void host_csrmv(hipsparseOperation_t trans,
         int             dev;
         hipDeviceProp_t prop;
 
-        hipGetDevice(&dev);
-        hipGetDeviceProperties(&prop, dev);
+        std::ignore = hipGetDevice(&dev);
+        std::ignore = hipGetDeviceProperties(&prop, dev);
 
         int WF_SIZE;
         J   nnz_per_row = (M == 0) ? 0 : (nnz / M);
@@ -4122,8 +4123,8 @@ static inline void host_lssolve(J                     M,
     int             dev;
     hipDeviceProp_t prop;
 
-    hipGetDevice(&dev);
-    hipGetDeviceProperties(&prop, dev);
+    std::ignore = hipGetDevice(&dev);
+    std::ignore = hipGetDeviceProperties(&prop, dev);
 
 #ifdef _OPENMP
 #pragma omp parallel for
@@ -4264,8 +4265,8 @@ static inline void host_ussolve(J                     M,
     int             dev;
     hipDeviceProp_t prop;
 
-    hipGetDevice(&dev);
-    hipGetDeviceProperties(&prop, dev);
+    std::ignore = hipGetDevice(&dev);
+    std::ignore = hipGetDeviceProperties(&prop, dev);
 
 #ifdef _OPENMP
 #pragma omp parallel for
@@ -4537,8 +4538,8 @@ void host_csr_lsolve(J                    M,
     int             dev;
     hipDeviceProp_t prop;
 
-    hipGetDevice(&dev);
-    hipGetDeviceProperties(&prop, dev);
+    std::ignore = hipGetDevice(&dev);
+    std::ignore = hipGetDeviceProperties(&prop, dev);
 
     std::vector<T> temp(prop.warpSize);
 
@@ -4644,8 +4645,8 @@ void host_csr_usolve(J                    M,
     int             dev;
     hipDeviceProp_t prop;
 
-    hipGetDevice(&dev);
-    hipGetDeviceProperties(&prop, dev);
+    std::ignore = hipGetDevice(&dev);
+    std::ignore = hipGetDeviceProperties(&prop, dev);
 
     std::vector<T> temp(prop.warpSize);
 

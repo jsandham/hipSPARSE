@@ -83,6 +83,47 @@ std::string hipsparse_exepath()
 #endif
 }
 
+/* ==================================================================================== */
+// Return path where the test data file (hipsparse_test.data) is located
+std::string hipsparse_datapath()
+{
+#ifdef WIN32
+    fs::path        share_path = fs::path(hipsparse_exepath() + "../share/hipsparse/test");
+    std::error_code ec;
+    fs::path        path = fs::canonical(share_path, ec);
+    if(!ec)
+    {
+        if(fs::exists(path, ec) && !ec)
+        {
+            path += path.empty() ? "" : "/";
+            return path.string();
+        }
+    }
+#else
+    std::string pathstr;
+    std::string share_path = hipsparse_exepath() + "../share/hipsparse/test";
+    char*       path       = realpath(share_path.c_str(), 0);
+    if(path != NULL)
+    {
+        pathstr = path;
+        pathstr += "/";
+        free(path);
+        return pathstr;
+    }
+#endif
+
+    return hipsparse_exepath();
+}
+
+
+
+
+
+
+
+
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -169,8 +210,8 @@ void set_device(int device_id)
 /*! \brief  CPU Timer(in microsecond): synchronize with the default device and return wall time */
 double get_time_us(void)
 {
-    hipDeviceSynchronize();
-    auto now = std::chrono::steady_clock::now();
+    std::ignore = hipDeviceSynchronize();
+    auto now    = std::chrono::steady_clock::now();
     // struct timeval tv;
     // gettimeofday(&tv, NULL);
     //  return (tv.tv_sec * 1000 * 1000) + tv.tv_usec;
@@ -187,8 +228,8 @@ double get_time_us(void)
 /*! \brief  CPU Timer(in microsecond): synchronize with given queue/stream and return wall time */
 double get_time_us_sync(hipStream_t stream)
 {
-    hipStreamSynchronize(stream);
-    auto now = std::chrono::steady_clock::now();
+    std::ignore = hipStreamSynchronize(stream);
+    auto now    = std::chrono::steady_clock::now();
 
     // struct timeval tv;
     // gettimeofday(&tv, NULL);
