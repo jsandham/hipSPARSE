@@ -64,7 +64,7 @@ if (NOT WIN32)
 endif( )
 
 # hipSPARSE project
-project(hipsparse LANGUAGES CXX ${fortran_language})
+project(hipsparse LANGUAGES CXX C ${fortran_language})
 
 # Set CXX flags
 if (NOT DEFINED CMAKE_CXX_STANDARD)
@@ -124,8 +124,8 @@ endif()
 
 
 # Setup version
-rocm_setup_version(VERSION 3.2.0)
-set(hipsparse_SOVERSION 1.1.0)
+rocm_setup_version(VERSION 4.0.0)
+set(hipsparse_SOVERSION 4.0.0)
 
 # hipSPARSE library
 add_subdirectory(library)
@@ -144,7 +144,7 @@ if(BUILD_CLIENTS_SAMPLES OR BUILD_CLIENTS_TESTS OR BUILD_CLIENTS_BENCHMARKS)
     set(OPENMP_RPM "libgomp")
     set(OPENMP_DEB "libomp-dev")
   endif()
-  if(CLIENTS_OS STREQUAL "centos" OR CLIENTS_OS STREQUAL "rhel")
+  if(CLIENTS_OS STREQUAL "centos" OR CLIENTS_OS STREQUAL "rhel" OR CLIENTS_OS STREQUAL "almalinux")
     if(CLIENTS_OS_VERSION VERSION_GREATER_EQUAL "8")
       set(GFORTRAN_RPM "libgfortran")
     endif()
@@ -173,14 +173,6 @@ if(BUILD_CLIENTS_SAMPLES OR BUILD_CLIENTS_TESTS OR BUILD_CLIENTS_BENCHMARKS)
         RPM "${OPENMP_RPM}"
     )
   endif()
-  if(BUILD_CLIENTS_SAMPLES)
-    rocm_package_setup_client_component(
-      samples
-      DEPENDS
-        COMPONENT clients-common
-        DEB "${GFORTRAN_DEB}"
-        RPM "${GFORTRAN_RPM}")
-  endif()
 
   if( BUILD_CLIENTS_BENCHMARKS )
   rocm_package_setup_client_component(
@@ -197,8 +189,6 @@ if(BUILD_CLIENTS_SAMPLES OR BUILD_CLIENTS_TESTS OR BUILD_CLIENTS_BENCHMARKS)
   if(NOT WIN32)
     rocm_package_add_rpm_dependencies(COMPONENT tests DEPENDS "${GFORTRAN_RPM}")
     rocm_package_add_deb_dependencies(COMPONENT tests DEPENDS "${GFORTRAN_DEB}")
-    rocm_package_add_rpm_dependencies(COMPONENT samples DEPENDS "${GFORTRAN_RPM}")
-    rocm_package_add_deb_dependencies(COMPONENT samples DEPENDS "${GFORTRAN_DEB}")
     rocm_package_add_rpm_dependencies(COMPONENT benchmarks DEPENDS "${GFORTRAN_RPM}")
     rocm_package_add_deb_dependencies(COMPONENT benchmarks DEPENDS "${GFORTRAN_DEB}")
   endif()
@@ -221,7 +211,9 @@ set(CPACK_RPM_PACKAGE_LICENSE "MIT")
 if(WIN32)
   set(CPACK_SOURCE_GENERATOR "ZIP")
   set(CPACK_GENERATOR "ZIP")
-  set(CMAKE_INSTALL_PREFIX "C:/hipSDK" CACHE PATH "Install path" FORCE)
+  if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "C:/hipSDK" CACHE PATH "Install path" FORCE)
+  endif()
   set(INSTALL_PREFIX "C:/hipSDK")
   set(CPACK_SET_DESTDIR OFF)
   set(CPACK_PACKAGE_INSTALL_DIRECTORY "C:/hipSDK")
@@ -285,17 +277,13 @@ if(BUILD_CODE_COVERAGE)
   add_custom_target(coverage_output
     DEPENDS coverage_analysis
     COMMAND mkdir -p lcoverage
-    COMMAND echo "\\#!/bin/bash" > llvm-gcov.sh
-    COMMAND echo "\\# THIS FILE HAS BEEN GENERATED" >> llvm-gcov.sh
-    COMMAND printf "exec /opt/rocm/llvm/bin/llvm-cov gcov $$\\@" >> llvm-gcov.sh
-    COMMAND chmod +x llvm-gcov.sh
     )
 
   #
   # Generate coverage output.
   #
   add_custom_command(TARGET coverage_output
-    COMMAND lcov --directory . --base-directory . --gcov-tool ${CMAKE_BINARY_DIR}/llvm-gcov.sh --capture -o lcoverage/raw_main_coverage.info
+    COMMAND lcov --directory . --base-directory . --capture -o lcoverage/raw_main_coverage.info
     COMMAND lcov --remove lcoverage/raw_main_coverage.info "'/opt/*'" "'/usr/*'" -o lcoverage/main_coverage.info
     COMMAND genhtml lcoverage/main_coverage.info --output-directory lcoverage
     )

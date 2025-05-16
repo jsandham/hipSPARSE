@@ -25,6 +25,7 @@
 #include "hipsparse_bench_app.hpp"
 #include "hipsparse_bench.hpp"
 
+#include <chrono>
 #include <fstream>
 #include <random>
 
@@ -326,7 +327,7 @@ hipsparseStatus_t hipsparse_bench_app::define_results_json(std::ostream& out)
     // !!! To fix, not necessarily the gpu used from hipsparse_bench.
     //
     hipDeviceProp_t prop;
-    hipGetDeviceProperties(&prop, 0);
+    std::ignore = hipGetDeviceProperties(&prop, 0);
     gpu_config g(prop);
     g.print_json(out);
 
