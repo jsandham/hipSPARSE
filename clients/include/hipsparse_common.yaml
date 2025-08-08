@@ -33,15 +33,15 @@ Datatypes:
   - hipDataType:
       bases: [ c_int ]
       attr:
-        f16_r: 150
-        f32_r: 151
-        f64_r: 152
-        f32_c: 154
-        f64_c: 155
-        i8_r:  160
-        u8_r:  161
-        i32_r: 162
-        u32_r: 163
+        f32_r: 0
+        f64_r: 1
+        f16_r: 2
+        i8_r:  3
+        f32_c: 4
+        f64_c: 5
+        u8_r:  8
+        i32_r: 10
+        u32_r: 12
   - { single: f32_r, double: f64_r }
   - { single complex: f32_c, double complex: f64_c }
   - hipsparseOperation_t:
@@ -310,6 +310,7 @@ Arguments:
   - filename: c_char*128
   - function: c_char*64
   - function_name: c_char*64
+  - category: c_char*32
 
 # These named dictionary lists [ {dict1}, {dict2}, etc. ] supply subsets of
 # test arguments in a structured way. The dictionaries are applied to the test
@@ -413,3 +414,4 @@ Defaults:
   filename: '*'
   function: '*'
   function_name: '*'
+  category: '*'

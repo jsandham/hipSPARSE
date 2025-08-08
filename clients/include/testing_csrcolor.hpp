@@ -39,7 +39,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_csrcolor_bad_arg(void)
+void testing_csrcolor_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
 
@@ -226,7 +226,7 @@ void testing_csrcolor_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csrcolor()
+hipsparseStatus_t testing_csrcolor(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 13000)
     // Determine absolute path of test matrix

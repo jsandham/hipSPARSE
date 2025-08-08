@@ -41,13 +41,13 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_csrgeam2_bad_arg(void)
+void testing_csrgeam2_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int safe_size = 1;
 
-    T alpha = 1.0;
-    T beta  = 1.0;
+    T alpha = make_DataType<T>(1.0);
+    T beta  = make_DataType<T>(1.0);
 
     int nnz_C;
 
@@ -729,14 +729,14 @@ void testing_csrgeam2_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csrgeam2(Arguments argus)
+hipsparseStatus_t testing_csrgeam2(const Arguments& argus)
 {
     int                  M          = argus.M;
     int                  N          = argus.N;
     hipsparseIndexBase_t idx_base_A = argus.baseA;
     hipsparseIndexBase_t idx_base_B = argus.baseB;
     hipsparseIndexBase_t idx_base_C = argus.baseC;
-    std::string          filename   = argus.filename;
+    std::string          filename   = get_filename(argus.filename);
     T                    h_alpha    = make_DataType<T>(argus.alpha);
     T                    h_beta     = make_DataType<T>(argus.beta);
 

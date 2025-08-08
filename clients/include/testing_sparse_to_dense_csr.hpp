@@ -39,7 +39,8 @@
 
 using namespace hipsparse_test;
 
-void testing_sparse_to_dense_csr_bad_arg(void)
+template <typename I, typename J, typename T>
+void testing_sparse_to_dense_csr_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11020)
     int64_t safe_size = 100;
@@ -128,7 +129,7 @@ void testing_sparse_to_dense_csr_bad_arg(void)
 }
 
 template <typename I, typename J, typename T>
-hipsparseStatus_t testing_sparse_to_dense_csr(Arguments argus)
+hipsparseStatus_t testing_sparse_to_dense_csr(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11020)
     J                           m        = argus.M;
@@ -137,7 +138,7 @@ hipsparseStatus_t testing_sparse_to_dense_csr(Arguments argus)
     hipsparseSparseToDenseAlg_t alg
         = static_cast<hipsparseSparseToDenseAlg_t>(argus.sparse2dense_alg);
     hipsparseOrder_t order    = argus.orderA;
-    std::string      filename = argus.filename;
+    std::string      filename = get_filename(argus.filename);
 
     // Index and data type
     hipsparseIndexType_t typeI = getIndexType<I>();

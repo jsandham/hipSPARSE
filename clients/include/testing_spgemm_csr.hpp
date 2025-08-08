@@ -36,7 +36,8 @@
 
 using namespace hipsparse_test;
 
-void testing_spgemm_csr_bad_arg(void)
+template <typename I, typename J, typename T>
+void testing_spgemm_csr_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11000)
     int64_t              m         = 100;
@@ -47,7 +48,7 @@ void testing_spgemm_csr_bad_arg(void)
     int64_t              nnz_C     = 100;
     int64_t              safe_size = 100;
     float                alpha     = 0.6;
-    float                beta      = 0.2;
+    float beta     = 0.2;
     hipsparseOperation_t transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
     hipsparseOperation_t transB    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
     hipsparseIndexBase_t idxBaseA  = HIPSPARSE_INDEX_BASE_ZERO;
@@ -331,7 +332,7 @@ void testing_spgemm_csr_bad_arg(void)
 }
 
 template <typename I, typename J, typename T>
-hipsparseStatus_t testing_spgemm_csr(Arguments argus)
+hipsparseStatus_t testing_spgemm_csr(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11000)
     J                    m        = argus.M;
@@ -341,7 +342,7 @@ hipsparseStatus_t testing_spgemm_csr(Arguments argus)
     hipsparseIndexBase_t idxBaseB = argus.baseB;
     hipsparseIndexBase_t idxBaseC = argus.baseC;
     hipsparseSpGEMMAlg_t alg      = static_cast<hipsparseSpGEMMAlg_t>(argus.spgemm_alg);
-    std::string          filename = argus.filename;
+    std::string          filename = get_filename(argus.filename);
 
     T                    h_beta = make_DataType<T>(0);
     hipsparseOperation_t transA = HIPSPARSE_OPERATION_NON_TRANSPOSE;

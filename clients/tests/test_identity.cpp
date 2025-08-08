@@ -1,5 +1,6 @@
+/*! \file */
 /* ************************************************************************
- * Copyright (C) 2018-2019 Advanced Micro Devices, Inc. All rights Reserved.
+ * Copyright (C) 2020-2023 Advanced Micro Devices, Inc. All rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,44 +22,16 @@
  *
  * ************************************************************************ */
 
-#include "testing_identity.hpp"
-#include "utility.hpp"
+ #include "test.hpp"
 
-#include <hipsparse.h>
-#include <vector>
-
-int identity_N_range[] = {0, 33, 242, 623, 1000};
-
-class parameterized_identity : public testing::TestWithParam<int>
-{
-protected:
-    parameterized_identity() {}
-    virtual ~parameterized_identity() {}
-    virtual void SetUp() {}
-    virtual void TearDown() {}
-};
-
-Arguments setup_identity_arguments(int n)
-{
-    Arguments arg;
-    arg.N      = n;
-    arg.timing = 0;
-    return arg;
-}
-
-#if(!defined(CUDART_VERSION) || CUDART_VERSION < 13000)
-TEST(identity_bad_arg, identity)
-{
-    testing_identity_bad_arg();
-}
-
-TEST_P(parameterized_identity, identity)
-{
-    Arguments arg = setup_identity_arguments(GetParam());
-
-    hipsparseStatus_t status = testing_identity(arg);
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
-
-INSTANTIATE_TEST_SUITE_P(identity, parameterized_identity, testing::ValuesIn(identity_N_range));
-#endif
+ #include "testing_identity.hpp"
+ 
+ TEST_ROUTINE(identity,
+             conversion,
+             arg.M,
+             arg.N,
+             arg.block_dim,
+             arg.dirA,
+             arg.baseA,
+             arg.baseB,
+             arg.filename);

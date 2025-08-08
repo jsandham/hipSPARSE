@@ -42,7 +42,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_csrilu02_bad_arg(void)
+void testing_csrilu02_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int                    m         = 100;
@@ -176,7 +176,7 @@ void testing_csrilu02_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csrilu02(Arguments argus)
+hipsparseStatus_t testing_csrilu02(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 13000)
     int                    m         = argus.M;
@@ -185,7 +185,7 @@ hipsparseStatus_t testing_csrilu02(Arguments argus)
     T                      boost_val = make_DataType<T>(argus.boostval, argus.boostvali);
     hipsparseIndexBase_t   idx_base  = argus.baseA;
     hipsparseSolvePolicy_t policy    = argus.solve_policy;
-    std::string            filename  = argus.filename;
+    std::string            filename  = get_filename(argus.filename);
 
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
     hipsparseHandle_t              handle = unique_ptr_handle->handle;

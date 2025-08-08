@@ -21,11 +21,11 @@
  *
  * ************************************************************************ */
 
-#include "testing_const_dnvec_descr.hpp"
+// #include "testing_const_dnvec_descr.hpp"
 
-#if(!defined(CUDART_VERSION) || CUDART_VERSION >= 12000)
-TEST(const_dnvec_descr_bad_arg, const_dnvec_descr_float)
-{
-    testing_const_dnvec_descr_bad_arg();
-}
-#endif
+// #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 12000)
+// TEST(const_dnvec_descr_bad_arg, const_dnvec_descr_float)
+// {
+//     testing_const_dnvec_descr_bad_arg();
+// }
+// #endif

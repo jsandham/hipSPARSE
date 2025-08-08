@@ -41,7 +41,8 @@
 using namespace hipsparse;
 using namespace hipsparse_test;
 
-void testing_spmm_batched_coo_bad_arg(void)
+template <typename I, typename T>
+void testing_spmm_batched_coo_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int32_t              m         = 100;
@@ -49,7 +50,7 @@ void testing_spmm_batched_coo_bad_arg(void)
     int32_t              k         = 100;
     int64_t              nnz       = 100;
     float                alpha     = 0.6;
-    float                beta      = 0.2;
+    float beta     = 0.2;
     size_t               safe_size = 100;
     hipsparseOperation_t transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
     hipsparseOperation_t transB    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
@@ -165,7 +166,7 @@ void testing_spmm_batched_coo_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_spmm_batched_coo(Arguments argus)
+hipsparseStatus_t testing_spmm_batched_coo(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     I                    m        = argus.M;
@@ -189,7 +190,7 @@ hipsparseStatus_t testing_spmm_batched_coo(Arguments argus)
     hipsparseSpMMAlg_t alg = HIPSPARSE_COOMM_ALG1;
 #endif
 
-    std::string filename = argus.filename;
+    std::string filename = get_filename(argus.filename);
 
 #if(defined(CUDART_VERSION))
     if(orderB != orderC || orderB != HIPSPARSE_ORDER_COL)

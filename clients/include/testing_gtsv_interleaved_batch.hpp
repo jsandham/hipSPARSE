@@ -42,7 +42,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_gtsv_interleaved_batch_bad_arg(void)
+void testing_gtsv_interleaved_batch_bad_arg(const Arguments& argus)
 {
     // Dont do bad argument checking for cuda
 #if(!defined(CUDART_VERSION))
@@ -116,7 +116,7 @@ void testing_gtsv_interleaved_batch_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_gtsv_interleaved_batch(Arguments argus)
+hipsparseStatus_t testing_gtsv_interleaved_batch(const Arguments& argus)
 {
     int m           = argus.M;
     int batch_count = argus.batch_count;

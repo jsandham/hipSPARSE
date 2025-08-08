@@ -39,7 +39,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_bsrxmv_bad_arg(void)
+void testing_bsrxmv_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
 
@@ -384,7 +384,7 @@ void testing_bsrxmv_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_bsrxmv(Arguments argus)
+hipsparseStatus_t testing_bsrxmv(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 13000)
     hipsparseDirection_t dir          = HIPSPARSE_DIRECTION_COLUMN;

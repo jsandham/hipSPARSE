@@ -43,7 +43,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_bsric02_bad_arg(void)
+void testing_bsric02_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int                    mb        = 100;
@@ -336,16 +336,17 @@ void testing_bsric02_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_bsric02(Arguments argus)
+hipsparseStatus_t testing_bsric02(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 13000)
     int                    m         = argus.M;
+    int                    n         = argus.N;
     int                    block_dim = argus.block_dim;
     hipsparseDirection_t   dir       = argus.dirA;
     hipsparseIndexBase_t   idx_base  = argus.baseA;
     hipsparseSolvePolicy_t policy    = argus.solve_policy;
-    std::string            filename  = argus.filename;
-
+    std::string            filename  = get_filename(argus.filename);
+    
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
     hipsparseHandle_t              handle = unique_ptr_handle->handle;
 
@@ -375,10 +376,15 @@ hipsparseStatus_t testing_bsric02(Arguments argus)
 
     // Read or construct CSR matrix
     int nnz = 0;
-    if(!generate_csr_matrix(filename, m, m, nnz, hcsr_row_ptr, hcsr_col_ind, hcsr_val, idx_base))
+    if(!generate_csr_matrix(filename, m, n, nnz, hcsr_row_ptr, hcsr_col_ind, hcsr_val, idx_base))
     {
         fprintf(stderr, "Cannot open [read] %s\ncol", filename.c_str());
         return HIPSPARSE_STATUS_INTERNAL_ERROR;
+    }
+
+    if(m != n)
+    {
+        return HIPSPARSE_STATUS_SUCCESS;
     }
 
     // m can be modifed if we read in a matrix from a file

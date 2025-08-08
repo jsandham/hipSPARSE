@@ -38,7 +38,8 @@
 
 using namespace hipsparse_test;
 
-void testing_axpby_bad_arg(void)
+template <typename I, typename T>
+void testing_axpby_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11000)
 
@@ -89,74 +90,9 @@ void testing_axpby_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_axpby(Arguments argus)
+hipsparseStatus_t testing_axpby(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11000)
-
-    std::cout << "argus.M: " << argus.M << std::endl;
-    std::cout << "argus.N: " << argus.N << std::endl;
-    std::cout << "argus.K: " << argus.K << std::endl;
-    std::cout << "argus.nnz: " << argus.nnz << std::endl;
-    std::cout << "argus.block_dim: " << argus.block_dim << std::endl;
-    std::cout << "argus.row_block_dimA: " << argus.row_block_dimA << std::endl;
-    std::cout << "argus.col_block_dimA: " << argus.col_block_dimA << std::endl;
-    std::cout << "argus.row_block_dimB: " << argus.row_block_dimB << std::endl;
-    std::cout << "argus.col_block_dimB: " << argus.col_block_dimB << std::endl;
-    std::cout << "argus.lda: " << argus.lda << std::endl;
-    std::cout << "argus.ldb: " << argus.ldb << std::endl;
-    std::cout << "argus.ldc: " << argus.ldc << std::endl;
-    std::cout << "argus.batch_count: " << argus.batch_count << std::endl;
-    std::cout << "argus.index_type_I: " << argus.index_type_I << std::endl;
-    std::cout << "argus.index_type_J: " << argus.index_type_J << std::endl;
-    std::cout << "argus.compute_type: " << argus.compute_type << std::endl;
-    std::cout << "argus.alpha: " << argus.alpha << std::endl;
-    std::cout << "argus.alphai: " << argus.alphai << std::endl;
-    std::cout << "argus.beta: " << argus.beta << std::endl;
-    std::cout << "argus.betai: " << argus.betai << std::endl;
-    std::cout << "argus.threshold: " << argus.threshold << std::endl;
-    std::cout << "argus.percentage: " << argus.percentage << std::endl;
-    std::cout << "argus.transA: " << argus.transA << std::endl;
-    std::cout << "argus.transB: " << argus.transB << std::endl;
-    std::cout << "argus.baseA: " << argus.baseA << std::endl;
-    std::cout << "argus.baseB: " << argus.baseB << std::endl;
-    std::cout << "argus.baseC: " << argus.baseC << std::endl;
-    std::cout << "argus.baseD: " << argus.baseD << std::endl;
-    std::cout << "argus.action: " << argus.action << std::endl;
-    std::cout << "argus.part: " << argus.part << std::endl;
-    std::cout << "argus.diag_type: " << argus.diag_type << std::endl;
-    std::cout << "argus.fill_mode: " << argus.fill_mode << std::endl;
-    std::cout << "argus.solve_policy: " << argus.solve_policy << std::endl;
-    std::cout << "argus.dirA: " << argus.dirA << std::endl;
-    std::cout << "argus.orderA: " << argus.orderA << std::endl;
-    std::cout << "argus.orderB: " << argus.orderB << std::endl;
-    std::cout << "argus.orderC: " << argus.orderC << std::endl;
-    std::cout << "argus.formatA: " << argus.formatA << std::endl;
-    std::cout << "argus.formatB: " << argus.formatB << std::endl;
-    std::cout << "argus.csr2csc_alg: " << argus.csr2csc_alg << std::endl;
-    std::cout << "argus.dense2sparse_alg: " << argus.dense2sparse_alg << std::endl;
-    std::cout << "argus.sparse2dense_alg: " << argus.sparse2dense_alg << std::endl;
-    std::cout << "argus.sddmm_alg: " << argus.sddmm_alg << std::endl;
-    std::cout << "argus.spgemm_alg: " << argus.spgemm_alg << std::endl;
-    std::cout << "argus.spmm_alg: " << argus.spmm_alg << std::endl;
-    std::cout << "argus.spmv_alg: " << argus.spmv_alg << std::endl;
-    std::cout << "argus.spsm_alg: " << argus.spsm_alg << std::endl;
-    std::cout << "argus.spsv_alg: " << argus.spsv_alg << std::endl;
-    std::cout << "argus.numericboost: " << argus.numericboost << std::endl;
-    std::cout << "argus.boosttol: " << argus.boosttol << std::endl;
-    std::cout << "argus.boostval: " << argus.boostval << std::endl;
-    std::cout << "argus.boostvali: " << argus.boostvali << std::endl;
-    std::cout << "argus.ell_width: " << argus.ell_width << std::endl;
-    std::cout << "argus.permute: " << argus.permute << std::endl;
-    std::cout << "argus.gtsv_alg: " << argus.gtsv_alg << std::endl;
-    std::cout << "argus.gpsv_alg: " << argus.gpsv_alg << std::endl;
-    std::cout << "argus.unit_check: " << argus.unit_check << std::endl;
-    std::cout << "argus.timing: " << argus.timing << std::endl;
-    std::cout << "argus.iters: " << argus.iters << std::endl;
-
-
-
-    std::cout << "AAAA" << std::endl;
-
     I size = argus.N;
     I nnz  = argus.nnz;
 
@@ -168,8 +104,6 @@ hipsparseStatus_t testing_axpby(Arguments argus)
     // Index and data type
     hipsparseIndexType_t idxType  = getIndexType<I>();
     hipDataType          dataType = getDataType<T>();
-
-    std::cout << "BBBB" << std::endl;
 
     // hipSPARSE handle
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
@@ -187,7 +121,6 @@ hipsparseStatus_t testing_axpby(Arguments argus)
     hipsparseInit<T>(hx_val, 1, nnz);
     hipsparseInit<T>(hy, 1, size);
 
-    std::cout << "CCCC" << std::endl;
     hy_gold = hy;
 
     // Allocate memory on device
@@ -198,8 +131,6 @@ hipsparseStatus_t testing_axpby(Arguments argus)
     I* dx_ind = (I*)dx_ind_managed.get();
     T* dx_val = (T*)dx_val_managed.get();
     T* dy     = (T*)dy_managed.get();
-
-    std::cout << "DDDD" << std::endl;
 
     // copy data from CPU to device
     CHECK_HIP_ERROR(hipMemcpy(dx_ind, hx_ind.data(), sizeof(I) * nnz, hipMemcpyHostToDevice));
@@ -214,7 +145,6 @@ hipsparseStatus_t testing_axpby(Arguments argus)
         hipsparseCreateSpVec(&x, size, nnz, dx_ind, dx_val, idxType, idxBase, dataType));
     CHECK_HIPSPARSE_ERROR(hipsparseCreateDnVec(&y, size, dy, dataType));
 
-    std::cout << "EEEE" << std::endl;
     if(argus.unit_check)
     {
         // Axpby
@@ -238,8 +168,6 @@ hipsparseStatus_t testing_axpby(Arguments argus)
         // Verify results against host
         unit_check_general(1, size, 1, hy_gold.data(), hy.data());
     }
-
-    std::cout << "FFFF" << std::endl;
 
     if(argus.timing)
     {
@@ -284,7 +212,6 @@ hipsparseStatus_t testing_axpby(Arguments argus)
                             get_gpu_time_msec(gpu_time_used));
     }
 
-    std::cout << "GGGG" << std::endl;
     CHECK_HIPSPARSE_ERROR(hipsparseDestroySpVec(x));
     CHECK_HIPSPARSE_ERROR(hipsparseDestroyDnVec(y));
 

@@ -35,7 +35,8 @@
 
 using namespace hipsparse_test;
 
-void testing_const_spmat_descr_bad_arg(void)
+template <typename T>
+void testing_const_spmat_descr_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int64_t rows          = 100;

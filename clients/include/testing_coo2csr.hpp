@@ -41,7 +41,8 @@
 using namespace hipsparse;
 using namespace hipsparse_test;
 
-void testing_coo2csr_bad_arg(void)
+template <typename T>
+void testing_coo2csr_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int                  m         = 100;
@@ -72,12 +73,12 @@ void testing_coo2csr_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_coo2csr(Arguments argus)
+hipsparseStatus_t testing_coo2csr(const Arguments& argus)
 {
     int                  m        = argus.M;
     int                  n        = argus.N;
     hipsparseIndexBase_t idx_base = argus.baseA;
-    std::string          filename = argus.filename;
+    std::string          filename = get_filename(argus.filename);
 
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
     hipsparseHandle_t              handle = unique_ptr_handle->handle;

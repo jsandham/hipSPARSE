@@ -33,7 +33,7 @@
 
 using namespace hipsparse_test;
 
-void testing_spvec_descr_bad_arg(void)
+void testing_spvec_descr_bad_arg()
 {
 #if(!defined(CUDART_VERSION))
     int64_t size = 100;

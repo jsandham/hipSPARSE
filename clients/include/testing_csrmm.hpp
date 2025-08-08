@@ -41,7 +41,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_csrmm_bad_arg(void)
+void testing_csrmm_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int                  N         = 100;
@@ -51,8 +51,8 @@ void testing_csrmm_bad_arg(void)
     int                  ldc       = 100;
     int                  nnz       = 100;
     int                  safe_size = 100;
-    T                    alpha     = 0.6;
-    T                    beta      = 0.2;
+    T                    alpha     = make_DataType<T>(0.6);
+    T                    beta     = make_DataType<T>(0.2);
     hipsparseOperation_t transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
     hipsparseOperation_t transB    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
 
@@ -292,7 +292,7 @@ void testing_csrmm_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csrmm(Arguments argus)
+hipsparseStatus_t testing_csrmm(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 11000)
     int                  M        = argus.M;
@@ -303,7 +303,7 @@ hipsparseStatus_t testing_csrmm(Arguments argus)
     hipsparseOperation_t transA   = argus.transA;
     hipsparseOperation_t transB   = argus.transB;
     hipsparseIndexBase_t idx_base = argus.baseA;
-    std::string          filename = argus.filename;
+    std::string          filename = get_filename(argus.filename);
 
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
     hipsparseHandle_t              handle = unique_ptr_handle->handle;

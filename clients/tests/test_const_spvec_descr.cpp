@@ -21,11 +21,11 @@
  *
  * ************************************************************************ */
 
-#include "testing_const_spvec_descr.hpp"
+// #include "testing_const_spvec_descr.hpp"
 
-#if(!defined(CUDART_VERSION) || CUDART_VERSION >= 12000)
-TEST(const_spvec_descr_bad_arg, const_spvec_descr_float)
-{
-    testing_const_spvec_descr_bad_arg();
-}
-#endif
+// #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 12000)
+// TEST(const_spvec_descr_bad_arg, const_spvec_descr_float)
+// {
+//     testing_const_spvec_descr_bad_arg();
+// }
+// #endif

@@ -38,7 +38,8 @@
 
 using namespace hipsparse_test;
 
-void testing_rot_bad_arg(void)
+template <typename I, typename T>
+void testing_rot_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || (CUDART_VERSION >= 11000 && CUDART_VERSION < 13000))
     int64_t size = 100;
@@ -88,7 +89,7 @@ void testing_rot_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_rot(Arguments argus)
+hipsparseStatus_t testing_rot(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || (CUDART_VERSION >= 11000 && CUDART_VERSION < 13000))
     I size = argus.N;

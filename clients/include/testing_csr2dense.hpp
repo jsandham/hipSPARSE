@@ -27,7 +27,7 @@
 #include "testing_csx2dense.hpp"
 
 template <typename T>
-void testing_csr2dense_bad_arg(void)
+void testing_csr2dense_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 12000)
     static constexpr hipsparseDirection_t DIRA = HIPSPARSE_DIRECTION_ROW;
@@ -36,7 +36,7 @@ void testing_csr2dense_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csr2dense(Arguments argus)
+hipsparseStatus_t testing_csr2dense(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 12000)
     static constexpr hipsparseDirection_t DIRA = HIPSPARSE_DIRECTION_ROW;

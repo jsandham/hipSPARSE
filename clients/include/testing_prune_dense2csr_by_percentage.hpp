@@ -42,7 +42,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_prune_dense2csr_by_percentage_bad_arg(void)
+void testing_prune_dense2csr_by_percentage_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     size_t safe_size = 1;
@@ -370,7 +370,7 @@ void testing_prune_dense2csr_by_percentage_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_prune_dense2csr_by_percentage(Arguments argus)
+hipsparseStatus_t testing_prune_dense2csr_by_percentage(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 13000)
     int                  M          = argus.M;

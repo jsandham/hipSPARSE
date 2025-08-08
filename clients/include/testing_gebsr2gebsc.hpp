@@ -42,7 +42,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_gebsr2gebsc_bad_arg(void)
+void testing_gebsr2gebsc_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
 
@@ -431,7 +431,7 @@ void testing_gebsr2gebsc_bad_arg(void)
     TYPE* NAME           = (TYPE*)NAME##_managed.get()
 
 template <typename T>
-hipsparseStatus_t testing_gebsr2gebsc(Arguments argus)
+hipsparseStatus_t testing_gebsr2gebsc(const Arguments& argus)
 {
     int                  m             = argus.M;
     int                  n             = argus.N;
@@ -439,7 +439,7 @@ hipsparseStatus_t testing_gebsr2gebsc(Arguments argus)
     int                  col_block_dim = argus.col_block_dimA;
     hipsparseAction_t    action        = argus.action;
     hipsparseIndexBase_t base          = argus.baseA;
-    std::string          filename      = argus.filename;
+    std::string          filename      = get_filename(argus.filename);
 
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
     hipsparseHandle_t              handle = unique_ptr_handle->handle;

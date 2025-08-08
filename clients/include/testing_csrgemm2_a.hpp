@@ -38,7 +38,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_csrgemm2_a_bad_arg(void)
+void testing_csrgemm2_a_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int M         = 1;
@@ -48,7 +48,7 @@ void testing_csrgemm2_a_bad_arg(void)
     int nnz_B     = 1;
     int safe_size = 1;
 
-    T alpha = 1.0;
+    T alpha = make_DataType<T>(1.0);
 
     size_t size;
     int    nnz_C;
@@ -1038,7 +1038,7 @@ void testing_csrgemm2_a_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csrgemm2_a(Arguments argus)
+hipsparseStatus_t testing_csrgemm2_a(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 12000)
     int                  M          = argus.M;
@@ -1047,7 +1047,7 @@ hipsparseStatus_t testing_csrgemm2_a(Arguments argus)
     hipsparseIndexBase_t idx_base_A = argus.baseA;
     hipsparseIndexBase_t idx_base_B = argus.baseB;
     hipsparseIndexBase_t idx_base_C = argus.baseC;
-    std::string          filename   = argus.filename;
+    std::string          filename   = get_filename(argus.filename);
     T                    alpha      = make_DataType<T>(argus.alpha);
 
     T* h_alpha = &alpha;

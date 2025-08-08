@@ -39,7 +39,8 @@
 
 using namespace hipsparse_test;
 
-void testing_spsv_csr_bad_arg(void)
+template <typename I, typename J, typename T>
+void testing_spsv_csr_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int64_t              m         = 100;
@@ -160,7 +161,7 @@ void testing_spsv_csr_bad_arg(void)
 }
 
 template <typename I, typename J, typename T>
-hipsparseStatus_t testing_spsv_csr(Arguments argus)
+hipsparseStatus_t testing_spsv_csr(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11030)
     J                    m        = argus.M;
@@ -171,7 +172,7 @@ hipsparseStatus_t testing_spsv_csr(Arguments argus)
     hipsparseDiagType_t  diag     = argus.diag_type;
     hipsparseFillMode_t  uplo     = argus.fill_mode;
     hipsparseSpSVAlg_t   alg      = static_cast<hipsparseSpSVAlg_t>(argus.spsv_alg);
-    std::string          filename = argus.filename;
+    std::string          filename = get_filename(argus.filename);
 
     // Index and data type
     hipsparseIndexType_t typeI = getIndexType<I>();

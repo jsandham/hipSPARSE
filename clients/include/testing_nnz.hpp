@@ -42,7 +42,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_nnz_bad_arg(void)
+void testing_nnz_bad_arg(const Arguments& argus)
 {
     static constexpr size_t               safe_size = 100;
     static constexpr int                  M         = 10;
@@ -153,7 +153,7 @@ void testing_nnz_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_nnz(Arguments argus)
+hipsparseStatus_t testing_nnz(const Arguments& argus)
 {
     int                  M    = argus.M;
     int                  N    = argus.N;

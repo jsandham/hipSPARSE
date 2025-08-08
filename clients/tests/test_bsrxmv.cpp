@@ -26,45 +26,45 @@
 
 #include <hipsparse.h>
 
-#if(!defined(CUDART_VERSION) || CUDART_VERSION < 13000)
-TEST(bsrxmv_bad_arg, bsrxmv_bad_arg_float)
-{
-    testing_bsrxmv_bad_arg<float>();
-}
+// #if(!defined(CUDART_VERSION) || CUDART_VERSION < 13000)
+// TEST(bsrxmv_bad_arg, bsrxmv_bad_arg_float)
+// {
+//     testing_bsrxmv_bad_arg<float>();
+// }
 
-TEST(bsrxmv_bad_arg, bsrxmv_bad_arg_double)
-{
-    testing_bsrxmv_bad_arg<double>();
-}
+// TEST(bsrxmv_bad_arg, bsrxmv_bad_arg_double)
+// {
+//     testing_bsrxmv_bad_arg<double>();
+// }
 
-TEST(bsrxmv_bad_arg, bsrxmv_bad_arg_float_complex)
-{
-    testing_bsrxmv_bad_arg<hipComplex>();
-}
+// TEST(bsrxmv_bad_arg, bsrxmv_bad_arg_float_complex)
+// {
+//     testing_bsrxmv_bad_arg<hipComplex>();
+// }
 
-TEST(bsrxmv_bad_arg, bsrxmv_bad_arg_double_complex)
-{
-    testing_bsrxmv_bad_arg<hipDoubleComplex>();
-}
+// TEST(bsrxmv_bad_arg, bsrxmv_bad_arg_double_complex)
+// {
+//     testing_bsrxmv_bad_arg<hipDoubleComplex>();
+// }
 
-TEST(bsrxmv, bsrxmv_float)
-{
-    Arguments         arg;
-    hipsparseStatus_t status = testing_bsrxmv<float>(arg);
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
+// TEST(bsrxmv, bsrxmv_float)
+// {
+//     Arguments         arg;
+//     hipsparseStatus_t status = testing_bsrxmv<float>(arg);
+//     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
+// }
 
-TEST(bsrxmv, bsrxmv_double)
-{
-    Arguments         arg;
-    hipsparseStatus_t status = testing_bsrxmv<double>(arg);
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
+// TEST(bsrxmv, bsrxmv_double)
+// {
+//     Arguments         arg;
+//     hipsparseStatus_t status = testing_bsrxmv<double>(arg);
+//     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
+// }
 
-TEST(bsrxmv, bsrxmv_hipComplex)
-{
-    Arguments         arg;
-    hipsparseStatus_t status = testing_bsrxmv<hipComplex>(arg);
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
-#endif
+// TEST(bsrxmv, bsrxmv_hipComplex)
+// {
+//     Arguments         arg;
+//     hipsparseStatus_t status = testing_bsrxmv<hipComplex>(arg);
+//     EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
+// }
+// #endif

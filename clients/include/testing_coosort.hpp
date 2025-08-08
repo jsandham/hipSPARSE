@@ -41,7 +41,8 @@
 using namespace hipsparse;
 using namespace hipsparse_test;
 
-void testing_coosort_bad_arg(void)
+template <typename T>
+void testing_coosort_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int m         = 100;
@@ -108,7 +109,8 @@ void testing_coosort_bad_arg(void)
 #endif
 }
 
-hipsparseStatus_t testing_coosort(Arguments argus)
+template <typename T>
+hipsparseStatus_t testing_coosort(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 12000)
     int                  m        = argus.M;
@@ -116,7 +118,7 @@ hipsparseStatus_t testing_coosort(Arguments argus)
     int                  by_row   = (argus.transA == HIPSPARSE_OPERATION_NON_TRANSPOSE);
     int                  permute  = argus.permute;
     hipsparseIndexBase_t idx_base = argus.baseA;
-    std::string          filename = argus.filename;
+    std::string          filename = get_filename(argus.filename);
 
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
     hipsparseHandle_t              handle = unique_ptr_handle->handle;

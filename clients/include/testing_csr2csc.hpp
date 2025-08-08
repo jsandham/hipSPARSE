@@ -42,7 +42,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_csr2csc_bad_arg(void)
+void testing_csr2csc_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int m         = 100;
@@ -165,14 +165,14 @@ void testing_csr2csc_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csr2csc(Arguments argus)
+hipsparseStatus_t testing_csr2csc(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 11000)
     int                  m        = argus.M;
     int                  n        = argus.N;
     hipsparseIndexBase_t idx_base = argus.baseA;
     hipsparseAction_t    action   = argus.action;
-    std::string          filename = argus.filename;
+    std::string          filename = get_filename(argus.filename);
 
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
     hipsparseHandle_t              handle = unique_ptr_handle->handle;

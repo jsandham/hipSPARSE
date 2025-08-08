@@ -40,7 +40,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_gthrz_bad_arg(void)
+void testing_gthrz_bad_arg(const Arguments& argus)
 {
     int nnz       = 100;
     int safe_size = 100;
@@ -72,7 +72,7 @@ void testing_gthrz_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_gthrz(Arguments argus)
+hipsparseStatus_t testing_gthrz(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 12000)
     int                  N        = argus.N;

@@ -41,7 +41,12 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-hipsparseStatus_t testing_csrilusv(Arguments argus)
+void testing_csrilusv_bad_arg(const Arguments& arg)
+{
+}
+
+template <typename T>
+hipsparseStatus_t testing_csrilusv(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 12000)
     hipsparseIndexBase_t idx_base = argus.baseA;

@@ -45,12 +45,12 @@ using namespace hipsparse_test;
 #define ELL_IND(i, el, m, width) ELL_IND_ROW(i, el, m, width)
 
 template <typename T>
-void testing_hybmv_bad_arg(void)
+void testing_hybmv_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int                  safe_size = 100;
-    T                    alpha     = 0.6;
-    T                    beta      = 0.2;
+    T                    alpha     = make_DataType<T>(0.6);
+    T                    beta     = make_DataType<T>(0.2);
     hipsparseOperation_t transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
 
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
@@ -98,7 +98,7 @@ void testing_hybmv_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_hybmv(Arguments argus)
+hipsparseStatus_t testing_hybmv(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 11000)
     int                     m              = argus.M;
@@ -109,7 +109,7 @@ hipsparseStatus_t testing_hybmv(Arguments argus)
     hipsparseIndexBase_t    idx_base       = argus.baseA;
     hipsparseHybPartition_t part           = argus.part;
     int                     user_ell_width = argus.ell_width;
-    std::string             filename       = argus.filename;
+    std::string             filename       = get_filename(argus.filename);
 
     T zero = make_DataType<T>(0.0);
     T one  = make_DataType<T>(1.0);

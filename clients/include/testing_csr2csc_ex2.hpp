@@ -42,7 +42,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_csr2csc_ex2_bad_arg(void)
+void testing_csr2csc_ex2_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int    m           = 100;
@@ -274,7 +274,7 @@ void testing_csr2csc_ex2_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csr2csc_ex2(Arguments argus)
+hipsparseStatus_t testing_csr2csc_ex2(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 10010)
     int                   m        = argus.M;
@@ -282,7 +282,7 @@ hipsparseStatus_t testing_csr2csc_ex2(Arguments argus)
     hipsparseIndexBase_t  idx_base = argus.baseA;
     hipsparseAction_t     action   = argus.action;
     hipsparseCsr2CscAlg_t alg      = static_cast<hipsparseCsr2CscAlg_t>(argus.csr2csc_alg);
-    std::string           filename = argus.filename;
+    std::string           filename = get_filename(argus.filename);
 
     hipDataType dataType = getDataType<T>();
 

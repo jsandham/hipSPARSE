@@ -23,7 +23,7 @@
 
 # Template used to process YAML from log files
 ---
-include: rocsparse_common.yaml
+include: hipsparse_common.yaml
 
 Functions:
   

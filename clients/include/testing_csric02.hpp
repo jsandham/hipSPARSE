@@ -42,7 +42,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_csric02_bad_arg(void)
+void testing_csric02_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int                    m         = 100;
@@ -157,13 +157,14 @@ void testing_csric02_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csric02(Arguments argus)
+hipsparseStatus_t testing_csric02(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 13000)
     int                    m        = argus.M;
+    int                    n        = argus.N;
     hipsparseIndexBase_t   idx_base = argus.baseA;
     hipsparseSolvePolicy_t policy   = argus.solve_policy;
-    std::string            filename = argus.filename;
+    std::string            filename = get_filename(argus.filename);
 
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
     hipsparseHandle_t              handle = unique_ptr_handle->handle;
@@ -198,6 +199,11 @@ hipsparseStatus_t testing_csric02(Arguments argus)
     {
         fprintf(stderr, "Cannot open [read] %s\ncol", filename.c_str());
         return HIPSPARSE_STATUS_INTERNAL_ERROR;
+    }
+
+    if(m != n)
+    {
+        return HIPSPARSE_STATUS_SUCCESS;
     }
 
     std::vector<T> hcsr_val_orig(hcsr_val);

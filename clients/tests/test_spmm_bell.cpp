@@ -1,5 +1,5 @@
 /* ************************************************************************
- * Copyright (C) 2021 Advanced Micro Devices, Inc. All rights Reserved.
+ * Copyright (C) 2021-2025 Advanced Micro Devices, Inc. All rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,31 +21,16 @@
  *
  * ************************************************************************ */
 
+#include "test.hpp"
 #include "testing_spmm_bell.hpp"
 
-#include <hipsparse.h>
-
-#if(!defined(CUDART_VERSION))
-TEST(spmm_bell_bad_arg, spmm_bell_float)
-{
-    testing_spmm_bell_bad_arg();
-}
-
-TEST(spmm_bell, spmm_bell_i32_float)
-{
-    hipsparseStatus_t status = testing_spmm_bell<int32_t, float>();
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
-
-TEST(spmm_bell, spmm_bell_i64_double)
-{
-    hipsparseStatus_t status = testing_spmm_bell<int32_t, double>();
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
-
-TEST(spmm_bell, spmm_bell_i64_hipComplex)
-{
-    hipsparseStatus_t status = testing_spmm_bell<int32_t, hipComplex>();
-    EXPECT_EQ(status, HIPSPARSE_STATUS_SUCCESS);
-}
-#endif
+TEST_ROUTINE_WITH_CONFIG(spmm_bell,
+                        level3,
+                        hipsparse_test_config_it,
+                        arg.N,
+                        arg.nnz,
+                        arg.alpha,
+                        arg.alphai,
+                        arg.beta,
+                        arg.betai,
+                        arg.baseA);

@@ -40,12 +40,12 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_roti_bad_arg(void)
+void testing_roti_bad_arg(const Arguments& argus)
 {
     int nnz       = 100;
     int safe_size = 100;
-    T   c         = 3.7;
-    T   s         = 1.2;
+    T   c         = make_DataType<T>(3.7);
+    T   s         = make_DataType<T>(1.2);
 
     hipsparseIndexBase_t idx_base = HIPSPARSE_INDEX_BASE_ZERO;
 
@@ -86,7 +86,7 @@ void testing_roti_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_roti(Arguments argus)
+hipsparseStatus_t testing_roti(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 12000)
     int                  N        = argus.N;

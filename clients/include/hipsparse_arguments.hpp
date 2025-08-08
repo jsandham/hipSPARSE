@@ -119,6 +119,7 @@ struct Arguments
     char filename[128];
     char function[64];
     char function_name[64];
+    char category[32];
 
     Arguments()
     {
@@ -256,7 +257,7 @@ struct Arguments
             error("trailer");
 
         auto check_func = [&, sig = (uint8_t)0](const auto& elem, auto name) mutable {
-            std::cout << "elem: " << elem << " name: " << name << std::endl;
+            //std::cout << "elem: " << elem << " name: " << name << std::endl;
             static_assert(sizeof(elem) <= 255,
                           "One of the fields of Arguments is too large (> 255 bytes)");
             for(uint8_t i = 0; i < sizeof(elem); ++i)
@@ -330,6 +331,7 @@ struct Arguments
         HIPSPARSE_FORMAT_CHECK(filename);
         HIPSPARSE_FORMAT_CHECK(function);
         HIPSPARSE_FORMAT_CHECK(function_name);
+        HIPSPARSE_FORMAT_CHECK(category);
     }
 
 private:
@@ -403,6 +405,7 @@ private:
         print("filename", arg.filename);
         print("function", arg.function);
         print("function_name", arg.function_name);
+        print("category", arg.category);
         print("M", arg.M);
         print("N", arg.N);
         print("K", arg.K);

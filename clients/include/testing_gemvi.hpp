@@ -39,7 +39,8 @@
 using namespace hipsparse;
 using namespace hipsparse_test;
 
-void testing_gemvi_bad_arg(void)
+template <typename T>
+void testing_gemvi_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int m   = 100;
@@ -133,7 +134,7 @@ hipsparseStatus_t testing_gemvi(Arguments argus)
     T                    beta     = make_DataType<T>(argus.beta);
     hipsparseOperation_t trans    = argus.transA;
     hipsparseIndexBase_t idxBase  = argus.baseA;
-    std::string          filename = argus.filename;
+    std::string          filename = get_filename(argus.filename);
 
     int lda = m;
 

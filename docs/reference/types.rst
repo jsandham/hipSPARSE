@@ -199,7 +199,7 @@ hipsparseOrder_t
 
 .. doxygenenum:: hipsparseOrder_t
 
-hipsparseIndextype_t
+hipsparseIndexType_t
 ====================
 
 .. doxygenenum:: hipsparseIndexType_t

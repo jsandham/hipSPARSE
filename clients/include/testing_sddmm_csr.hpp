@@ -41,7 +41,8 @@
 using namespace hipsparse;
 using namespace hipsparse_test;
 
-void testing_sddmm_csr_bad_arg(void)
+template <typename I, typename J, typename T>
+void testing_sddmm_csr_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
 
@@ -51,7 +52,7 @@ void testing_sddmm_csr_bad_arg(void)
     int64_t              nnz       = 100;
     int32_t              safe_size = 100;
     float                alpha     = 0.6;
-    float                beta      = 0.2;
+    float beta     = 0.2;
     hipsparseOperation_t transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
     hipsparseOperation_t transB    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
     hipsparseOrder_t     orderA    = HIPSPARSE_ORDER_COL;
@@ -184,7 +185,7 @@ void testing_sddmm_csr_bad_arg(void)
 }
 
 template <typename I, typename J, typename T>
-hipsparseStatus_t testing_sddmm_csr(Arguments argus)
+hipsparseStatus_t testing_sddmm_csr(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     J                    m        = argus.M;
@@ -198,7 +199,7 @@ hipsparseStatus_t testing_sddmm_csr(Arguments argus)
     hipsparseOrder_t     orderB   = argus.orderB;
     hipsparseIndexBase_t idx_base = argus.baseA;
     hipsparseSDDMMAlg_t  alg      = static_cast<hipsparseSDDMMAlg_t>(argus.sddmm_alg);
-    std::string          filename = argus.filename;
+    std::string          filename = get_filename(argus.filename);
 
     // Index and data type
     hipsparseIndexType_t typeI = getIndexType<I>();

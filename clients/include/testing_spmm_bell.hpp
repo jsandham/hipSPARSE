@@ -38,7 +38,8 @@
 using namespace hipsparse;
 using namespace hipsparse_test;
 
-void testing_spmm_bell_bad_arg(void)
+template <typename I, typename T>
+void testing_spmm_bell_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int32_t              n             = 100;
@@ -175,7 +176,7 @@ void testing_spmm_bell_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_spmm_bell()
+hipsparseStatus_t testing_spmm_bell(const Arguments& argus)
 {
 
 #if(!defined(CUDART_VERSION) || CUDART_VERSION >= 11021)

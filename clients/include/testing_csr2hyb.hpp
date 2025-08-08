@@ -46,7 +46,7 @@ using namespace hipsparse_test;
 #define ELL_IND(i, el, m, width) ELL_IND_ROW(i, el, m, width)
 
 template <typename T>
-void testing_csr2hyb_bad_arg(void)
+void testing_csr2hyb_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 11000)
     int m         = 100;
@@ -119,7 +119,7 @@ void testing_csr2hyb_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_csr2hyb(Arguments argus)
+hipsparseStatus_t testing_csr2hyb(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 11000)
     int                     m              = argus.M;
@@ -127,7 +127,7 @@ hipsparseStatus_t testing_csr2hyb(Arguments argus)
     hipsparseIndexBase_t    idx_base       = argus.baseA;
     hipsparseHybPartition_t part           = argus.part;
     int                     user_ell_width = argus.ell_width;
-    std::string             filename       = argus.filename;
+    std::string             filename       = get_filename(argus.filename);
 
     std::unique_ptr<handle_struct> unique_ptr_handle(new handle_struct);
     hipsparseHandle_t              handle = unique_ptr_handle->handle;

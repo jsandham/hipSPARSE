@@ -2915,8 +2915,8 @@ void host_csrmm_batched(J                    M,
                         J                    N,
                         J                    K,
                         J                    batch_count_A,
-                        J                    offsets_batch_stride_A,
-                        I                    columns_values_batch_stride_A,
+                        int64_t              offsets_batch_stride_A,
+                        int64_t              columns_values_batch_stride_A,
                         hipsparseOperation_t transA,
                         hipsparseOperation_t transB,
                         T                    alpha,
@@ -2926,13 +2926,13 @@ void host_csrmm_batched(J                    M,
                         const T*             B,
                         J                    ldb,
                         J                    batch_count_B,
-                        I                    batch_stride_B,
+                        int64_t              batch_stride_B,
                         hipsparseOrder_t     order_B,
                         T                    beta,
                         T*                   C,
                         J                    ldc,
                         J                    batch_count_C,
-                        I                    batch_stride_C,
+                        int64_t              batch_stride_C,
                         hipsparseOrder_t     order_C,
                         hipsparseIndexBase_t base,
                         bool                 force_conj_A)
@@ -6668,7 +6668,7 @@ inline const char* get_hipsparse_clients_matrices_dir()
     return s_hipsparse_clients_matrices_dir;
 }
 
-inline std::string get_filename(const std::string& bin_file)
+inline std::string get_filename(const std::string& file)
 {
     const char* matrices_dir = get_hipsparse_clients_matrices_dir();
     if(matrices_dir == nullptr)
@@ -6679,11 +6679,11 @@ inline std::string get_filename(const std::string& bin_file)
     std::string r;
     if(matrices_dir != nullptr)
     {
-        r = std::string(matrices_dir) + "/" + bin_file;
+        r = std::string(matrices_dir) + "/" + file + ".bin";
     }
     else
     {
-        r = hipsparse_exepath() + "../matrices/" + bin_file;
+        r = hipsparse_exepath() + "../matrices/" + file + ".bin";
     }
 
     FILE* tmpf = fopen(r.c_str(), "r");

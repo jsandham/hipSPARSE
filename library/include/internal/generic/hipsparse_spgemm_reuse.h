@@ -429,7 +429,7 @@ hipsparseStatus_t hipsparseSpGEMMreuse_copy(hipsparseHandle_t      handle,
 *                        HIPSPARSE_INDEX_BASE_ZERO, HIP_R_32F);
 *    hipsparseCreateCsr(&matC, m, n, 0,
 *                        dcsrRowPtrC, NULL, NULL,
-*                        HIPSPARSE_INDEX_32I, HIPSPARSE_INDEX_32I,
+*                        , HIPSPARSE_INDEX_32I,
 *                        HIPSPARSE_INDEX_BASE_ZERO, HIP_R_32F);
 *
 *    hipsparseSpGEMMDescr_t spgemmDesc;

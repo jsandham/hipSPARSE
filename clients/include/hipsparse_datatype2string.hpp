@@ -26,6 +26,7 @@
 
 #include <hipsparse.h>
 #include <string>
+#include <algorithm>
 
 constexpr auto hipsparse_indextype2string(hipsparseIndexType_t type)
 {
@@ -523,3 +524,12 @@ constexpr auto hipsparse_densetosparsealg2string(hipsparseDenseToSparseAlg_t alg
     return "invalid";
 }
 #endif
+
+// Return a string without '/' or '\\'
+inline std::string hipsparse_filename2string(const std::string filename)
+{
+    std::string result(filename);
+    std::replace(result.begin(), result.end(), '/', '_');
+    std::replace(result.begin(), result.end(), '\\', '_');
+    return result;
+}

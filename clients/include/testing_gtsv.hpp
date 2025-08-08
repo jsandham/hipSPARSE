@@ -42,7 +42,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_gtsv2_bad_arg(void)
+void testing_gtsv2_bad_arg(const Arguments& argus)
 {
     // Dont do bad argument checking for cuda
 #if(!defined(CUDART_VERSION))
@@ -112,7 +112,7 @@ void testing_gtsv2_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_gtsv2(Arguments argus)
+hipsparseStatus_t testing_gtsv2(const Arguments& argus)
 {
     int m = argus.M;
     int n = argus.N;

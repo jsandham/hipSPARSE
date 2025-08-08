@@ -39,7 +39,8 @@
 
 using namespace hipsparse_test;
 
-void testing_spmv_coo_aos_bad_arg(void)
+template <typename I, typename T>
+void testing_spmv_coo_aos_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || (CUDART_VERSION > 10010 && CUDART_VERSION < 12000) \
     || (CUDART_VERSION == 10010 && CUDART_10_1_UPDATE_VERSION == 1 && CUDART_VERSION < 12000))
@@ -49,7 +50,7 @@ void testing_spmv_coo_aos_bad_arg(void)
     int64_t              nnz       = 100;
     int64_t              safe_size = 100;
     float                alpha     = 0.6;
-    float                beta      = 0.2;
+    float beta     = 0.2;
     hipsparseOperation_t transA    = HIPSPARSE_OPERATION_NON_TRANSPOSE;
     hipsparseIndexBase_t idxBase   = HIPSPARSE_INDEX_BASE_ZERO;
     hipsparseIndexType_t idxType   = HIPSPARSE_INDEX_32I;
@@ -147,7 +148,7 @@ void testing_spmv_coo_aos_bad_arg(void)
 }
 
 template <typename I, typename T>
-hipsparseStatus_t testing_spmv_coo_aos(Arguments argus)
+hipsparseStatus_t testing_spmv_coo_aos(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || (CUDART_VERSION >= 10010 && CUDART_VERSION < 12000))
     I                    m        = argus.M;
@@ -157,7 +158,7 @@ hipsparseStatus_t testing_spmv_coo_aos(Arguments argus)
     hipsparseOperation_t transA   = argus.transA;
     hipsparseIndexBase_t idx_base = argus.baseA;
     hipsparseSpMVAlg_t   alg      = static_cast<hipsparseSpMVAlg_t>(argus.spmv_alg);
-    std::string          filename = argus.filename;
+    std::string          filename = get_filename(argus.filename);
 
     // Index and data type
     hipsparseIndexType_t typeI = getIndexType<I>();

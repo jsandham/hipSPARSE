@@ -280,7 +280,7 @@ def write_test(test):
     # scalars, we coerce the string/numeric value into ctype.
     arg = []
     for name, ctype in param['Arguments']._fields_:
-        print("name", name)
+        #print("name", name)
         try:
             if issubclass(ctype, ctypes.Array):
                 if issubclass(ctype._type_, ctypes.c_char):
@@ -416,8 +416,7 @@ def generate(test, function):
                     #
                     if ((not os.path.isdir(filename_arg))
                         and (not glob.glob(filename_arg))
-                        and (not glob.glob(filename_arg + ".csr"))
-                        and (not glob.glob(filename_arg + ".bsr"))):
+                        and (not glob.glob(filename_arg + ".bin"))):
                         print("skip unrecognized filename, directory or filename glob expression: '" + test[key] + "'")
                     else:
                         cleanlist.append(test[key])

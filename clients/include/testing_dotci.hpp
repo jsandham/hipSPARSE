@@ -40,7 +40,7 @@ using namespace hipsparse;
 using namespace hipsparse_test;
 
 template <typename T>
-void testing_dotci_bad_arg(void)
+void testing_dotci_bad_arg(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION))
     int                  nnz       = 100;
@@ -77,7 +77,7 @@ void testing_dotci_bad_arg(void)
 }
 
 template <typename T>
-hipsparseStatus_t testing_dotci(Arguments argus)
+hipsparseStatus_t testing_dotci(const Arguments& argus)
 {
 #if(!defined(CUDART_VERSION) || CUDART_VERSION < 11000)
     int                  N        = argus.N;
